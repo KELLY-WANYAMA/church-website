@@ -1,0 +1,8 @@
+*.sqlite3
+*.pyc
+__pycache__/
+.env
+.env.local
+.env.production
+.DS_Store
+
