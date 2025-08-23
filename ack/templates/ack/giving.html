@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACK ST. JUDE'S HURUMA</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <header>
+        <nav class="navbar">
+    <div class="logo">
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <a href="/">🌟 ACK ST JUDES HURUMA</a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">HOME</a></li>
+        <li class="dropdown">
+            <a href="/about">ABOUT ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/events">EVENTS</a></li>
+                <li><a href="/gallery">GALLERY</a></li>
+                <li><a href="/giving">GIVING</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="/ministries">MINISTRIES ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/ministries/youth">YOUTH</a></li>
+                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
+                <li><a href="/ministries/kama">KAMA</a></li>
+                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
+                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
+            </ul>
+        </li>
+        <li><a href="/sermons">SERMONS</a></li>
+        <li><a href="/contacts">CONTACT</a></li>
+    </ul>
+</nav>
+    </header>
+</head>
+<body>
+    
+
+{% block title %}Giving - {{ church_name }}{% endblock %}
+
+{% block content %}
+<section class="giving-section">
+    <div class="container">
+        <h1><i class="fas fa-hand-holding-heart"></i> Giving & Donations</h1>
+        
+        <div class="giving-options">
+            <div class="giving-method">
+                <div class="method-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Money (M-Pesa)</h3>
+                <div class="method-details">
+                    <p><strong>Till Number:</strong> .123456..</p>
+                    <p><strong>Account Name: You can either write</strong> {{ church_name }}</p>
+                    <p class="note">Tithe/ Offertory/ Funds, etc</p>
+                </div>
+            </div>
+
+            <div class="giving-method">
+                <div class="method-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>Bank Transfer</h3>
+                <div class="method-details">
+                    <p><strong>Bank:</strong> Kenya Commercial Bank</p>
+                    <p><strong>Account Name:</strong> {{ church_name }}</p>
+                    <p><strong>Account Number:</strong> 0123456789</p>
+                    <p><strong>Branch:</strong> Nairobi Main</p>
+                </div>
+            </div>
+
+            <div class="giving-method">
+                <div class="method-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3>Cash & Cheque</h3>
+                <div class="method-details">
+                    <p>You may also give during our services:</p>
+                    <p><strong>Sunday:</strong> 8:00 AM - 12:00 PM</p>
+                    <p><strong>Wednesday:</strong> 5:30 PM - 7:00 PM</p>
+                    <p>Ask for a receipt at the welcome desk</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bible-verse">
+            <p>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."</p>
+            <p class="verse">- 2 Corinthians 9:7</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>ACK ST JUDES HURUMA</h3>
+            <p>A place to belong, believe, and become in Christ.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+
+
+                <li><a href="{% url 'bk' %}">Sermons</a></li>       <!--REMEMBE TO CHANGE TO SERMONS NOT BK-->
+                <li><a href="{% url 'bk' %}">Events</a></li>    <!--REMEMBE TO CHANGE TO EVENTS NOT BK-->
+
+
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
+            <p><i class="fas fa-phone"></i> +254 791 675625</p>
+            <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Service Times</h3>
+            <p>Sunday: 9:00 AM & 11:00 AM</p>
+            <p>Wednesday: 6:30 PM (Bible Study)</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
+        <p>Designed and developed by <i class="fas fa-heart"> Kelly </i> for God's glory</p>
+    </div>
+</footer>
+<!--end of footer-->
+
+
+
+
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Toggle mobile menu
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('show');
+    });
+
+    // Toggle dropdowns on mobile
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const menu = this.nextElementSibling;
+                menu.classList.toggle('show');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
+
+
+

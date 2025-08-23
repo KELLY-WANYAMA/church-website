@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACK ST. JUDE'S HURUMA</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <header>
+        <nav class="navbar">
+    <div class="logo">
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <a href="/">🌟 ACK ST JUDES HURUMA</a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">HOME</a></li>
+        <li class="dropdown">
+            <a href="/about">ABOUT ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/events">EVENTS</a></li>
+                <li><a href="/gallery">GALLERY</a></li>
+                <li><a href="/giving">GIVING</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="/ministries">MINISTRIES ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/ministries/youth">YOUTH</a></li>
+                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
+                <li><a href="/ministries/kama">KAMA</a></li>
+                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
+                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
+            </ul>
+        </li>
+        <li><a href="/sermons">SERMONS</a></li>
+        <li><a href="/contacts">CONTACT</a></li>
+    </ul>
+</nav>
+    </header>
+</head>
+<body>
+
+{% block content %}
+
+    <!-- Hero Section -->
+    <section class="sunday-hero">
+        <div class="hero-content">
+            <h1>ACK Sunday School</h1>
+            <p class="tagline">"Train up a child in the way he should go; even when he is old he will not depart from it." - Proverbs 22:6</p>
+            <div class="hero-buttons">
+                <a href="#age-groups" class="cta-button primary-btn"><i class="fas fa-child"></i> Age Groups</a>
+                <a href="#registration" class="cta-button secondary-btn"><i class="fas fa-users"></i> Register</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-sunday">
+        <div class="container">
+            <h2>About Our Sunday School</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to the ACK St Judes Huruma Sunday School, where we nurture children in the Anglican faith tradition through engaging lessons, activities, and fellowship.</p>
+                    
+                    <p>Our Sunday School provides a safe and loving environment for children to learn about God's love, grow in their faith, and build lasting friendships.</p>
+
+                    <div class="ack-values">
+                        <h3>Our Anglican Values</h3>
+                        <ul>
+                            <li><i class="fas fa-bible"></i> Bible-based teaching</li>
+                            <li><i class="fas fa-pray"></i> Prayer and worship</li>
+                            <li><i class="fas fa-hands-helping"></i> Service and outreach</li>
+                            <li><i class="fas fa-church"></i> Sacramental life</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Sunday School Children">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Groups Section -->
+    <section id="age-groups" class="age-groups">
+        <div class="container">
+            <h2>Age Groups & Activities</h2>
+            
+            <div class="age-tabs">
+                <button class="age-tab active" data-age="nursery">Nursery (3-5 years)</button>
+                <button class="age-tab" data-age="primary">Primary (6-9 years)</button>
+                <button class="age-tab" data-age="juniors">Juniors (10-12 years)</button>
+            </div>
+
+            <!-- Nursery Age Group -->
+            <div class="age-content active" id="nursery-content">
+                <div class="age-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-music"></i></div>
+                        <h4>Bible Songs & Rhymes</h4>
+                        <p>Fun, interactive songs that teach simple Bible stories and Christian values</p>
+                        <span class="activity-time">30 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-palette"></i></div>
+                        <h4>Coloring & Crafts</h4>
+                        <p>Simple coloring pages and crafts based on Bible stories</p>
+                        <span class="activity-time">45 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-book-bible"></i></div>
+                        <h4>Story Time</h4>
+                        <p>Interactive Bible story reading with visual aids and puppets</p>
+                        <span class="activity-time">30 minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Primary Age Group -->
+            <div class="age-content" id="primary-content">
+                <div class="age-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <h4>Bible Games</h4>
+                        <p>Interactive games that teach Bible stories and Christian values</p>
+                        <span class="activity-time">45 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-theater-masks"></i></div>
+                        <h4>Role Playing</h4>
+                        <p>Acting out Bible stories to understand their lessons</p>
+                        <span class="activity-time">40 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-pray"></i></div>
+                        <h4>Simple Prayers</h4>
+                        <p>Learning and practicing simple prayers together</p>
+                        <span class="activity-time">25 minutes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Juniors Age Group -->
+            <div class="age-content" id="juniors-content">
+                <div class="age-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-book-open"></i></div>
+                        <h4>Bible Study</h4>
+                        <p>Deeper exploration of Bible stories and their meanings</p>
+                        <span class="activity-time">50 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h4>Service Projects</h4>
+                        <p>Small community service activities and outreach</p>
+                        <span class="activity-time">60 minutes</span>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon"><i class="fas fa-users"></i></div>
+                        <h4>Group Discussions</h4>
+                        <p>Discussing how to apply Bible lessons in daily life</p>
+                        <span class="activity-time">45 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule">
+        <div class="container">
+            <h2>Weekly Schedule</h2>
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <h3>Sunday Schedule</h3>
+                    <div class="schedule-item">
+                        <span class="schedule-time">9:00 AM</span>
+                        <span class="schedule-activity">Arrival & Welcome</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">9:15 AM</span>
+                        <span class="schedule-activity">Opening Prayer & Songs</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">9:30 AM</span>
+                        <span class="schedule-activity">Age Group Activities</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">10:30 AM</span>
+                        <span class="schedule-activity">Snack Time</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">10:45 AM</span>
+                        <span class="schedule-activity">Bible Story</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">11:15 AM</span>
+                        <span class="schedule-activity">Closing Prayer</span>
+                    </div>
+                </div>
+
+                <div class="schedule-card">
+                    <h3>Special Activities</h3>
+                    <div class="schedule-item">
+                        <span class="schedule-time">1st Sunday</span>
+                        <span class="schedule-activity">Family Service</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">3rd Sunday</span>
+                        <span class="schedule-activity">Outreach Project</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">Last Sunday</span>
+                        <span class="schedule-activity">Birthday Celebrations</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="schedule-time">Monthly</span>
+                        <span class="schedule-activity">Parent-Teacher Meeting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="teachers">
+        <div class="container">
+            <h2>Our Teachers</h2>
+            <div class="teachers-grid">
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Teacher Sarah">
+                    <h4>Teacher Sarah</h4>
+                    <p>Nursery Class Teacher</p>
+                    <span class="teacher-age">3-5 years</span>
+                </div>
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Teacher David">
+                    <h4>Teacher David</h4>
+                    <p>Primary Class Teacher</p>
+                    <span class="teacher-age">6-9 years</span>
+                </div>
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Teacher Grace">
+                    <h4>Teacher Grace</h4>
+                    <p>Juniors Class Teacher</p>
+                    <span class="teacher-age">10-12 years</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="registration">
+        <div class="container">
+            <h2>Join Our Sunday School</h2>
+            <div class="reg-content">
+                <div class="reg-info">
+                    <h3>Why Join Us?</h3>
+                    <ul>
+                        <li>Age-appropriate biblical teaching</li>
+                        <li>Safe and nurturing environment</li>
+                        <li>Experienced and caring teachers</li>
+                        <li>Fun and engaging activities</li>
+                        <li>Strong Christian community</li>
+                        <li>Regular parent involvement</li>
+                    </ul>
+                    
+                    <h3>Requirements</h3>
+                    <ul>
+                        <li>Children aged 3-12 years</li>
+                        <li>Parent/guardian consent form</li>
+                        <li>Regular attendance encouraged</li>
+                        <li>Participation in special events</li>
+                    </ul>
+                </div>
+                
+                <div class="reg-form">
+                    <h3>Registration Form</h3>
+                    <form class="interest-form">
+                        <input type="text" placeholder="Child's Full Name" required>
+                        <input type="number" placeholder="Child's Age" min="3" max="12" required>
+                        <select required>
+                            <option value="">Select Age Group</option>
+                            <option value="nursery">Nursery (3-5 years)</option>
+                            <option value="primary">Primary (6-9 years)</option>
+                            <option value="juniors">Juniors (10-12 years)</option>
+                        </select>
+                        <input type="text" placeholder="Parent/Guardian Name" required>
+                        <input type="tel" placeholder="Phone Number" required>
+                        <input type="email" placeholder="Email Address">
+                        <textarea placeholder="Any special notes or requirements" rows="3"></textarea>
+                        <button type="submit">Register Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bible Verse Section -->
+    <section class="bible-verse">
+        <div class="container">
+            <blockquote>
+                "But Jesus said, 'Let the little children come to me and do not hinder them, for to such belongs the kingdom of heaven.'"
+                <cite>- Matthew 19:14</cite>
+            </blockquote>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>ACK ST JUDES HURUMA</h3>
+            <p>A place to belong, believe, and become in Christ.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+
+
+                <li><a href="{% url 'bk' %}">Sermons</a></li>       <!--REMEMBE TO CHANGE TO SERMONS NOT BK-->
+                <li><a href="{% url 'bk' %}">Events</a></li>    <!--REMEMBE TO CHANGE TO EVENTS NOT BK-->
+
+
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
+            <p><i class="fas fa-phone"></i> +254 791 675625</p>
+            <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Service Times</h3>
+            <p>Sunday: 9:00 AM & 11:00 AM</p>
+            <p>Wednesday: 6:30 PM (Bible Study)</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
+        <p>Designed and developed by <i class="fas fa-heart"> Kelly </i> for God's glory</p>
+    </div>
+</footer>
+<!--end of footer-->
+
+
+
+
+
+
+<script>
+
+       // Tab functionality for age groups
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.age-tab');
+            const contents = document.querySelectorAll('.age-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const ageGroup = this.getAttribute('data-age');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(`${ageGroup}-content`).classList.add('active');
+                });
+            });
+
+            // Simple form validation
+            const form = document.querySelector('.interest-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your registration! We will contact you soon.');
+                    form.reset();
+                });
+            }
+        });
+// JavaScript to handle the expand/collapse functionality
+function toggleEventDetails(button) {
+    const eventCard = button.closest('.event-card');
+    const isExpanded = eventCard.classList.contains('expanded');
+    
+    // Close all other expanded cards
+    const expandedCards = document.querySelectorAll('.event-card.expanded');
+    expandedCards.forEach(card => {
+        if (card !== eventCard) {
+            card.classList.remove('expanded');
+            const otherButton = card.querySelector('.event-button');
+            if (otherButton) {
+                const btnText = otherButton.querySelector('.btn-text');
+                if (btnText) btnText.textContent = 'Details';
+            }
+        }
+    });
+    
+    // Toggle current card
+    if (isExpanded) {
+        eventCard.classList.remove('expanded');
+        const btnText = button.querySelector('.btn-text');
+        if (btnText) btnText.textContent = 'Details';
+    } else {
+        eventCard.classList.add('expanded');
+        const btnText = button.querySelector('.btn-text');
+        if (btnText) btnText.textContent = 'Less Info';
+        
+        // Scroll to ensure the expanded content is visible
+        eventCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+// Close expanded cards when clicking outside
+document.addEventListener('click', function(e) {
+    const isEventButton = e.target.classList.contains('event-button') || 
+                        e.target.closest('.event-button');
+    const isInsideExpandedCard = e.target.closest('.event-card.expanded');
+    
+    if (!isInsideExpandedCard && !isEventButton) {
+        const expandedCards = document.querySelectorAll('.event-card.expanded');
+        expandedCards.forEach(card => {
+            card.classList.remove('expanded');
+            const button = card.querySelector('.event-button');
+            if (button) {
+                const btnText = button.querySelector('.btn-text');
+                if (btnText) btnText.textContent = 'Details';
+            }
+        });
+    }
+});
+
+// Close expanded cards on escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const expandedCards = document.querySelectorAll('.event-card.expanded');
+        expandedCards.forEach(card => {
+            card.classList.remove('expanded');
+            const button = card.querySelector('.event-button');
+            if (button) {
+                const btnText = button.querySelector('.btn-text');
+                if (btnText) btnText.textContent = 'Details';
+            }
+        });
+    }
+});
+
+// Mobile navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Check if elements exist before adding event listeners
+    if (hamburger && navLinks) {
+        // Toggle mobile menu
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('show');
+            
+            // Close dropdowns when closing mobile menu
+            if (!navLinks.classList.contains('show')) {
+                dropdowns.forEach(dropdown => {
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    if (menu) menu.classList.remove('show');
+                });
+            }
+        });
+    }
+
+    // Toggle dropdowns on mobile
+    if (dropdowns.length > 0) {
+        dropdowns.forEach(dropdown => {
+            const link = dropdown.querySelector('a');
+            if (link) {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const menu = this.nextElementSibling;
+                        if (menu && menu.classList.contains('dropdown-menu')) {
+                            menu.classList.toggle('show');
+                            
+                            // Close other dropdowns
+                            dropdowns.forEach(otherDropdown => {
+                                if (otherDropdown !== dropdown) {
+                                    const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                                    if (otherMenu) otherMenu.classList.remove('show');
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    // Close dropdowns when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            const isHamburger = e.target.closest('.hamburger');
+            const isNavLink = e.target.closest('.nav-links');
+            const isDropdown = e.target.closest('.dropdown');
+            
+            if (!isHamburger && !isNavLink && !isDropdown && navLinks && navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                if (hamburger) hamburger.classList.remove('active');
+                
+                // Close all dropdowns
+                dropdowns.forEach(dropdown => {
+                    const menu = dropdown.querySelector('.dropdown-menu');
+                    if (menu) menu.classList.remove('show');
+                });
+            }
+        }
+    });
+
+    // Close mobile menu on resize to desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('show')) {
+            navLinks.classList.remove('show');
+            if (hamburger) hamburger.classList.remove('active');
+            
+            // Close all dropdowns
+            dropdowns.forEach(dropdown => {
+                const menu = dropdown.querySelector('.dropdown-menu');
+                if (menu) menu.classList.remove('show');
+            });
+        }
+    });
+});
+
+// Form submission handling for Mother's Union interest form
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('mothersUnionForm');
+    const messageDiv = document.getElementById('form-message');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        // Show loading state
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        messageDiv.style.display = 'none';
+
+        try {
+            const formData = {
+                full_name: form.querySelector('input[name="full_name"]').value,
+                email: form.querySelector('input[name="email"]').value,
+                phone: form.querySelector('input[name="phone"]').value,
+                message: form.querySelector('textarea[name="message"]').value
+            };
+
+            const response = await fetch('/ministries/mu/interest/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                showMessage(data.message, 'success');
+                form.reset();
+            } else {
+                showMessage(data.message, 'error');
+            }
+
+        } catch (error) {
+            showMessage('Network error. Please try again.', 'error');
+        } finally {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
+    });
+
+    function showMessage(text, type) {
+        messageDiv.textContent = text;
+        messageDiv.style.display = 'block';
+        messageDiv.className = type === 'success' ? 
+            'alert alert-success' : 'alert alert-error';
+    }
+});
+
+
+// Smooth scrolling for anchor links
+document.addEventListener('DOMContentLoaded', function() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href !== '#' && href.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    const navLinks = document.querySelector('.nav-links');
+                    const hamburger = document.querySelector('.hamburger');
+                    if (navLinks && navLinks.classList.contains('show')) {
+                        navLinks.classList.remove('show');
+                        if (hamburger) hamburger.classList.remove('active');
+                    }
+                }
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
+
+
+

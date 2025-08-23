@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACK ST. JUDE'S HURUMA</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <header>
+        <nav class="navbar">
+    <div class="logo">
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <a href="/">🌟 ACK ST JUDES HURUMA</a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">HOME</a></li>
+        <li class="dropdown">
+            <a href="/about">ABOUT ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/events">EVENTS</a></li>
+                <li><a href="/gallery">GALLERY</a></li>
+                <li><a href="/giving">GIVING</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="/ministries">MINISTRIES ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="/ministries/youth">YOUTH</a></li>
+                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
+                <li><a href="/ministries/kama">KAMA</a></li>
+                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
+                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
+            </ul>
+        </li>
+        <li><a href="/sermons">SERMONS</a></li>
+        <li><a href="/contacts">CONTACT</a></li>
+    </ul>
+</nav>
+    </header>
+</head>
+<body>
+    
+
+{% block content %}
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Welcome to Our Church Community</h2>
+                <p>Join us for worship, fellowship, and spiritual growth through our services in both English and Kiswahili.</p>
+                <a href="#services" class="btn">View Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <!-- Kiswahili Service -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kiswahili Service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Kiswahili Service</h3>
+                        <p>Sundays at 8:00 AM</p>
+                        <p>Join our vibrant Kiswahili-speaking congregation for worship, prayer, and teaching from God's Word.</p>
+                        <a href="https://www.youtube.com/playlist?list=example1" class="btn" target="_blank">Watch Sermons</a>
+                    </div>
+                </div>
+
+                <!-- English Service -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1475776408506-67ce0bf42d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="English Service">
+                    </div>
+                    <div class="service-content">
+                        <h3>English Service</h3>
+                        <p>Sundays at 10:30 AM</p>
+                        <p>Our main English service features traditional Anglican liturgy, hymns, and biblical preaching.</p>
+                        <a href="https://www.youtube.com/playlist?list=example2" class="btn" target="_blank">Watch Sermons</a>
+                    </div>
+                </div>
+
+                <!-- Youth Service -->
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Youth Service">
+                    </div>
+                    <div class="service-content">
+                        <h3>Youth Service</h3>
+                        <p>Sundays at 5:00 PM</p>
+                        <p>A dynamic service for youth and young adults with contemporary worship and relevant biblical teaching.</p>
+                        <a href="https://www.youtube.com/playlist?list=example3" class="btn" target="_blank">Watch Sermons</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Events Section -->
+    <section id="events" class="past-events">
+        <div class="container">
+            <h2 class="section-title">Past Events</h2>
+            <div class="events-container">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Easter Celebration">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">April 9, 2023</div>
+                        <h3>Easter Sunday Celebration</h3>
+                        <p>Join us as we celebrate the resurrection of our Lord Jesus Christ with special music, message, and fellowship.</p>
+                        <a href="https://www.youtube.com/watch?v=example1" class="btn" target="_blank">Watch Event</a>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Christmas Service">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">December 24, 2022</div>
+                        <h3>Christmas Eve Service</h3>
+                        <p>Our special candlelight service celebrating the birth of our Savior, Jesus Christ.</p>
+                        <a href="https://www.youtube.com/watch?v=example2" class="btn" target="_blank">Watch Event</a>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Baptism Service">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">June 18, 2023</div>
+                        <h3>Baptism Service</h3>
+                        <p>Celebrating new life in Christ as we baptize new believers into the family of God.</p>
+                        <a href="https://www.youtube.com/watch?v=example3" class="btn" target="_blank">Watch Event</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>ACK ST JUDES HURUMA</h3>
+            <p>A place to belong, believe, and become in Christ.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+
+
+                <li><a href="{% url 'bk' %}">Sermons</a></li>       <!--REMEMBE TO CHANGE TO SERMONS NOT BK-->
+                <li><a href="{% url 'bk' %}">Events</a></li>    <!--REMEMBE TO CHANGE TO EVENTS NOT BK-->
+
+
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
+            <p><i class="fas fa-phone"></i> +254 791 675625</p>
+            <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Service Times</h3>
+            <p>Sunday: 9:00 AM & 11:00 AM</p>
+            <p>Wednesday: 6:30 PM (Bible Study)</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
+        <p>Designed and developed by <i class="fas fa-heart"> Kelly </i> for God's glory</p>
+    </div>
+</footer>
+<!--end of footer-->
+
+
+
+
+
+
+    <script>
+
+// This is a simplified example of how you might fetch events from a data source
+        // In a real implementation, you would fetch from a server or API
+        document.addEventListener('DOMContentLoaded', function() {
+            // Example of how to dynamically update events
+            // This would typically be replaced with an API call to your backend
+            const events = [
+                {
+                    title: "Annual Church Picnic",
+                    date: "August 12, 2023",
+                    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                    youtubeUrl: "https://www.youtube.com/watch?v=example4"
+                },
+                {
+                    title: "Mission Conference",
+                    date: "May 5, 2023",
+                    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+                    youtubeUrl: "https://www.youtube.com/watch?v=example5"
+                }
+            ];
+            
+            // Function to update events in the DOM
+            function updateEvents(eventsArray) {
+                const eventsContainer = document.querySelector('.events-container');
+                
+                // Clear existing events
+                eventsContainer.innerHTML = '';
+                
+                // Add each event to the container
+                eventsArray.forEach(event => {
+                    const eventElement = document.createElement('div');
+                    eventElement.classList.add('event-card');
+                    eventElement.innerHTML = `
+                        <div class="event-img">
+                            <img src="${event.image}" alt="${event.title}">
+                        </div>
+                        <div class="event-content">
+                            <div class="event-date">${event.date}</div>
+                            <h3>${event.title}</h3>
+                            <p>Description of the event would go here.</p>
+                            <a href="${event.youtubeUrl}" class="btn" target="_blank">Watch Event</a>
+                        </div>
+                    `;
+                    eventsContainer.appendChild(eventElement);
+                });
+            }
+            
+            // In a real implementation, you would call updateEvents() with data from an API
+            // For demonstration, we're not calling it here to preserve the example events
+            // updateEvents(events);
+        });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Toggle mobile menu
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('show');
+    });
+
+    // Toggle dropdowns on mobile
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const menu = this.nextElementSibling;
+                menu.classList.toggle('show');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
+
+
+
