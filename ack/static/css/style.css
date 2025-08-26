@@ -2367,6 +2367,10 @@ blockquote {
 
 
 
+
+
+
+
 /* START OF MOTHER'S UNION PAGE STYLES */
 /* Mother's Union Specific Styles */
 :root {
@@ -4401,19 +4405,21 @@ blockquote {
         }
         
         /* Past Events Section */
-        .past-events {
+        .Spast-events {
             padding: 4rem 0;
         }
         
-        .events-container {
+        .Sevents-container {
             margin-top: 2rem;
             display: flex;
             flex-direction: row;
             
         }
         
-        .event-card {
+        .Sevent-card {
             display: flex;
+            flex-direction: column;
+            padding: 20px 15px 15px;
             margin-bottom: 2rem;
             background: var(--white);
             border-radius: 8px;
@@ -4421,40 +4427,42 @@ blockquote {
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
-        .event-img {
+        .Sevent-img {
             flex: 0 0 300px;
+            height: 200px;
+            max-height: 500px;
         }
         
-        .event-img img {
+        .Sevent-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .event-content {
+        .Sevent-content {
             padding: 1.5rem;
             flex: 1;
         }
         
-        .event-date {
+        .Sevent-date {
             color: var(--accent);
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: rgb(76, 75, 75);
         }
         
-        .event-content h3 {
+        .Sevent-content h3 {
             margin-bottom: 1rem;
         }
         
-        .event-content p {
+        .Sevent-content p {
             margin-bottom: 1rem;
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
 
-            .events-container {
+            .Sevents-container {
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
@@ -4478,18 +4486,18 @@ blockquote {
                 font-size: 2.5rem;
             }
             
-            .event-card {
+            .Sevent-card {
                 flex-direction: column;
             }
             
-            .event-img {
+            .Sevent-img {
                 flex: 0 0 200px;
             }
         }
         
         @media (max-width: 576px) {
 
-            .events-container {
+            .Sevents-container {
             margin-top: 2rem;
             display: flex;
             flex-direction: column;
@@ -4620,63 +4628,175 @@ blockquote {
             padding: 4rem 0;
         }
         
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--accent);
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
         
-        .contact-info {
-            background: var(--gray);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
+        .contact-info, .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .contact-info h3, .contact-form h3 {
+            color: #1a2a6c;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #fdbb2d;
         }
         
         .contact-detail {
             display: flex;
+            margin-bottom: 25px;
             align-items: flex-start;
-            margin-bottom: 1.5rem;
         }
         
         .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-right: 1rem;
-            min-width: 30px;
+            background: #1a2a6c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
         
         .contact-text h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.3rem;
+            color: #b21f1f;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
         }
         
         .contact-text p {
+            color: #555;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #1a2a6c;
+            box-shadow: 0 0 0 3px rgba(26, 42, 108, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #b21f1f, #1a2a6c);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .whatsapp-note {
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
             color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .map-container {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
         }
         
         .map-container {
@@ -4693,61 +4813,7 @@ blockquote {
         }
         
         /* Contact Form */
-        .contact-form {
-            background: var(--gray);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
         
-        .contact-form h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 1rem;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: var(--accent);
-            transform: translateY(-2px);
-        }
         
         /* Service Times */
         .service-times {
