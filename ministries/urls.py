@@ -13,4 +13,5 @@ urlpatterns = [
     path('kama/', views.men_ministry, name='kama'),
     path('kama/interest/', views.kama_interest, name='kama_interest'),
     path('choir_worship/', views.choir_worship, name='choir_worship'),
+
 ]

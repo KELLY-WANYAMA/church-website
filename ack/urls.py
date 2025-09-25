@@ -36,7 +36,6 @@ urlpatterns = [
     path('test-static/', test_static),
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('sermons/', views.sermons, name='senmon'),
     path('contacts/', views.contacts, name='contact'),
     path('bk/', views.bk, name='bk'),
     path('events/', views.events, name='events'),
@@ -48,6 +47,6 @@ urlpatterns = [
     path('sundayschool/', views.sundayschool, name='sundayschool'),
     path('mu/', views.mu, name= 'mothersunion'),
     path('kama/', views.kama, name='kama'),
-    
-    
+    path('sermons/', views.sermons, name='sermons'),
+    path('leaders/', views.leaders, name='leaders'),
 ]

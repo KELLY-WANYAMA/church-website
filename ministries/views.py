@@ -197,3 +197,4 @@ def choir_worship(request):
         'ministry_name': "ACK Music Ministry",
     }
     return render(request, 'ministries/choir_worship.html', context)
+

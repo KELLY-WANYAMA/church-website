@@ -22,17 +22,19 @@
     <ul class="nav-links">
         <li><a href="/">HOME</a></li>
         <li class="dropdown">
-            <a href="/about">ABOUT ▾</a>
+            <a href="#">ABOUT ▾</a>
             <ul class="dropdown-menu">
                 <li><a href="/about">ABOUT US</a></li>
+                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
                 <li><a href="/events">EVENTS</a></li>
                 <li><a href="/gallery">GALLERY</a></li>
                 <li><a href="/giving">GIVING</a></li>
             </ul>
         </li>
         <li class="dropdown">
-            <a href="/ministries">MINISTRIES ▾</a>
+            <a href="#">MINISTRIES ▾</a>
             <ul class="dropdown-menu">
+                <li><a href="/ministries">OUR MINISTRIES</a></li>
                 <li><a href="/ministries/youth">YOUTH</a></li>
                 <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
                 <li><a href="/ministries/kama">KAMA</a></li>
@@ -43,6 +45,7 @@
         <li><a href="/sermons">SERMONS</a></li>
         <li><a href="/contacts">CONTACT</a></li>
     </ul>
+
 </nav>
     </header>
 </head>
@@ -74,17 +77,17 @@
         <div class="service-times">
             <div class="time-card">
                 <h3>Sundays</h3>
-                <p>9:00 AM - Main Service</p>
-                <p>11:00 AM - Family Service</p>
+                <p>7:30 AM - 9:00 AM Youth Service</p><br>
+                <p>9:30 AM - 11:00 AM Eng Service</p><br>
+                <p>11:30 AM - 1:00 PM Kisw Service</p>
             </div>
             <div class="time-card">
                 <h3>Wednesdays</h3>
-                <p>6:30 PM - Bible Study</p>
+                <p>6:30 AM - 6:30 PM Maombi Wed</p>
             </div>
             <div class="time-card">
-                <h3>Location</h3>
-                <p>Nairobi, Kenya</p>
-                <p>Church Road, Westlands</p>
+                <h3>Friday</h3>
+                <p>9:30 PM - 11:00 PM Online Bible Study</p>
             </div>
         </div>
     </div>
@@ -129,10 +132,11 @@
             <h3>ACK ST JUDES HURUMA</h3>
             <p>A place to belong, believe, and become in Christ.</p>
             <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100069972304998" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.youtube.com/@ackstjudesparish-huruma" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@ack.st.judes.huru" target="_blank"><i class="fab fa-tiktok"></i></a>
             </div>
         </div>
 
@@ -141,12 +145,8 @@
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About Us</a></li>
-
-
-                <li><a href="{% url 'bk' %}">Sermons</a></li>       <!--REMEMBE TO CHANGE TO SERMONS NOT BK-->
-                <li><a href="{% url 'bk' %}">Events</a></li>    <!--REMEMBE TO CHANGE TO EVENTS NOT BK-->
-
-
+                <li><a href="{% url 'sermons' %}">Sermon</a></li>
+                <li><a href="{% url 'events' %}">Events</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
         </div>
@@ -154,20 +154,20 @@
         <div class="footer-section">
             <h3>Contact Info</h3>
             <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
-            <p><i class="fas fa-phone"></i> +254 791 675625</p>
+            <p><i class="fas fa-phone"></i> +254 718 437784</p>
             <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
         </div>
 
         <div class="footer-section">
             <h3>Service Times</h3>
-            <p>Sunday: 9:00 AM & 11:00 AM</p>
-            <p>Wednesday: 6:30 PM (Bible Study)</p>
+            <p>Sunday: 7:30 AM To 1:00 PM</p>
+            <p>Wednesday: 6:30 AM To 6:30 PM (Maombi Wednesday)</p>
         </div>
     </div>
 
     <div class="footer-bottom">
         <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
-        <p>Designed and developed by <i class="fas fa-heart"> Kelly </i> for God's glory</p>
+        <p>Designed and developed by <a href="https://nicekelly.netlify.app/" target="_blank"> Kelly</a> </i> To God Be The Glory</p>
     </div>
 </footer>
 <!--end of footer-->

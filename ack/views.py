@@ -17,7 +17,12 @@ def about(request):
     return render(request, 'ack/about.html')
 
 def sermons(request):
-    return render(request, 'ack/sermons.html')
+    # Your view logic here
+    context = {
+        'title': 'sermons',
+        # Add any other context data
+    }
+    return render(request, 'ack/sermons.html', context)
 
 def contacts(request):
     return render(request, 'ack/contacts.html')
@@ -59,6 +64,12 @@ def mu(request):
 
 def kama(request):
     return render(request, 'ack/kama.html')
+
+def leaders(request):
+    return render(request, 'ack/leaders.html')
+
+
+
 
 
 
