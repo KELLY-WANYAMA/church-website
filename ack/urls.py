@@ -1,43 +1,17 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-from django.http import HttpResponse
-from django.templatetags.static import static
-
-
-
-
-def test_static(request):
-    return HttpResponse(f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Static Test</title>
-        <link rel="stylesheet" href="{static('css/style.css')}">
-        <style>
-            .test {{ color: red; font-size: 20px; }}
-        </style>
-    </head>
-    <body>
-        <h1>Static File Test</h1>
-        <p class="test">This should be red if inline CSS works</p>
-        <p>CSS file path: {static('css/style.css')}</p>
-        <p>If external CSS works, you'll see additional styles.</p>
-    </body>
-    </html>
-    """)
-
-
-
-
-
+from .views import (
+    SermonListAPIView, SermonDetailAPIView, RecentSermonsAPIView,
+    EventListAPIView, EventDetailAPIView, UpcomingEventsAPIView,
+    api_home, event_types_api, SermonCreateAPIView, EventCreateAPIView
+)
 
 urlpatterns = [
-    # Main site navigation
-    path('test-static/', test_static),
+    # Traditional URLs (existing)
     path('', views.home, name='home'),
+    path('contacts/', views.contacts, name='contacts'),
     path('about/', views.about, name='about'),
-    path('contacts/', views.contacts, name='contact'),
-    path('bk/', views.bk, name='bk'),
+    path('sermons/', views.sermons, name='sermons'),
     path('events/', views.events, name='events'),
     path('gallery/', views.gallery, name='gallery'),
     path('giving/', views.giving, name='giving'),
@@ -45,8 +19,19 @@ urlpatterns = [
     path('ministries/', views.ministries, name='ministries'),
     path('youth/', views.youth, name='youth'),
     path('sundayschool/', views.sundayschool, name='sundayschool'),
-    path('mu/', views.mu, name= 'mothersunion'),
+    path('mu/', views.mu, name='mu'),
     path('kama/', views.kama, name='kama'),
-    path('sermons/', views.sermons, name='sermons'),
     path('leaders/', views.leaders, name='leaders'),
+    
+    # NEW API URLs
+    path('api/', api_home, name='api-home'),
+    path('api/sermons/', SermonListAPIView.as_view(), name='api-sermons'),
+    path('api/sermons/recent/', RecentSermonsAPIView.as_view(), name='api-sermons-recent'),
+    path('api/sermons/<int:pk>/', SermonDetailAPIView.as_view(), name='api-sermon-detail'),
+    path('api/sermons/create/', SermonCreateAPIView.as_view(), name='api-sermon-create'),
+    path('api/events/', EventListAPIView.as_view(), name='api-events'),
+    path('api/events/upcoming/', UpcomingEventsAPIView.as_view(), name='api-events-upcoming'),
+    path('api/events/<int:pk>/', EventDetailAPIView.as_view(), name='api-event-detail'),
+    path('api/events/create/', EventCreateAPIView.as_view(), name='api-event-create'),
+    path('api/event-types/', event_types_api, name='api-event-types'),
 ]

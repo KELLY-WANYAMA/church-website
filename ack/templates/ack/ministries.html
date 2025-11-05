@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACK ST. JUDE'S HURUMA</title>
-    {% load static %}
+    
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -25,7 +26,6 @@
             <a href="#">ABOUT ▾</a>
             <ul class="dropdown-menu">
                 <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
                 <li><a href="/events">EVENTS</a></li>
                 <li><a href="/gallery">GALLERY</a></li>
                 <li><a href="/giving">GIVING</a></li>
@@ -52,8 +52,6 @@
 <body>
 
 
-{% block title %}MINISTRIES - {{ church_name }}{% endblock %}
-
 {% block content %}
 <section class="ministries-section">
     <div class="container">
@@ -75,11 +73,12 @@
                         <p><i class="fas fa-calendar-alt"></i> Every Wednesday at 6:30 PM</p>
                         <p><i class="fas fa-map-marker-alt"></i> Main Sanctuary</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/sermons" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
 
             <!-- Youth Ministry -->
+            
             <div class="ministry-card">
                 <div class="ministry-icon">
                     <i class="fas fa-music"></i>
@@ -91,7 +90,7 @@
                         <p><i class="fas fa-calendar-alt"></i> Fridays at 4:00 PM</p>
                         <p><i class="fas fa-map-marker-alt"></i> Youth Hall</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/ministries/youth" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
 
@@ -107,7 +106,7 @@
                         <p><i class="fas fa-calendar-alt"></i> Sundays at 9:00 AM</p>
                         <p><i class="fas fa-map-marker-alt"></i> Children's Wing</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/ministries/sundayschool" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
 
@@ -123,7 +122,7 @@
                         <p><i class="fas fa-calendar-alt"></i> 1st Saturday monthly</p>
                         <p><i class="fas fa-map-marker-alt"></i> Fellowship Hall</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/ministries/mu" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
 
@@ -139,7 +138,7 @@
                         <p><i class="fas fa-calendar-alt"></i> 2nd Saturday monthly</p>
                         <p><i class="fas fa-map-marker-alt"></i> Prayer Room</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/ministries/kama" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
 
@@ -155,7 +154,7 @@
                         <p><i class="fas fa-calendar-alt"></i> Quarterly events</p>
                         <p><i class="fas fa-map-marker-alt"></i> Various locations</p>
                     </div>
-                    <a href="#" class="learn-more-btn">Learn More</a>
+                    <a href="/sermons" class="learn-more-btn">Learn More</a>
                 </div>
             </div>
         </div>
@@ -187,7 +186,7 @@
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'sermons' %}">Sermon</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contacts' %}">Contact</a></li>
             </ul>
         </div>
 
@@ -212,36 +211,8 @@
 </footer>
 <!--end of footer-->
 
-
-
-
-
-
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
-    });
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const menu = this.nextElementSibling;
-                menu.classList.toggle('show');
-            }
-        });
-    });
-});
-</script>
+<!-- External JavaScript -->
+    <script src="{% static 'js/ministries.js' %}"></script>
 </body>
 </html>
 

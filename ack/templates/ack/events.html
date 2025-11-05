@@ -1,13 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACK ST. JUDE'S HURUMA</title>
-    {% load static %}
+    <title>Church Events & Calendar - ACK St. Jude's Huruma</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+</head>
+<body>
+    <!-- Your existing header -->
     <header>
         <nav class="navbar">
             <div class="logo">
@@ -19,144 +21,197 @@
                 <a href="/">🌟 ACK ST JUDES HURUMA</a>
             </div>
             <ul class="nav-links">
-        <li><a href="/">HOME</a></li>
-        <li class="dropdown">
-            <a href="#">ABOUT ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
-                <li><a href="/events">EVENTS</a></li>
-                <li><a href="/gallery">GALLERY</a></li>
-                <li><a href="/giving">GIVING</a></li>
+                <li><a href="/">HOME</a></li>
+                <li class="dropdown">
+                    <a href="#">ABOUT ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about">ABOUT US</a></li>
+                        <li><a href="/events">EVENTS</a></li>
+                        <li><a href="/gallery">GALLERY</a></li>
+                        <li><a href="/giving">GIVING</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">MINISTRIES ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ministries">OUR MINISTRIES</a></li>
+                        <li><a href="/ministries/youth">YOUTH</a></li>
+                        <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
+                        <li><a href="/ministries/kama">KAMA</a></li>
+                        <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
+                        <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
+                    </ul>
+                </li>
+                <li><a href="/sermons">SERMONS</a></li>
+                <li><a href="/contacts">CONTACT</a></li>
             </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#">MINISTRIES ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/ministries">OUR MINISTRIES</a></li>
-                <li><a href="/ministries/youth">YOUTH</a></li>
-                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
-                <li><a href="/ministries/kama">KAMA</a></li>
-                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
-                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
-            </ul>
-        </li>
-        <li><a href="/sermons">SERMONS</a></li>
-        <li><a href="/contacts">CONTACT</a></li>
-    </ul>
-
         </nav>
     </header>
-</head>
-<body>
 
-{% block title %}Events | ACK ST JUDES HURUMA{% endblock %}
+    <main>
+        <section class="events-page">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1>
+                        <i class="fas fa-calendar-alt"></i> Church Events & Calendar
+                    </h1>
+                    <p class="subtitle">
+                        Explore our complete church calendar featuring upcoming revivals, fellowships, weddings, and prayer meetings. 
+                        Join us as we gather to worship, fellowship, and grow together in Christ.
+                    </p>
+                    
+                    <!-- Events Summary -->
+                    <div class="events-summary">
+                        <div class="summary-item">
+                            <span class="summary-count">{{ upcoming_events|length }}</span>
+                            <span class="summary-label">Upcoming Events</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-count">{{ past_events|length }}</span>
+                            <span class="summary-label">Past Events</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-count">{{ all_events|length }}</span>
+                            <span class="summary-label">Total Events</span>
+                        </div>
+                    </div>
+                </div>
 
-{% block content %}
-    <section class="events-page">
-        <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1>
-                    <i class="fas fa-calendar-alt"></i> Upcoming Events
-                </h1>
-                <p class="subtitle">
-                    Stay updated with our upcoming revivals, conferences, weddings, and fellowships.  
-                    You're welcome to join us and be part of what God is doing in our church family.
+                <!-- Events Filter -->
+                <div class="events-filter">
+                    <button class="filter-btn {% if current_filter == 'all' %}active{% endif %}" 
+                            onclick="filterEvents('all')">All Events</button>
+                    <button class="filter-btn {% if current_filter == 'REVIVAL' %}active{% endif %}" 
+                            onclick="filterEvents('REVIVAL')">
+                        <i class="fas fa-church"></i> Revivals
+                    </button>
+                    <button class="filter-btn {% if current_filter == 'FELLOWSHIP' %}active{% endif %}" 
+                            onclick="filterEvents('FELLOWSHIP')">
+                        <i class="fas fa-handshake"></i> Fellowships
+                    </button>
+                    <button class="filter-btn {% if current_filter == 'WEDDING' %}active{% endif %}" 
+                            onclick="filterEvents('WEDDING')">
+                        <i class="fas fa-ring"></i> Weddings
+                    </button>
+                    <button class="filter-btn {% if current_filter == 'PRAYER' %}active{% endif %}" 
+                            onclick="filterEvents('PRAYER')">
+                        <i class="fas fa-pray"></i> Prayer
+                    </button>
+                </div>
+
+
+<!-- Upcoming Events Section -->
+{% if upcoming_events %}
+<section class="events-section">
+    <h2 class="section-title">
+        <i class="fas fa-arrow-up"></i> Upcoming Events
+        <span class="event-count">{{ upcoming_events|length }}</span>
+    </h2>
+    <div class="events-grid">
+        {% for event in upcoming_events %}
+        <div class="event-card {{ event.event_type|lower }}">
+            <div class="event-badge status-upcoming">
+                {{ event.get_event_type_display }}
+            </div>
+            <div class="event-icon">
+                <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="event-details">
+                <h3>{{ event.title }}</h3>
+                    <div class="event-meta">
+                        <p><i class="fas fa-calendar-day"></i> {{ event.date|date:"F j, Y" }}</p>
+                        <p><i class="fas fa-clock"></i> {{ event.date|date:"g:i A" }}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                    </div>
+                <p class="event-description">
+                    {{ event.description }}
                 </p>
-            </div>
-
-            <!-- Events Filter (Optional) -->
-            <div class="events-filter">
-                <button class="filter-btn active" data-filter="all">All Events</button>
-                <button class="filter-btn" data-filter="revival">Revivals</button>
-                <button class="filter-btn" data-filter="fellowship">Fellowships</button>
-                <button class="filter-btn" data-filter="wedding">Weddings</button>
-            </div>
-
-            <!-- Events Grid -->
-            <div class="events-grid">
-                <!-- Revival Event -->
-                <div class="event-card revival">
-                    <div class="event-icon">
-                        <i class="fas fa-church"></i>
-                    </div>
-                    <div class="event-details">
-                        <h2>Revival Meeting</h2>
-                        <div class="event-meta">
-                            <p><i class="fas fa-calendar-day"></i> 25th August 2025</p>
-                            <p><i class="fas fa-clock"></i> 6:00 PM - 9:00 PM</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Main Sanctuary</p>
-                        </div>
-                        <p class="event-description">
-                            Join us for three days of prayer, worship, and revival preaching. 
-                            Come expectant for God's move!
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Fellowship Event -->
-                <div class="event-card fellowship">
-                    <div class="event-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <div class="event-details">
-                        <h2>Youth Fellowship Night</h2>
-                        <div class="event-meta">
-                            <p><i class="fas fa-calendar-day"></i> 10th September 2025</p>
-                            <p><i class="fas fa-clock"></i> 5:00 PM - 8:00 PM</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Youth Hall</p>
-                        </div>
-                        <p class="event-description">
-                            A time of worship, sharing, and encouragement. 
-                            All youths and young adults are welcome!
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Wedding Event -->
-                <div class="event-card wedding">
-                    <div class="event-icon">
-                        <i class="fas fa-ring"></i>
-                    </div>
-                    <div class="event-details">
-                        <h2>Church Wedding</h2>
-                        <div class="event-meta">
-                            <p><i class="fas fa-calendar-day"></i> 22nd October 2025</p>
-                            <p><i class="fas fa-clock"></i> 2:00 PM - 5:00 PM</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Church Garden</p>
-                        </div>
-                        <p class="event-description">
-                            Celebrate with us as we witness the holy union of our beloved members in Christ.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Additional Event Example -->
-                <div class="event-card revival">
-                    <div class="event-icon">
-                        <i class="fas fa-pray"></i>
-                    </div>
-                    <div class="event-details">
-                        <h2>Prayer & Fasting</h2>
-                        <div class="event-meta">
-                            <p><i class="fas fa-calendar-day"></i> 15th November 2025</p>
-                            <p><i class="fas fa-clock"></i> 7:00 AM - 5:00 PM</p>
-                            <p><i class="fas fa-map-marker-alt"></i> Prayer Chapel</p>
-                        </div>
-                        <p class="event-description">
-                            A day dedicated to prayer and fasting for our church and community needs.
-                        </p>
-                    </div>
+                <div class="event-footer">
+                    <span class="event-type">{{ event.get_event_type_display }}</span>
+                    <span class="event-date-display">{{ event.date|date:"M d, Y" }}</span>
                 </div>
             </div>
-
         </div>
-    </section>
-{% endblock %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
+<!-- Past Events Section -->
+{% if past_events %}
+<section class="events-section past-events-section">
+    <h2 class="section-title">
+        <i class="fas fa-history"></i> Past Events
+        <span class="event-count">{{ past_events|length }}</span>
+    </h2>
+    <div class="events-grid">
+        {% for event in past_events %}
+        <div class="event-card past-event {{ event.event_type|lower }}">
+            <div class="event-badge status-past">
+                Past Event
+            </div>
+            <div class="event-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <div class="event-details">
+                <h3>{{ event.title }}</h3>
+                    <div class="event-meta">
+                        <p><i class="fas fa-calendar-day"></i> {{ event.date|date:"F j, Y" }}</p>
+                        <p><i class="fas fa-clock"></i> {{ event.date|date:"g:i A" }}</p>
+                        <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
+                    </div>
+                <p class="event-description">
+                    {{ event.description }}
+                </p>
+                
+                <!-- Video Links Section - FIXED -->
+                {% if event.youtube_url or event.tiktok_url %}
+                <div class="video-links">
+                    <h4><i class="fas fa-video"></i> Watch Event Highlights:</h4>
+                    <div class="video-buttons">
+                        {% if event.youtube_url %}
+                        <a href="{{ event.youtube_url }}" target="_blank" rel="noopener" class="video-btn youtube-btn">
+                            <i class="fab fa-youtube"></i>
+                            Watch on YouTube
+                        </a>
+                        {% endif %}
+                        {% if event.tiktok_url %}
+                        <a href="{{ event.tiktok_url }}" target="_blank" rel="noopener" class="video-btn tiktok-btn">
+                            <i class="fab fa-tiktok"></i>
+                            Watch on TikTok
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="no-videos">
+                    <p><i class="fas fa-video-slash"></i> No video highlights available</p>
+                </div>
+                {% endif %}
+                
+                <div class="event-footer">
+                    <span class="event-type">{{ event.get_event_type_display }}</span>
+                    <span class="event-date-display">{{ event.date|date:"M d, Y" }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+                <!-- No Events Message -->
+                {% if not all_events %}
+                <div class="no-events">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Events Scheduled</h3>
+                    <p>Check back later for upcoming church events and activities!</p>
+                </div>
+                {% endif %}
 
-
+            </div>
+        </section>
+    </main>
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -180,7 +235,7 @@
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'sermons' %}">Sermon</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contacts' %}">Contact</a></li>
             </ul>
         </div>
 
@@ -206,29 +261,54 @@
 <!--end of footer-->
 
 
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+function filterEvents(eventType) {
+    let url = new URL(window.location.href);
+    
+    // Always start with the base events URL
+    const basePath = '/events/';
+    url.pathname = basePath;
+    
+    if (eventType === 'all') {
+        url.searchParams.delete('type');
+    } else {
+        url.searchParams.set('type', eventType);
+    }
+    
+    window.location.href = url.toString();
+}
 
-
-<script>
+// Add active class to current filter button
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
-    });
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const menu = this.nextElementSibling;
-                menu.classList.toggle('show');
+    const currentFilter = '{{ current_filter }}'.toLowerCase();
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    
+    filterButtons.forEach(btn => {
+        let btnFilter = 'all';
+        const onclickAttr = btn.getAttribute('onclick');
+        
+        if (onclickAttr) {
+            const match = onclickAttr.match(/'([^']+)'/);
+            if (match && match[1]) {
+                btnFilter = match[1].toLowerCase();
             }
+        }
+        
+        // Update active class
+        if (btnFilter === currentFilter) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+    
+    // Add click handlers for video buttons to ensure they work
+    const videoButtons = document.querySelectorAll('.video-btn');
+    videoButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Allow default behavior (opening link)
+            console.log('Video button clicked:', this.href);
         });
     });
 });

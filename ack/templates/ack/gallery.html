@@ -1,108 +1,126 @@
+<!-- ack/templates/ack/gallery.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACK ST. JUDE'S HURUMA</title>
-    {% load static %}
+    <title>Church Gallery - ACK St. Jude's Huruma</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <header>
-        <nav class="navbar">
-    <div class="logo">
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <a href="/">🌟 ACK ST JUDES HURUMA</a>
-    </div>
-    <ul class="nav-links">
-        <li><a href="/">HOME</a></li>
-        <li class="dropdown">
-            <a href="#">ABOUT ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
-                <li><a href="/events">EVENTS</a></li>
-                <li><a href="/gallery">GALLERY</a></li>
-                <li><a href="/giving">GIVING</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#">MINISTRIES ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/ministries">OUR MINISTRIES</a></li>
-                <li><a href="/ministries/youth">YOUTH</a></li>
-                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
-                <li><a href="/ministries/kama">KAMA</a></li>
-                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
-                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
-            </ul>
-        </li>
-        <li><a href="/sermons">SERMONS</a></li>
-        <li><a href="/contacts">CONTACT</a></li>
-    </ul>
-
-</nav>
-    </header>
 </head>
 <body>
-    
+    <!-- Your existing header -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <a href="/">🌟 ACK ST JUDES HURUMA</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">HOME</a></li>
+                <li class="dropdown">
+                    <a href="#">ABOUT ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about">ABOUT US</a></li>
+                        <li><a href="/events">EVENTS</a></li>
+                        <li><a href="/gallery">GALLERY</a></li>
+                        <li><a href="/giving">GIVING</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">MINISTRIES ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/ministries">OUR MINISTRIES</a></li>
+                        <li><a href="/ministries/youth">YOUTH</a></li>
+                        <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
+                        <li><a href="/ministries/kama">KAMA</a></li>
+                        <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
+                        <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
+                    </ul>
+                </li>
+                <li><a href="/sermons">SERMONS</a></li>
+                <li><a href="/contacts">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
 
-{% block title %}GALLERY - {{ church_name }}{% endblock %}
-
-{% block content %}
-<section class="gallery-section">
+    <main>
+        <section class="gallery-section">
     <div class="container">
         <h1><i class="fas fa-images"></i> Church Gallery</h1>
         <p class="subtitle">Capturing moments of faith, fellowship, and service</p>
         
-        <div class="gallery-categories">
-            <button class="category-btn active" data-category="all">All Events</button>
-            <button class="category-btn" data-category="services">Sunday Services</button>
-            <button class="category-btn" data-category="events">Special Events</button>
-            <button class="category-btn" data-category="outreach">Community Outreach</button>
+        <!-- Gallery Summary -->
+        <div class="gallery-summary">
+            <div class="summary-item">
+                <span class="summary-count">{{ gallery_items|length }}</span>
+                <span class="summary-label">Total Photos</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-count">{{ featured_items|length }}</span>
+                <span class="summary-label">Featured</span>
+            </div>
         </div>
+        
+            <div class="gallery-categories">
+                <button class="category-btn {% if current_category == 'all' %}active{% endif %}" 
+                        data-category="all" onclick="filterGallery('all')">All Events</button>
+                
+                {% for category in unique_categories %}
+                <button class="category-btn {% if current_category == category %}active{% endif %}" 
+                        data-category="{{ category }}" onclick="filterGallery('{{ category }}')">
+                    {{ category|title }}
+                </button>
+                {% endfor %}
+            </div>
 
+        <!-- Gallery Grid -->
         <div class="gallery-grid">
-            <!-- Sample Gallery Item 1 -->
-            <div class="gallery-item" data-category="services">
-                <img src="{% static 'images/gallery/service-1.jpg' %}" alt="Sunday Service">
+            {% for item in gallery_items %}
+            <div class="gallery-item" data-category="{{ item.category }}">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}" loading="lazy">
                 <div class="gallery-overlay">
-                    <h3>Sunday Worship</h3>
-                    <p>January 15, 2023</p>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.date|date:"F j, Y" }}</p>
+                    {% if item.description %}
+                    <div class="gallery-description">
+                        {{ item.description|truncatewords:15 }}
+                    </div>
+                    {% endif %}
+                    {% if item.is_featured %}
+                    <div class="featured-badge">
+                        <i class="fas fa-star"></i> Featured
+                    </div>
+                    {% endif %}
                 </div>
             </div>
-
-            <!-- Sample Gallery Item 2 -->
-            <div class="gallery-item" data-category="events">
-                <img src="{% static 'images/gallery/event-1.jpg' %}" alt="Church Wedding">
-                <div class="gallery-overlay">
-                    <h3>Church Wedding</h3>
-                    <p>March 5, 2023</p>
-                </div>
+            {% empty %}
+            <div class="no-gallery-items">
+                <i class="fas fa-camera"></i>
+                <h3>No Photos Yet</h3>
+                <p>Check back soon for gallery updates!</p>
             </div>
-
-            <!-- Sample Gallery Item 3 -->
-            <div class="gallery-item" data-category="outreach">
-                <img src="{% static 'images/gallery/outreach-1.jpg' %}" alt="Food Drive">
-                <div class="gallery-overlay">
-                    <h3>Community Food Drive</h3>
-                    <p>April 22, 2023</p>
-                </div>
-            </div>
-
-            <!-- Add more gallery items following the same pattern -->
+            {% endfor %}
         </div>
+        
+        <!-- Load More Button (Optional) -->
+        {% if gallery_items|length > 12 %}
+        <div class="load-more-container">
+            <button class="load-more-btn" id="loadMore">
+                <i class="fas fa-plus"></i> Load More Photos
+            </button>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endblock %}
+    </main>
 
-
-
+    
 <!-- Footer Section -->
 <footer class="footer">
     <div class="footer-container">
@@ -125,7 +143,7 @@
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'sermons' %}">Sermon</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contacts' %}">Contact</a></li>
             </ul>
         </div>
 
@@ -150,93 +168,62 @@
 </footer>
 <!--end of footer-->
 
+<script src="{% static 'js/main.js' %}"></script>
 
-
-
-
-
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Gallery Filter Functionality
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
+<script>
+function filterGallery(category) {
+    // Use Django template URL for the base path to ensure correct URL routing
+    let url = '{% url "gallery" %}';
     
-    categoryBtns.forEach(btn => {
+    // If it's not 'all', add the category as a query parameter
+    // Using 'category' parameter to match your view
+    if (category !== 'all') {
+        url += `?category=${category}`;
+    }
+    
+    // Navigate to the filtered URL
+    console.log('Navigating to:', url); // Debug log
+    window.location.href = url;
+}
+
+// Add active class to current category button
+document.addEventListener('DOMContentLoaded', function() {
+    const currentCategory = '{{ current_category }}';
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    
+    console.log('Current category:', currentCategory); // Debug log
+    
+    categoryButtons.forEach(btn => {
+        const btnCategory = btn.dataset.category;
+        console.log('Button category:', btnCategory); // Debug log
+        
+        // Remove active class from all buttons first
+        btn.classList.remove('active');
+        
+        // Add active class to matching button
+        if (btnCategory === currentCategory || 
+            (currentCategory === 'all' && btnCategory === 'all')) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // Simple load more functionality
+    const loadMoreBtn = document.getElementById('loadMore');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            // You can implement AJAX loading here
+            alert('Load more functionality can be implemented with AJAX');
+        });
+    }
+    
+    // Debug: Check if buttons have click events
+    categoryButtons.forEach(btn => {
         btn.addEventListener('click', function() {
-            // Update active button
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter items with animation
             const category = this.dataset.category;
-            galleryItems.forEach(item => {
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    item.style.display = (category === 'all' || item.dataset.category === category) ? 
-                        'block' : 'none';
-                    item.style.opacity = '1';
-                }, 200);
-            });
+            console.log('Button clicked, category:', category);
+            filterGallery(category);
         });
-    });
-
-    // Mobile Navigation
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
-        
-        // Close all dropdowns when menu is closed
-        if (!navLinks.classList.contains('show')) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
-        }
-    });
-
-    // Handle dropdowns
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        
-        // Mobile behavior
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                menu.classList.toggle('show');
-            }
-        });
-        
-        // Desktop hover behavior
-        dropdown.addEventListener('mouseenter', function() {
-            if (window.innerWidth > 768) {
-                menu.classList.add('show');
-            }
-        });
-        
-        dropdown.addEventListener('mouseleave', function() {
-            if (window.innerWidth > 768) {
-                menu.classList.remove('show');
-            }
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown') && window.innerWidth <= 768) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
-        }
     });
 });
-</script>
-</body>
+</script></body>
 </html>
-
-
-

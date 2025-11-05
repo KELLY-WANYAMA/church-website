@@ -25,7 +25,6 @@
             <a href="#">ABOUT ▾</a>
             <ul class="dropdown-menu">
                 <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
                 <li><a href="/events">EVENTS</a></li>
                 <li><a href="/gallery">GALLERY</a></li>
                 <li><a href="/giving">GIVING</a></li>
@@ -50,9 +49,6 @@
 </head>
 <body>
     
-
-
-{% block title %}About Us | ACK ST JUDES HURUMA{% endblock %}
 
 {% block content %}
 <section class="about-page">
@@ -118,53 +114,46 @@
         </div>
 
         <!-- Leadership Team -->
-        <div class="about-section">
-            <div class="section-icon">
-                <i class="fas fa-users"></i>
-            </div>
-            <div class="section-content">
-                <h2>Our Leadership Team</h2>
-                <div class="leadership-grid">
-                    <!-- Senior Pastor -->
-                    <div class="leader-card">
-                        <div class="leader-image">
-                            <img src="{% static 'images/pastor1.jpg' %}" alt="RT. JONATHAN KABIRU">
-                        </div>
-                        <div class="leader-info">
-                            <h3>RT. JONATHAN KABIRU</h3>
-                            <p class="position">NAIROBI DIOCESE</p>
-                            <p class="bio">Ordained in 1995, RT. JONATHAN has served our diocese since 2008.</p>
-                        </div>
+<div class="about-section">
+    <div class="section-icon">
+        <i class="fas fa-users"></i>
+    </div>
+    <div class="section-content">
+        <h2>Our Leadership Team</h2>
+        <div class="leadership-grid">
+            {% for leader in leaders %}
+            <div class="leader-card">
+                <div class="leader-image">
+                    {% if leader.image %}
+                        <img src="{{ leader.image.url }}" alt="{{ leader.name }}">
+                    {% else %}
+                        <img src="{% static 'images/leader-placeholder.jpg' %}" alt="{{ leader.name }}">
+                    {% endif %}
+                </div>
+                <div class="leader-info">
+                    <h3>{{ leader.name }}</h3>
+                    <p class="position">{{ leader.get_position_display }}</p>
+                    <p class="bio">{{ leader.bio }}</p>
+                    {% if leader.email or leader.phone %}
+                    <div class="leader-contact">
+                        {% if leader.email %}
+                        <p><i class="fas fa-envelope"></i> {{ leader.email }}</p>
+                        {% endif %}
+                        {% if leader.phone %}
+                        <p><i class="fas fa-phone"></i> {{ leader.phone }}</p>
+                        {% endif %}
                     </div>
-
-                    <!-- Assistant Pastor -->
-                    <div class="leader-card">
-                        <div class="leader-image">
-                            <img src="{% static 'images/pastor2.jpg' %}" alt="Rev. Yuyu ">
-                        </div>
-                        <div class="leader-info">
-                            <h3>REV. ... YUYU</h3>
-                            <p class="position">VICAR </p>
-                            <p class="bio">Leads our congregation ministry and community outreach programs. Leading 8 church branches</p>
-                        </div>
-                    </div>
-
-                    <!-- Youth Leader -->
-                    <div class="leader-card">
-                        <div class="leader-image">
-                            <img src="{% static 'images/pastor3.jpg' %}" alt="Brother Michael">
-                        </div>
-                        <div class="leader-info">
-                            <h3>Brother Michael</h3>
-                            <p class="position">Youth Ministry Leader</p>
-                            <p class="bio">Passionate about discipling the next generation of believers.</p>
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
+            {% empty %}
+            <div class="no-leaders">
+                <p>Our leadership team information is coming soon.</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
-</section>
+</div>
 {% endblock %}
 
 
@@ -191,7 +180,7 @@
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'sermons' %}">Sermon</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contacts' %}">Contact</a></li>
             </ul>
         </div>
 
@@ -216,34 +205,9 @@
 </footer>
 <!--end of footer-->
 
+<!-- External JavaScript -->
+    <script src="{% static 'js/about.js' %}"></script>
 
-
-
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
-    });
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const menu = this.nextElementSibling;
-                menu.classList.toggle('show');
-            }
-        });
-    });
-});
-</script>
 </body>
 </html>
 

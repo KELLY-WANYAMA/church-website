@@ -1,17 +1,44 @@
-# ministries/urls.py
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
+from .views import (
+    MinistryViewSet, InterestFormSubmissionViewSet,
+    ministry_stats, ministry_type_stats, submit_interest_form,
+    ProgramListAPIView, MinistryProgramsAPIView
+)
 
-app_name = 'ministries'
+# Router for ViewSets
+router = DefaultRouter()
+router.register(r'ministries', MinistryViewSet, basename='ministry')
+router.register(r'interest-forms', InterestFormSubmissionViewSet, basename='interestform')
 
 urlpatterns = [
+    # Traditional URLs
     path('', views.ministries_home, name='ministries_home'),
-    path('youth/', views.youth_ministry, name='youth'),
-    path('sundayschool/', views.children_ministry, name='children'),
-    path('mu/', views.women_ministry, name='women'),
-    path('mu/interest/', views.mothers_union_interest, name='mothers_union_interest'),
-    path('kama/', views.men_ministry, name='kama'),
-    path('kama/interest/', views.kama_interest, name='kama_interest'),
+    path('youth/', views.youth_ministry, name='youth_ministry'),
+    path('sundayschool/', views.children_ministry, name='children_ministry'),
+    path('mu/', views.women_ministry, name='women_ministry'),
+    path('kama/', views.men_ministry, name='men_ministry'),
+    path('choir/', views.choir_ministry, name='choir_ministry'),
     path('choir_worship/', views.choir_worship, name='choir_worship'),
+    path('events/', views.events, name='events'),
+    path('mothers-union/', views.mothers_union_page, name='mothers_union'),
+    path('submit-membership-interest/', views.submit_membership_interest, name='submit_membership_interest'),
 
+    path('<str:ministry_type>/', views.ministry_detail, name='ministry_detail'),
+
+    
+    # Interest form endpoints
+    path('api/mothers-union-interest/', views.mothers_union_interest, name='mothers_union_interest'),
+    path('api/kama-interest/', views.kama_interest, name='kama_interest'),
+    path('api/youth-interest/', views.youth_interest, name='youth_interest'),
+    path('api/choir-interest/', views.choir_interest, name='choir_interest'),
+    
+    # API URLs
+    path('api/', include(router.urls)),
+    path('api/stats/', ministry_stats, name='ministry_stats'),
+    path('api/stats/by-type/', ministry_type_stats, name='ministry_type_stats'),
+    path('api/interest/submit/', submit_interest_form, name='submit_interest_form'),
+    path('api/programs/', ProgramListAPIView.as_view(), name='program_list'),
+    path('api/programs/<str:ministry_type>/', MinistryProgramsAPIView.as_view(), name='ministry_programs'),
 ]

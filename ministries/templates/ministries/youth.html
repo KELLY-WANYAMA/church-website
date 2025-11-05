@@ -26,7 +26,6 @@
             <a href="#">ABOUT ▾</a>
             <ul class="dropdown-menu">
                 <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/leaders" target ="_blank">CHURCH LEADERS</a></li>
                 <li><a href="/events">EVENTS</a></li>
                 <li><a href="/gallery">GALLERY</a></li>
                 <li><a href="/giving">GIVING</a></li>
@@ -64,12 +63,12 @@
     </div>
 </section>
 
-<section class="about-youth">
+<section id="about-youth" class="about-youth">
     <div class="container">
         <h2>Welcome to ACK St. Judes Huruma Youth</h2>
         <div class="about-content">
             <div class="about-text">
-                <p>We're a vibrant community for ages 12-18 focused on...</p>
+                <p>We're a vibrant community for ages 18-35 focused on...</p>
                 <ul>
                     <li><i class="fas fa-cross"></i> Biblical teaching tailored for teens</li>
                     <li><i class="fas fa-users"></i> Authentic relationships</li>
@@ -78,7 +77,7 @@
                 </ul>
             </div>
             <div class="about-image">
-                <img src="youth-activity.jpg" alt="Youth group activity">
+                <img src="{% static 'image/rendetakatifu.png' %}" alt="Youth group activity">
             </div>
         </div>
     </div>
@@ -87,48 +86,38 @@
 <section class="programs">
     <h2>Weekly Programs</h2>
     <div class="program-cards">
-        <!-- Sunday School -->
+        {% for program in weekly_programs %}
         <div class="program-card">
-            <div class="program-icon"><i class="fas fa-bible"></i></div>
-            <h3>Sunday School</h3>
-            <p><strong>When:</strong> Sundays, 9:30-10:30am</p>
-            <p><strong>Where:</strong> Youth Room</p>
-            <p>Bible study and discussion groups</p>
+            <div class="program-icon"><i class="{{ program.icon_class }}"></i></div>
+            <h3>{{ program.name }}</h3>
+            <p><strong>When:</strong> {{ program.day }}, {{ program.time }}</p>
+            {% if program.location %}
+            <p><strong>Where:</strong> {{ program.location }}</p>
+            {% endif %}
+            <p>{{ program.description }}</p>
         </div>
-        
-        <!-- Youth Night -->
-        <div class="program-card">
-            <div class="program-icon"><i class="fas fa-fire"></i></div>
-            <h3>Youth Night</h3>
-            <p><strong>When:</strong> Wednesdays, 7-9pm</p>
-            <p>Worship, games, and relevant messages</p>
+        {% empty %}
+        <div class="no-programs">
+            <p>No weekly programs scheduled at the moment. Check back soon!</p>
         </div>
-        
-        <!-- Small Groups -->
-        <div class="program-card">
-            <div class="program-icon"><i class="fas fa-heart"></i></div>
-            <h3>Small Groups</h3>
-            <p><strong>When:</strong> Various times</p>
-            <p>Gender and age-specific discipleship</p>
-        </div>
+        {% endfor %}
     </div>
 </section>
 
 
-
 <section id="events" class="youth-events">
-    <h2>Upcoming Events</h2>
+    <h2>Youth Upcoming Events</h2>
     <div class="event-container">
-        <!-- Event Card 1 -->
+        {% for event in upcoming_events %}
         <div class="event-card">
             <div class="event-date">
-                <span class="month">JUN</span>
-                <span class="day">15</span>
+                <span class="month">{{ event.formatted_month }}</span>
+                <span class="day">{{ event.formatted_day }}</span>
             </div>
             <div class="event-details">
-                <h3>Summer Kickoff Pool Party</h3>
-                <p><i class="far fa-clock"></i> 4:00-8:00 PM</p>
-                <p><i class="fas fa-map-marker-alt"></i> Smith Family Home</p>
+                <h3>{{ event.title }}</h3>
+                <p><i class="far fa-clock"></i> {{ event.start_time|time:"g:i A" }} - {{ event.end_time|time:"g:i A" }}</p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ event.location }}</p>
                 <button class="event-button" onclick="toggleEventDetails(this)">
                     <span class="btn-text">Details</span>
                     <i class="fas fa-chevron-down"></i>
@@ -138,130 +127,126 @@
                 <div class="event-expanded-details">
                     <div class="event-description">
                         <h4>About This Event</h4>
-                        <p>Join us for an amazing summer kickoff party at the Smith Family Home! We'll have swimming, games, BBQ, worship, and an inspiring message about starting the summer with purpose and faith. This is the perfect opportunity to connect with other youth, make new friends, and create lasting memories.</p>
+                        <p>{{ event.about_event|default:event.description }}</p>
                         
                         <div class="event-extra-info">
-                            <p><strong>What to bring:</strong> Swimsuit, towel, sunscreen</p>
-                            <p><strong>Cost:</strong> Free!</p>
-                            <p><strong>Age group:</strong> 12-18 years</p>
+                            {% if event.what_to_bring %}
+                            <p><strong>What to bring:</strong> {{ event.what_to_bring }}</p>
+                            {% endif %}
+                            {% if event.cost %}
+                            <p><strong>Cost:</strong> {{ event.cost }}</p>
+                            {% endif %}
+                            {% if event.age_group %}
+                            <p><strong>Age group:</strong> {{ event.age_group }}</p>
+                            {% endif %}
+                            {% if event.dress_code %}
+                            <p><strong>Dress code:</strong> {{ event.dress_code }}</p>
+                            {% endif %}
+                            {% if event.transportation_info %}
+                            <p><strong>Transportation:</strong> {{ event.transportation_info }}</p>
+                            {% endif %}
                         </div>
+                        
+                        {% if event.registration_required and event.registration_link %}
+                        <div class="event-registration">
+                            <a href="{{ event.registration_link }}" class="registration-btn" target="_blank">Register Now</a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Event Card 2 -->
-        <div class="event-card">
-            <div class="event-date">
-                <span class="month">JUN</span>
-                <span class="day">22</span>
-            </div>
-            <div class="event-details">
-                <h3>Youth Worship Night</h3>
-                <p><i class="far fa-clock"></i> 6:00-9:00 PM</p>
-                <p><i class="fas fa-map-marker-alt"></i> Church Sanctuary</p>
-                <button class="event-button" onclick="toggleEventDetails(this)">
-                    <span class="btn-text">Details</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                
-                <div class="event-expanded-details">
-                    <div class="event-description">
-                        <h4>Powerful Night of Worship</h4>
-                        <p>Experience an evening of powerful worship, prayer, and connection with God and fellow believers. Our youth worship team will lead us in passionate praise, followed by a meaningful message about finding God's purpose in our lives.</p>
-
-                        <div class="event-extra-info">
-                            <p><strong>Dress code:</strong> Casual</p>
-                            <p><strong>Bring:</strong> Bible, notebook, open heart</p>
-                            <p><strong>Snacks:</strong> Provided after service</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {% empty %}
+        <div class="no-events">
+            <p>No upcoming events scheduled. Check back soon for updates!</p>
         </div>
-
-        <!-- Event Card 3 -->
-        <div class="event-card">
-            <div class="event-date">
-                <span class="month">JUL</span>
-                <span class="day">05</span>
-            </div>
-            <div class="event-details">
-                <h3>Beach Outreach</h3>
-                <p><i class="far fa-clock"></i> 10:00 AM-4:00 PM</p>
-                <p><i class="fas fa-map-marker-alt"></i> City Beach Park</p>
-                <button class="event-button" onclick="toggleEventDetails(this)">
-                    <span class="btn-text">Details</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                
-                <div class="event-expanded-details">
-                    <div class="event-description">
-                        <h4>Serve and Share Love</h4>
-                        <p>Join us for a day of service and outreach at City Beach Park! We'll be cleaning up the beach, engaging with the community, and sharing God's love through practical acts of service. This is a great opportunity to put your faith into action and make a difference in our city.</p>
-
-                        <div class="event-extra-info">
-                            <p><strong>What to wear:</strong> Comfortable outdoor clothing</p>
-                            <p><strong>Provided:</strong> Gloves, trash bags, lunch</p>
-                            <p><strong>Transportation:</strong> Meet at church at 9:00 AM</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <a href="/events" class="full-calendar-link">View Full Calendar →</a>
 </section>
 
 
-
-<section class="youth-leaders">
+<section id=youth-leaders class="youth-leaders">
     <h2>Meet Our Youth Leaders</h2>
     <div class="leaders-grid">
+        {% for leader in youth_leaders %}
         <div class="leader-card">
-            <img src="leader1.jpg" alt="Pastor John">
-            <h3>Pastor John</h3>
-            <p>Youth Pastor</p>
-            <p class="bio">Passionate about helping teens discover God's purpose...</p>
+            {% if leader.image %}
+            <img src="{{ leader.image.url }}" alt="{{ leader.name }}">
+            {% else %}
+            <img src="{% static 'image/revyuyu.png' %}" alt="{{ leader.name }}">
+            {% endif %}
+            <h3>{{ leader.name }}</h3>
+            <p>{{ leader.position }}</p>
+            <p class="bio">{{ leader.bio|truncatewords:20 }}</p>
         </div>
-        <!-- More leaders... -->
+        {% empty %}
+        <div class="no-leaders">
+            <p>Our youth leadership team information is coming soon!</p>
+        </div>
+        {% endfor %}
     </div>
 </section>
+
 
 <section class="youth-gallery">
     <h2>Life in Our Youth Group</h2>
     <div class="gallery-grid">
-        <img src="event1.jpg" alt="Youth retreat">
-        <img src="worship.jpg" alt="Youth worship">
-        <!-- More images... -->
+        {% for image in gallery_images %}
+        <div class="gallery-item">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy">
+            {% if image.description %}
+            <div class="gallery-caption">
+                <p>{{ image.description }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <div class="no-gallery">
+            <p>Gallery images coming soon!</p>
+        </div>
+        {% endfor %}
     </div>
 </section>
 
+
 <section class="parent-resources">
-    <h2>For Parents</h2>
+    <h2>For Visitors</h2>
     <div class="resources">
+        {% for resource in visitor_resources %}
         <div class="resource-card">
-            <h3>Parent Handbook</h3>
-            <p>Download our youth ministry policies and permission forms</p>
-            <a href="#" class="resource-btn">Download PDF</a>
+            <h3>{{ resource.title }}</h3>
+            <p>{{ resource.description }}</p>
+            <a href="{{ resource.file.url }}" class="resource-btn" download>Download PDF</a>
         </div>
+        {% empty %}
         <div class="resource-card">
+            <h3>Visitors Handbook</h3>
+            <p>Visitor's resources will be available soon.</p>
+            <a href="#" class="resource-btn">Coming Soon</a>
+        </div>
+        {% endfor %}
+        
+        <!--<div class="resource-card">
             <h3>Stay Connected</h3>
             <p>Sign up for parent updates and newsletters</p>
-            <form class="parent-signup">
-                <input type="email" placeholder="Your email">
+            <form class="parent-signup" id="parent-subscription-form">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="Your email" required>
                 <button type="submit">Subscribe</button>
             </form>
+            <div id="subscription-message" style="display: none;"></div>-->
         </div>
     </div>
 </section>
+
 
 <section class="youth-cta">
     <h2>Ready to Join Us?</h2>
     <p>We'd love to have you be part of our youth community!</p>
     <div class="cta-buttons">
-        <a href="/contacts" class="cta-button">Contact Our Youth Pastor</a>
-<!--        <a href="/contacts" class="cta-button secondary">Plan Your Visit</a> -->
+        <a href="#youth-leaders" class="cta-button">Contact Youth Leader</a>
+       <a href="/contacts" class="cta-button secondary">Plan Your Visit</a> 
     </div>
 </section>
 
@@ -272,7 +257,7 @@
         <p class="tagline">Where teens encounter God, build friendships, and change the world</p>
         <div class="hero-buttons">
             <a href="#events" class="cta-button primary-btn"><i class="fas fa-calendar-alt"></i> Upcoming Events</a>
-            <a href="#about" class="cta-button secondary-btn"><i class="fas fa-info-circle"></i> Learn More</a>
+            <a href="#about-youth" class="cta-button secondary-btn"><i class="fas fa-info-circle"></i> Learn More</a>
         </div>
         
         <!-- Social Media Links -->
@@ -303,17 +288,32 @@
             <h3>Biblical Truth</h3>
             <p>We teach God's Word without compromise in relevant ways</p>
         </div>
+        <div class="value-card" data-aos="fade-up">
+            <div class="value-icon"><i class="fas fa-bible"></i></div>
+            <h3>Intentional Discipleship</h3>
+            <p>We are committed to nurturing the whole person spirit, mind, and character to become mature Christian leaders.</p>
+        </div>
+        <div class="value-card" data-aos="fade-up">
+            <div class="value-icon"><i class="fas fa-bible"></i></div>
+            <h3>Servant Leadership</h3>
+            <p>We equip young people to live out their faith by actively serving and transforming their communities.</p>
+        </div>
         <!-- Repeat for other values -->
     </div>
 </section>
 
 <section class="testimonials">
-    <h2>What Teens Are Saying</h2>
+    <h2>What Our Youth Say</h2>
     <div class="testimonial-slider">
         <div class="testimonial">
-            <img src="student1.jpg" alt="Sarah M." class="testimonial-img">
+            <img src="{% static 'image/vic.png' %}" alt="Vick M." class="testimonial-img">
+            <blockquote>"I really like and enjoy serving in this youth group because it has been amazing experiences and the vibes and humour I get."</blockquote>
+            <p class="testimonial-author">- Victoria</p>
+        </div>
+        <div class="testimonial">
+            <img src="{% static 'image/leonard.png' %}" alt="Leo W." class="testimonial-img">
             <blockquote>"This youth group changed my life! I finally found friends who share my faith."</blockquote>
-            <p class="testimonial-author">- Sarah, 16</p>
+            <p class="testimonial-author">- Leonard</p>
         </div>
         <!-- More testimonials -->
     </div>
@@ -321,9 +321,6 @@
 
 
 {% endblock %}
-
-
-
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -347,7 +344,7 @@
                 <li><a href="{% url 'about' %}">About Us</a></li>
                 <li><a href="{% url 'sermons' %}">Sermon</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'contacts' %}">Contact</a></li>
             </ul>
         </div>
 
@@ -374,56 +371,120 @@
 
 
 
-
-
 <script>
-// JavaScript to handle the expand/collapse functionality
-function toggleEventDetails(button) {
-    const eventCard = button.closest('.event-card');
-    const isExpanded = eventCard.classList.contains('expanded');
+// Parent subscription form handling
+document.addEventListener('DOMContentLoaded', function() {
+    const subscriptionForm = document.getElementById('parent-subscription-form');
+    const messageDiv = document.getElementById('subscription-message');
     
-    // Close all other expanded cards
-    const expandedCards = document.querySelectorAll('.event-card.expanded');
-    expandedCards.forEach(card => {
+    if (subscriptionForm) {
+        subscriptionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            
+            fetch('/youth/subscribe/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                },
+                body: JSON.stringify({ email: email })
+            })
+            
+            .then(response => response.json())
+            .then(data => {
+                messageDiv.textContent = data.message;
+                messageDiv.style.display = 'block';
+                
+                if (data.success) {
+                    messageDiv.className = 'success-message';
+                    subscriptionForm.reset();
+                } else {
+                    messageDiv.className = 'error-message';
+                }
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageDiv.textContent = 'An error occurred. Please try again.';
+                messageDiv.className = 'error-message';
+                messageDiv.style.display = 'block';
+            });
+        });
+    }
+});
+
+// SINGLE VERSION - Event details toggle function
+function toggleEventDetails(button) {
+    console.log('toggleEventDetails called'); // Debug log
+    
+    const eventCard = button.closest('.event-card');
+    const expandedDetails = eventCard.querySelector('.event-expanded-details');
+    const btnText = button.querySelector('.btn-text');
+    const chevron = button.querySelector('.fa-chevron-down');
+    
+    // Close all other expanded cards first
+    const allExpandedCards = document.querySelectorAll('.event-card.expanded');
+    allExpandedCards.forEach(card => {
         if (card !== eventCard) {
             card.classList.remove('expanded');
             const otherButton = card.querySelector('.event-button');
             if (otherButton) {
-                const btnText = otherButton.querySelector('.btn-text');
-                if (btnText) btnText.textContent = 'Details';
+                const otherBtnText = otherButton.querySelector('.btn-text');
+                const otherChevron = otherButton.querySelector('.fa-chevron-down');
+                if (otherBtnText) otherBtnText.textContent = 'Details';
+                if (otherChevron) {
+                    otherChevron.classList.remove('fa-chevron-up');
+                    otherChevron.classList.add('fa-chevron-down');
+                }
             }
         }
     });
     
     // Toggle current card
-    if (isExpanded) {
+    if (eventCard.classList.contains('expanded')) {
+        // Close current card
         eventCard.classList.remove('expanded');
-        const btnText = button.querySelector('.btn-text');
         if (btnText) btnText.textContent = 'Details';
+        if (chevron) {
+            chevron.classList.remove('fa-chevron-up');
+            chevron.classList.add('fa-chevron-down');
+        }
     } else {
+        // Open current card
         eventCard.classList.add('expanded');
-        const btnText = button.querySelector('.btn-text');
         if (btnText) btnText.textContent = 'Less Info';
+        if (chevron) {
+            chevron.classList.remove('fa-chevron-down');
+            chevron.classList.add('fa-chevron-up');
+        }
         
-        // Scroll to ensure the expanded content is visible
+        // Smooth scroll to ensure the expanded content is visible
         eventCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
 // Close expanded cards when clicking outside
 document.addEventListener('click', function(e) {
-    const isEventButton = e.target.classList.contains('event-button') || 
-                        e.target.closest('.event-button');
-    const isInsideExpandedCard = e.target.closest('.event-card.expanded');
-    
-    if (!isInsideExpandedCard && !isEventButton) {
+    if (!e.target.closest('.event-card') && !e.target.closest('.event-button')) {
         const expandedCards = document.querySelectorAll('.event-card.expanded');
         expandedCards.forEach(card => {
             card.classList.remove('expanded');
             const button = card.querySelector('.event-button');
             if (button) {
                 const btnText = button.querySelector('.btn-text');
+                const chevron = button.querySelector('.fa-chevron-down');
                 if (btnText) btnText.textContent = 'Details';
+                if (chevron) {
+                    chevron.classList.remove('fa-chevron-up');
+                    chevron.classList.add('fa-chevron-down');
+                }
             }
         });
     }
@@ -438,7 +499,12 @@ document.addEventListener('keydown', function(e) {
             const button = card.querySelector('.event-button');
             if (button) {
                 const btnText = button.querySelector('.btn-text');
+                const chevron = button.querySelector('.fa-chevron-down');
                 if (btnText) btnText.textContent = 'Details';
+                if (chevron) {
+                    chevron.classList.remove('fa-chevron-up');
+                    chevron.classList.add('fa-chevron-down');
+                }
             }
         });
     }
