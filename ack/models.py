@@ -2,32 +2,10 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from datetime import datetime, time
 
 
-class Sermon(models.Model):
-    title = models.CharField(max_length=200)
-    date = models.DateField(default=timezone.now)
-    speaker = models.CharField(max_length=100)
-    description = models.TextField()
-    video_url = models.URLField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-date']
-
-    def __str__(self):
-        return self.title
-
-    def is_recent(self):
-        """Check if sermon is from last 30 days"""
-        return (timezone.now().date() - self.date).days <= 30
-
-    def get_absolute_url(self):
-        return reverse('sermon-detail', kwargs={'pk': self.pk})
-
-
-# models.py - update your Event model
 class Event(models.Model):
     EVENT_TYPES = [
         ('REVIVAL', 'Revival'),
@@ -49,6 +27,7 @@ class Event(models.Model):
 
     class Meta:
         ordering = ['date']
+        verbose_name_plural = 'Church Homepage Events update'
 
     def __str__(self):
         return self.title
@@ -151,6 +130,7 @@ class Leader(models.Model):
 
     class Meta:
         ordering = ['order', 'position', 'name']
+        verbose_name_plural = 'ALL CHURCH LEADERS'
 
     def __str__(self):
         return f"{self.name} - {self.get_position_display()}"
@@ -182,7 +162,7 @@ class Gallery(models.Model):
 
     class Meta:
         ordering = ['-event_date', '-created_at']
-        verbose_name_plural = 'Gallery Items'
+        verbose_name_plural = 'Church Gallery'
 
     def __str__(self):
         return self.title
@@ -197,3 +177,120 @@ class Gallery(models.Model):
 
     def get_absolute_url(self):
         return reverse('gallery-detail', kwargs={'pk': self.pk})
+    
+
+
+class ChurchService(models.Model):
+    SERVICE_TYPES = [
+        ('kiswahili', 'Kiswahili Service'),
+        ('english', 'English Service'),
+        ('youth', 'Youth Service'),
+        ('children', 'Children Service'),
+        ('prayer', 'Prayer Service'),
+    ]
+    
+    name = models.CharField(max_length=100)
+    service_type = models.CharField(max_length=20, choices=SERVICE_TYPES)
+    schedule = models.CharField(max_length=100, help_text="e.g., Sundays at 8:00 AM")
+    description = models.TextField()
+    image = models.ImageField(upload_to='services/', blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True, help_text="External image URL if not uploading")
+    youtube_playlist_url = models.URLField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    # New fields for automatic past events
+    last_service_date = models.DateField(blank=True, null=True, help_text="Date of the last service (auto-updated)")
+    auto_generate_events = models.BooleanField(default=True, help_text="Automatically create past events from services")
+    
+    class Meta:
+        ordering = ['order', 'service_type']
+        verbose_name_plural = "Sermon Services"
+    
+    def __str__(self):
+        return f"{self.name} - {self.schedule}"
+    
+    def get_image_url(self):
+        """Return either uploaded image or external image URL"""
+        if self.image:
+            return self.image.url
+        return self.image_url or ''
+    
+    def is_service_past_due(self):
+        """Check if the service time has passed for today"""
+        if not self.last_service_date:
+            return False
+        
+        # If last service date is before today, it's past due
+        return self.last_service_date < timezone.now().date()
+    
+    def create_past_event_from_service(self):
+        """Create a SermonEvent from this service if it's past due"""
+        if self.auto_generate_events and self.is_service_past_due() and self.last_service_date:
+            # Check if event already exists for this service and date
+            existing_event = SermonEvent.objects.filter(
+                title__icontains=self.name,
+                event_date=self.last_service_date
+            ).exists()
+            
+            if not existing_event:
+                event_title = f"{self.name} - {self.last_service_date.strftime('%B %d, %Y')}"
+                
+                SermonEvent.objects.create(
+                    title=event_title,
+                    event_type='other',  # Default type for service-based events
+                    event_date=self.last_service_date,
+                    description=f"Recorded service from {self.name}. {self.description}",
+                    image=self.image,
+                    image_url=self.image_url,
+                    youtube_url=self.youtube_playlist_url,
+                    is_active=True
+                )
+                return True
+        return False
+
+class SermonEvent(models.Model):
+    EVENT_TYPES = [
+        ('easter', 'Easter Celebration'),
+        ('christmas', 'Christmas Service'),
+        ('baptism', 'Baptism Service'),
+        ('conference', 'Conference'),
+        ('revival', 'Revival Meeting'),
+        ('other', 'Other Event'),
+        ('service', 'Regular Service'),  # New type for service-based events
+    ]
+    
+    title = models.CharField(max_length=200)
+    event_type = models.CharField(max_length=20, choices=EVENT_TYPES)
+    event_date = models.DateField()
+    description = models.TextField()
+    image = models.ImageField(upload_to='sermon_events/', blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True, help_text="External image URL if not uploading")
+    youtube_url = models.URLField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    order = models.IntegerField(default=0)
+    # Link to service if this event was auto-generated from a service
+    source_service = models.ForeignKey(
+        ChurchService, 
+        on_delete=models.SET_NULL, 
+        blank=True, 
+        null=True,
+        related_name='generated_events'
+    )
+    
+    class Meta:
+        ordering = ['-event_date', 'order']
+        verbose_name_plural = "Update Past Sermons"
+    
+    def __str__(self):
+        return f"{self.title} - {self.event_date}"
+    
+    def formatted_date(self):
+        """Return formatted date: Month Day, Year"""
+        return self.event_date.strftime("%B %d, %Y")
+    
+    def get_image_url(self):
+        """Return either uploaded image or external image URL"""
+        if self.image:
+            return self.image.url
+        return self.image_url or ''
+    

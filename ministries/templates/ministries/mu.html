@@ -131,9 +131,9 @@
             <div class="activity-card">
                 <div class="activity-icon"><i class="{{ activity.icon_class }}"></i></div>
                 <h3>{{ activity.title }}</h3>
-                {% if activity.schedule %}<p>{{ activity.schedule }}</p>{% endif %}
-                {% if activity.location %}<p>{{ activity.location }}</p>{% endif %}
-                <p>{{ activity.details }}</p>
+                {% if activity.schedule %}<p class="schedule"><i class="fas fa-clock"></i> {{ activity.schedule }}</p>{% endif %}
+                {% if activity.location %}<p class="location"><i class="fas fa-map-marker-alt"></i> {{ activity.location }}</p>{% endif %}
+                <p>{{ activity.description }}</p>
             </div>
             {% empty %}
             <div class="no-activities">
@@ -144,7 +144,6 @@
     </div>
 </section>
 
-
 <!-- Leadership Section -->
 <section class="mu-leadership">
     <div class="container">
@@ -152,14 +151,20 @@
         <div class="leadership-grid">
             {% for leader in leaders %}
             <div class="leader-card">
-                {% if leader.image %}
-                <img src="{{ leader.image.url }}" alt="{{ leader.name }} - {{ leader.position }}">
-                {% else %}
-                <img src="/static/images/default-leader.jpg" alt="{{ leader.name }} - {{ leader.position }}">
-                {% endif %}
+                <div class="leader-image-container">
+                    {% if leader.image %}
+                    <img src="{{ leader.image.url }}" alt="{{ leader.name }} - {{ leader.position }}">
+                    {% else %}
+                    <div class="leader-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    {% endif %}
+                </div>
                 <h3>{{ leader.name }}</h3>
-                <p>{{ leader.position }}</p>
-                <p class="bio">{{ leader.bio }}</p>
+                <p class="position">{{ leader.position }}</p>
+                {% if leader.bio %}<p class="bio">{{ leader.bio }}</p>{% endif %}
+                {% if leader.email %}<p class="contact"><i class="fas fa-envelope"></i> {{ leader.email }}</p>{% endif %}
+                {% if leader.phone %}<p class="contact"><i class="fas fa-phone"></i> {{ leader.phone }}</p>{% endif %}
             </div>
             {% empty %}
             <div class="no-leaders">
@@ -196,7 +201,7 @@
             <!-- Membership Form -->
             <div class="membership-form">
                 <h3>Express Interest</h3>
-                <form class="interest-form" id="mothersUnionForm">
+                <form class="interest-form" id="mothersUnionForm" method="POST">
                     {% csrf_token %}
                     <input type="text" name="full_name" placeholder="Full Name" required>
                     <input type="email" name="email" placeholder="Email Address" required>
@@ -220,15 +225,14 @@
             {% for event in events %}
             <div class="event-card">
                 <div class="event-date">
-                    <span class="month">{{ event.display_date.month }}</span>
-                    <span class="day">{{ event.display_date.day }}</span>
+                    <span class="month">{{ event.date|date:"M"|upper }}</span>
+                    <span class="day">{{ event.date|date:"d" }}</span>
                 </div>
                 <div class="event-details">
                     <h3>{{ event.title }}</h3>
                     <p>{{ event.description }}</p>
-                    {% if event.time %}<p><small>Time: {{ event.time }}</small></p>{% endif %}
-                    {% if event.location %}<p><small>Location: {{ event.location }}</small></p>{% endif %}
-                    <button class="event-button">Details</button>
+                    {% if event.time %}<p><small><i class="fas fa-clock"></i> Time: {{ event.time|time:"g:i A" }}</small></p>{% endif %}
+                    {% if event.location %}<p><small><i class="fas fa-map-marker-alt"></i> Location: {{ event.location }}</small></p>{% endif %}
                 </div>
             </div>
             {% empty %}
@@ -332,12 +336,14 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.disabled = true;
             messageDiv.style.display = 'none';
 
-            // Use the correct URL from your urls.py
+            
+            // In your JavaScript, use absolute path
             fetch("/ministries/submit-membership-interest/", {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                 }
             })
             .then(response => {

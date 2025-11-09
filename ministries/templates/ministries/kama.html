@@ -52,14 +52,15 @@
 
 
 
-{% block blockname %}
+{% block content %}
         
 <body>
     <section class="kama-hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Kenya Anglican Men's Association</h1>
-            <p class="tagline">"Be watchful, stand firm in the faith, act like men, be strong." - 1 Corinthians 16:13</p>
+            <p class="tagline">"Be watchful, stand firm in the faith, act like men, be strong." <br>
+                - 1 Corinthians 16:13</p>
             <div class="hero-buttons">
                 <a href="#activities" class="cta-button primary-btn"><i class="fas fa-hands-helping"></i> Our Programs</a>
                 <a href="#membership" class="cta-button secondary-btn"><i class="fas fa-users"></i> Join KAMA</a>
@@ -88,7 +89,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="/static/images/kama-group.jpg" alt="KAMA Members" style="width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="{% static 'image/KAMA.png' %}" alt="ACK KAMA Members">
                 </div>
             </div>
         </div>
@@ -108,10 +109,19 @@
                     <h3>Our Mission</h3>
                     <p>"To empower Anglican men through spiritual growth, fellowship, and service for effective witness in church and society."</p>
                 </div>
+                <!-- Dynamic Motto Card -->
                 <div class="mv-card">
                     <div class="mv-icon"><i class="fas fa-flag"></i></div>
                     <h3>Our Motto</h3>
-                    <p>"Men of Faith, Men of Action, Men of Service"</p>
+                    {% if motto %}
+                        <p>"{{ motto.motto }}"</p>
+                        {% if motto.description %}
+                            <p class="motto-description">{{ motto.description }}</p>
+                        {% endif %}
+                    {% else %}
+                        <p>"Men of Faith, Men of Action, Men of Service"</p>
+                        <p class="motto-description">Default motto - Please add in admin</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -145,63 +155,68 @@
         </div>
     </section>
 
-    <section id="activities" class="kama-activities">
-        <div class="container">
-            <h2>Our Activities & Programs</h2>
-            <div class="activities-grid">
-                <div class="activity-card">
-                    <div class="activity-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <h3>Monthly Meetings</h3>
-                    <p>Every 1st Saturday, 9:00 AM</p>
-                    <p>Fellowship, planning, and spiritual nourishment</p>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon"><i class="fas fa-tree"></i></div>
-                    <h3>Men's Conference</h3>
-                    <p>Annual spiritual retreat</p>
-                    <p>Guest speakers and workshops</p>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon"><i class="fas fa-tools"></i></div>
-                    <h3>Community Service</h3>
-                    <p>Church maintenance projects</p>
-                    <p>Environmental conservation</p>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Leadership Training</h3>
-                    <p>Biblical leadership workshops</p>
-                    <p>Family manhood programs</p>
+            <!-- KAMA Activities Section -->
+        <section id="activities" class="kama-activities">
+            <div class="container">
+                <h2>Our Activities & Programs</h2>
+                <div class="activities-grid">
+                    {% for activity in activities %}
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="{{ activity.icon_class|default:'fas fa-heart' }}"></i>
+                        </div>
+                        <h3>{{ activity.title }}</h3>
+                        {% if activity.schedule %}
+                            <p class="schedule">{{ activity.schedule }}</p>
+                        {% endif %}
+                        <p>{{ activity.description }}</p>
+                        {% if activity.additional_info %}
+                            <p class="additional-info">{{ activity.additional_info }}</p>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <div class="no-activities">
+                        <p>No activities currently scheduled. Please check back later.</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="kama-leadership">
-        <div class="container">
-            <h2>KAMA Leadership</h2>
-            <div class="leadership-grid">
-                <div class="leader-card">
-                    <img src="/static/images/kama-chairman.jpg" alt="KAMA Chairman">
-                    <h3>Bro. John Kamau</h3>
-                    <p>Chairman</p>
-                    <p class="bio">Leading with vision and dedication</p>
-                </div>
-                <div class="leader-card">
-                    <img src="/static/images/kama-secretary.jpg" alt="KAMA Secretary">
-                    <h3>Bro. Peter Mwangi</h3>
-                    <p>Secretary</p>
-                    <p class="bio">Ensuring effective communication</p>
-                </div>
-                <div class="leader-card">
-                    <img src="/static/images/kama-treasurer.jpg" alt="KAMA Treasurer">
-                    <h3>Bro. James Ochieng</h3>
-                    <p>Treasurer</p>
-                    <p class="bio">Stewarding God's resources</p>
+       <!-- KAMA Leadership Section -->
+        <section class="kama-leadership">
+            <div class="container">
+                <h2>KAMA Leadership</h2>
+                <div class="leadership-grid">
+                    {% for leader in leaders %}
+                    <div class="leader-card">
+                        {% if leader.image %}
+                            <img src="{{ leader.image.url }}" alt="{{ leader.name }} - {{ leader.position }}">
+                        {% else %}
+                            <div class="leader-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        {% endif %}
+                        <h3>{{ leader.name }}</h3>
+                        <p class="position">{{ leader.position }}</p>
+                        {% if leader.bio %}
+                            <p class="bio">{{ leader.bio }}</p>
+                        {% endif %}
+                        {% if leader.email %}
+                            <p class="contact"><i class="fas fa-envelope"></i> {{ leader.email }}</p>
+                        {% endif %}
+                        {% if leader.phone %}
+                            <p class="contact"><i class="fas fa-phone"></i> {{ leader.phone }}</p>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <div class="no-leaders">
+                        <p>Leadership information coming soon.</p>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <section id="membership" class="kama-membership">
         <div class="container">
@@ -226,6 +241,7 @@
                     </ul>
                 </div>
                 
+                <!-- KAMA Membership Section -->
                 <div class="membership-form">
                     <h3>Express Interest</h3>
                     <form class="interest-form" id="kamaInterestForm">
@@ -310,8 +326,6 @@
 
 
 <script>
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('kamaInterestForm');
     const messageDiv = document.getElementById('form-message');

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Sermon, Event
+from .models import *
 from django.utils import timezone
 
 
@@ -10,7 +10,7 @@ class SermonSerializer(serializers.ModelSerializer):
     days_ago = serializers.SerializerMethodField()
     
     class Meta:
-        model = Sermon
+        model = SermonEvent
         fields = [
             'id', 'title', 'date', 'formatted_date', 'speaker', 
             'description', 'video_url', 'is_recent', 'days_ago',
@@ -75,23 +75,6 @@ class EventSerializer(serializers.ModelSerializer):
         if value < timezone.now():
             raise serializers.ValidationError("Event date cannot be in the past")
         return value
-
-
-# Optimized serializers for list views
-class SermonListSerializer(serializers.ModelSerializer):
-    formatted_date = serializers.SerializerMethodField()
-    is_recent = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Sermon
-        fields = ['id', 'title', 'formatted_date', 'speaker', 'video_url', 'is_recent']
-    
-    def get_formatted_date(self, obj):
-        return obj.date.strftime("%b %d, %Y")
-    
-    def get_is_recent(self, obj):
-        return obj.is_recent()
-
 
 class EventListSerializer(serializers.ModelSerializer):
     formatted_date = serializers.SerializerMethodField()

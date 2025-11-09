@@ -66,30 +66,41 @@
         </div>
     </section>
 
-    <!-- Teams Section -->
+    
+    
+        <!-- Teams Section -->
     <section id="teams" class="teams-section">
         <div class="container">
             <h2>Our Music Ministry Teams</h2>
             <div class="teams-container">
-                <!-- Choir Team -->
+                {% for team in music_teams %}
                 <div class="team-card">
-                    <div class="team-icon"><i class="fas fa-microphone-alt"></i></div>
-                    <h3>Choir Team</h3>
-                    <p>The ACK Choir leads the congregation in hymns and anthems during Sunday services and special occasions. We maintain the rich musical tradition of the Anglican Church.</p>
-                    <a href="https://www.youtube.com/@YourACKChoir" class="youtube-link" target="_blank">
-                        <i class="fab fa-youtube"></i> Watch Our Choir
-                    </a>
+                    <div class="team-icon">
+                        <i class="{{ team.icon_class }}"></i>
+                    </div>
+                    <h3>{{ team.name }}</h3>
+                    <p>{{ team.description }}</p>
+                    <div class="team-links">
+                        {% if team.youtube_url %}
+                        <a href="{{ team.youtube_url }}" class="youtube-link" target="_blank">
+                            <i class="fab fa-youtube"></i> Watch on YouTube
+                        </a>
+                        {% endif %}
+                        {% if team.tiktok_url %}
+                        <a href="{{ team.tiktok_url }}" class="tiktok-link" target="_blank">
+                            <i class="fab fa-tiktok"></i> Follow on TikTok
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="team-leader">
+                        <small>Team Leader: {{ team.leader_name }}</small>
+                    </div>
                 </div>
-
-                <!-- Praise & Worship Team -->
-                <div class="team-card">
-                    <div class="team-icon"><i class="fas fa-guitar"></i></div>
-                    <h3>Praise & Worship Team</h3>
-                    <p>The Praise Team leads contemporary worship songs and creates an atmosphere of praise during our services. We blend modern worship with Anglican liturgy.</p>
-                    <a href="https://www.youtube.com/@YourACKPraiseTeam" class="youtube-link" target="_blank">
-                        <i class="fab fa-youtube"></i> Watch Praise Team
-                    </a>
+                {% empty %}
+                <div class="no-teams">
+                    <p>Music ministry teams information coming soon...</p>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -100,7 +111,7 @@
             <h2>Ministry Requirements</h2>
             <div class="req-grid">
                 <div class="req-card">
-                    <div class="req-icon"><i class="fas fa-vocal"></i></div>
+                    <div class="req-icon"><i class="fas fa-drum"></i></div>
                     <h4>Choir Requirements</h4>
                     <ul>
                         <li>Commitment to weekly rehearsals</li>
@@ -206,6 +217,7 @@
                 <div class="reg-form">
                     <h3>Registration Form</h3>
                     <form class="interest-form" id="musicMinistryForm">
+                        {% csrf_token %}
                         <input type="text" name="full_name" placeholder="Full Name" required>
                         <input type="tel" name="phone" placeholder="Phone Number" required>
                         <input type="email" name="email" placeholder="Email Address">
@@ -242,7 +254,7 @@
                         <textarea name="message" placeholder="Why would you like to join? What is your faith journey?" rows="4" required></textarea>
                         
                         <button type="submit" id="submitBtn">
-                            <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                            <i class="fab fa-whatsapp"></i> Send Registration
                         </button>
                         
                         <div id="form-message" class="alert"></div>
@@ -251,6 +263,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Bible Verse Section -->
     <section class="bible-verse">
@@ -319,6 +332,82 @@
 
 
 <script>
+        // Form Handler for Music Ministry Registration
+    function initializeMusicMinistryForm() {
+        const form = document.getElementById('musicMinistryForm');
+        const messageDiv = document.getElementById('form-message');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                // Get form data
+                const formData = new FormData(form);
+                const data = {
+                    full_name: formData.get('full_name'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    team: formData.get('team'),
+                    experience: formData.get('experience'),
+                    instrument: formData.get('instrument'),
+                    message: formData.get('message')
+                };
+
+                try {
+                    const response = await fetch('/ministries/submit_music_ministry_registration/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        showMessage(messageDiv, result.message, 'success');
+                        form.reset();
+                    } else {
+                        showMessage(messageDiv, result.message, 'error');
+                    }
+                } catch (error) {
+                    showMessage(messageDiv, 'Network error. Please try again.', 'error');
+                } finally {
+                    // Re-enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Registration';
+                }
+            });
+        }
+    }
+
+    function showMessage(element, message, type) {
+        element.textContent = message;
+        element.className = `alert alert-${type}`;
+        element.style.display = 'block';
+        
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 5000);
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeMusicMinistryForm();
+    });
+
+
+
+
+
+
+
     document.addEventListener('DOMContentLoaded', function() {
     // Mobile navigation functionality
     const hamburger = document.querySelector('.hamburger');

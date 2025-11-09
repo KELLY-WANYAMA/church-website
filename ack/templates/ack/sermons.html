@@ -6,6 +6,7 @@
     <title>ACK ST. JUDE'S HURUMA</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sermons.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -65,91 +66,58 @@
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <!-- Kiswahili Service -->
+                {% for service in services %}
                 <div class="service-card">
                     <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kiswahili Service">
+                        <img src="{{ service.get_image_url }}" alt="{{ service.name }}" loading="lazy">
                     </div>
                     <div class="service-content">
-                        <h3>Kiswahili Service</h3>
-                        <p>Sundays at 8:00 AM</p>
-                        <p>Join our vibrant Kiswahili-speaking congregation for worship, prayer, and teaching from God's Word.</p>
-                        <a href="https://www.youtube.com/playlist?list=example1" class="btn" target="_blank">Watch Sermons</a>
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.schedule }}</p>
+                        <p>{{ service.description }}</p>
+                        {% if service.youtube_playlist_url %}
+                        <a href="{{ service.youtube_playlist_url }}" class="btn" target="_blank">Watch Sermons</a>
+                        {% else %}
+                        <button class="btn btn-disabled" disabled>Coming Soon</button>
+                        {% endif %}
                     </div>
                 </div>
-
-                <!-- English Service -->
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1475776408506-67ce0bf42d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="English Service">
-                    </div>
-                    <div class="service-content">
-                        <h3>English Service</h3>
-                        <p>Sundays at 10:30 AM</p>
-                        <p>Our main English service features traditional Anglican liturgy, hymns, and biblical preaching.</p>
-                        <a href="https://www.youtube.com/playlist?list=example2" class="btn" target="_blank">Watch Sermons</a>
-                    </div>
+                {% empty %}
+                <div class="no-services">
+                    <p>Service information coming soon. Please check back later.</p>
                 </div>
-
-                <!-- Youth Service -->
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Youth Service">
-                    </div>
-                    <div class="service-content">
-                        <h3>Youth Service</h3>
-                        <p>Sundays at 5:00 PM</p>
-                        <p>A dynamic service for youth and young adults with contemporary worship and relevant biblical teaching.</p>
-                        <a href="https://www.youtube.com/playlist?list=example3" class="btn" target="_blank">Watch Sermons</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
 
-    <!-- Past Events Section -->
+
+        <!-- Past Events Section -->
     <section id="events" class="past-events">
         <div class="container">
             <h2 class="section-title">Past Events</h2>
             <div class="events-container">
-                <!-- Event 1 -->
+                {% for event in past_events %}
                 <div class="past-event-card">
                     <div class="event-img">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Easter Celebration">
+                        <img src="{{ event.get_image_url }}" alt="{{ event.title }}" loading="lazy">
                     </div>
                     <div class="event-content">
-                        <div class="event-date">April 9, 2023</div>
-                        <h3>Easter Sunday Celebration</h3>
-                        <p>Join us as we celebrate the resurrection of our Lord Jesus Christ with special music, message, and fellowship.</p>
-                        <a href="https://www.youtube.com/watch?v=example1" class="btn" target="_blank">Watch Event</a>
+                        <div class="event-date">{{ event.formatted_date }}</div>
+                        <h3>{{ event.title }}</h3>
+                        <p>{{ event.description }}</p>
+                        {% if event.youtube_url %}
+                        <a href="{{ event.youtube_url }}" class="btn" target="_blank">Watch Event</a>
+                        {% else %}
+                        <button class="btn btn-disabled" disabled>Recording Coming Soon</button>
+                        {% endif %}
                     </div>
                 </div>
-
-                <!-- Event 2 -->
-                <div class="past-event-card">
-                    <div class="event-img">
-                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Christmas Service">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">December 24, 2022</div>
-                        <h3>Christmas Eve Service</h3>
-                        <p>Our special candlelight service celebrating the birth of our Savior, Jesus Christ.</p>
-                        <a href="https://www.youtube.com/watch?v=example2" class="btn" target="_blank">Watch Event</a>
-                    </div>
+                {% empty %}
+                <div class="no-events">
+                    <p>Past event recordings will be available here soon.</p>
                 </div>
-
-                <!-- Event 3 -->
-                <div class="past-event-card">
-                    <div class="event-img">
-                        <img src="https://images.unsplash.com/photo-1460518451285-97b6aa326961?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Baptism Service">
-                    </div>
-                    <div class="event-content">
-                        <div class="event-date">June 18, 2023</div>
-                        <h3>Baptism Service</h3>
-                        <p>Celebrating new life in Christ as we baptize new believers into the family of God.</p>
-                        <a href="https://www.youtube.com/watch?v=example3" class="btn" target="_blank">Watch Event</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

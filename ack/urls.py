@@ -1,10 +1,6 @@
 from django.urls import path, include
 from . import views
-from .views import (
-    SermonListAPIView, SermonDetailAPIView, RecentSermonsAPIView,
-    EventListAPIView, EventDetailAPIView, UpcomingEventsAPIView,
-    api_home, event_types_api, SermonCreateAPIView, EventCreateAPIView
-)
+from .views import *
 
 urlpatterns = [
     # Traditional URLs (existing)
@@ -25,8 +21,6 @@ urlpatterns = [
     
     # NEW API URLs
     path('api/', api_home, name='api-home'),
-    path('api/sermons/', SermonListAPIView.as_view(), name='api-sermons'),
-    path('api/sermons/recent/', RecentSermonsAPIView.as_view(), name='api-sermons-recent'),
     path('api/sermons/<int:pk>/', SermonDetailAPIView.as_view(), name='api-sermon-detail'),
     path('api/sermons/create/', SermonCreateAPIView.as_view(), name='api-sermon-create'),
     path('api/events/', EventListAPIView.as_view(), name='api-events'),

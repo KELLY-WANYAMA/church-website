@@ -18,6 +18,7 @@
                 const whatsappMessage = `New Message from ACK St. Judes Website:%0A%0A*Name:* ${data.name}%0A*Email:* ${data.email}%0A*Subject:* ${data.subject}%0A%0A*Message:*%0A${data.message}`;
 
                 
+                //INSERT HERE REAL WHATSAPP NUMBER
                 // Create WhatsApp URL
                 const whatsappURL = `https://wa.me/254791675625?text=${whatsappMessage}`;
                 
@@ -72,4 +73,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-

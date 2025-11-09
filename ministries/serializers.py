@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.utils import timezone
-from .models import Ministry, Program, MinistryMember, InterestFormSubmission, Event, MinistryGallery
+from .models import *
 
 
 class ProgramSerializer(serializers.ModelSerializer):
@@ -36,26 +36,6 @@ class MinistryMemberSerializer(serializers.ModelSerializer):
         return f"{duration.days // 30} months"
 
 
-class MinistryGallerySerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-    days_since_upload = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = MinistryGallery
-        fields = [
-            'id', 'title', 'image', 'image_url', 'description',
-            'upload_date', 'is_featured', 'days_since_upload'
-        ]
-    
-    def get_image_url(self, obj):
-        if obj.image:
-            return obj.image.url
-        return None
-    
-    def get_days_since_upload(self, obj):
-        return (timezone.now() - obj.upload_date).days
-
-
 class MinistryListSerializer(serializers.ModelSerializer):
     """Simplified serializer for listing ministries"""
     program_count = serializers.SerializerMethodField()
@@ -83,7 +63,6 @@ class MinistryDetailSerializer(serializers.ModelSerializer):
     """Detailed serializer for single ministry view"""
     programs = ProgramSerializer(many=True, read_only=True)
     members = MinistryMemberSerializer(many=True, read_only=True)
-    gallery = MinistryGallerySerializer(many=True, read_only=True)
     upcoming_events = serializers.SerializerMethodField()
     contact_info = serializers.SerializerMethodField()
     

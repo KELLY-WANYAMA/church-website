@@ -4,12 +4,12 @@ from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
-from .serializers import SermonSerializer, EventSerializer, SermonListSerializer, EventListSerializer
+from .serializers import *
 
 
 # Traditional Django Views - Updated for better integration
 def home(request):
-    recent_sermons = Sermon.objects.all()[:3]  # Uses model ordering
+    recent_sermons = SermonEvent.objects.all()[:3]  # Uses model ordering
     upcoming_events = Event.objects.filter(date__gte=timezone.now())[:3]  # Uses model ordering
     
     context = {
@@ -26,13 +26,29 @@ def about(request):
     }
     return render(request, 'ack/about.html', context)
 
+
 def sermons(request):
-    all_sermons = Sermon.objects.all()  # Uses model ordering
+    """Sermons page with services and past events"""
+    # Get active church services
+    services = ChurchService.objects.filter(is_active=True).order_by('order', 'service_type')
+    
+    # Get past sermon events (events before today)
+    from datetime import date
+    past_events = SermonEvent.objects.filter(
+        is_active=True, 
+        event_date__lt=date.today()
+    ).order_by('-event_date')[:6]  # Limit to 6 most recent events
+    
     context = {
-        'title': 'sermons',
-        'sermons': all_sermons,
+        'title': 'Sermons & Services',
+        'page_description': 'Watch our latest sermons and explore our church services',
+        'services': services,
+        'past_events': past_events,
     }
+    
     return render(request, 'ack/sermons.html', context)
+
+
 
 def contacts(request):
     return render(request, 'ack/contacts.html')
@@ -125,20 +141,11 @@ def leaders(request):
 
 
 # API Views - Updated for better integration
-class SermonListAPIView(generics.ListAPIView):
-    """API endpoint for listing sermons"""
-    queryset = Sermon.objects.all()  # Uses model ordering
-    serializer_class = SermonListSerializer
 
 class SermonDetailAPIView(generics.RetrieveAPIView):
     """API endpoint for single sermon details"""
-    queryset = Sermon.objects.all()
+    queryset = SermonEvent.objects.all()
     serializer_class = SermonSerializer
-
-class RecentSermonsAPIView(generics.ListAPIView):
-    """API endpoint for recent sermons (last 10)"""
-    queryset = Sermon.objects.all()[:10]  # Uses model ordering
-    serializer_class = SermonListSerializer
 
 # Event API Views
 class EventListAPIView(generics.ListAPIView):
@@ -160,16 +167,14 @@ class EventDetailAPIView(generics.RetrieveAPIView):
 @api_view(['GET'])
 def api_home(request):
     """API homepage with summary data"""
-    recent_sermons = Sermon.objects.all()[:3]
+    recent_sermons = SermonEvent.objects.all()[:3]
     upcoming_events = Event.objects.filter(date__gte=timezone.now())[:5]
     
-    sermon_serializer = SermonListSerializer(recent_sermons, many=True)
     event_serializer = EventListSerializer(upcoming_events, many=True)
     
     return Response({
-        'recent_sermons': sermon_serializer.data,
         'upcoming_events': event_serializer.data,
-        'total_sermons': Sermon.objects.count(),
+        'total_sermons': SermonEvent.objects.count(),
         'total_events': Event.objects.count(),
     })
 
@@ -185,7 +190,7 @@ def event_types_api(request):
 # Admin API views (for creating/updating content)
 class SermonCreateAPIView(generics.CreateAPIView):
     """API endpoint for creating sermons (admin use)"""
-    queryset = Sermon.objects.all()
+    queryset = SermonEvent.objects.all()
     serializer_class = SermonSerializer
 
 class EventCreateAPIView(generics.CreateAPIView):
@@ -196,7 +201,7 @@ class EventCreateAPIView(generics.CreateAPIView):
 # Update API views
 class SermonUpdateAPIView(generics.UpdateAPIView):
     """API endpoint for updating sermons (admin use)"""
-    queryset = Sermon.objects.all()
+    queryset = SermonEvent.objects.all()
     serializer_class = SermonSerializer
 
 class EventUpdateAPIView(generics.UpdateAPIView):
