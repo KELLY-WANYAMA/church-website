@@ -231,6 +231,11 @@ body, ul, li, a {
     text-align: center;
 }
 
+.services-info h2 {
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
 .service-times {
     display: flex;
     justify-content: center;
@@ -239,7 +244,7 @@ body, ul, li, a {
 }
 
 .time-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(215, 164, 8, 0.749);
     padding: 30px;
     border-radius: 8px;
     flex: 1;
