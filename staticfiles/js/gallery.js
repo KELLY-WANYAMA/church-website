@@ -1,78 +1,71 @@
+// gallery.js - Conflict-free gallery functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Gallery Filter Functionality
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Update active button
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+    // Only run if we're on a gallery page
+    const gallerySection = document.querySelector('.gallery-section');
+    if (!gallerySection) return;
+
+    console.log('Gallery JS loaded');
+
+    // Gallery filter functionality
+    function handleGalleryFilter(category) {
+        const baseUrl = window.location.pathname;
+        let url = baseUrl;
+        
+        if (category !== 'all') {
+            url += `?category=${category}`;
+        }
+        
+        console.log('Filtering gallery to:', category);
+        window.location.href = url;
+    }
+
+    // Set active category button
+    function setActiveCategory() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategory = urlParams.get('category') || 'all';
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        
+        categoryButtons.forEach(btn => {
+            const btnCategory = btn.dataset.category;
+            btn.classList.remove('active');
             
-            // Filter items with animation
-            const category = this.dataset.category;
-            galleryItems.forEach(item => {
-                item.style.opacity = '0';
-                setTimeout(() => {
-                    item.style.display = (category === 'all' || item.dataset.category === category) ? 
-                        'block' : 'none';
-                    item.style.opacity = '1';
-                }, 200);
-            });
+            if (btnCategory === currentCategory) {
+                btn.classList.add('active');
+            }
         });
-    });
+    }
 
-    // Mobile Navigation
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
+    // Initialize gallery
+    function initGallery() {
+        // Set active category on page load
+        setActiveCategory();
         
-        // Close all dropdowns when menu is closed
-        if (!navLinks.classList.contains('show')) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
-            });
-        }
-    });
-
-    // Handle dropdowns
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        const menu = dropdown.querySelector('.dropdown-menu');
-        
-        // Mobile behavior
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
+        // Add click handlers to category buttons
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
-                menu.classList.toggle('show');
-            }
+                const category = this.dataset.category;
+                handleGalleryFilter(category);
+            });
         });
-        
-        // Desktop hover behavior
-        dropdown.addEventListener('mouseenter', function() {
-            if (window.innerWidth > 768) {
-                menu.classList.add('show');
-            }
-        });
-        
-        dropdown.addEventListener('mouseleave', function() {
-            if (window.innerWidth > 768) {
-                menu.classList.remove('show');
-            }
-        });
-    });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown') && window.innerWidth <= 768) {
-            document.querySelectorAll('.dropdown-menu').forEach(menu => {
-                menu.classList.remove('show');
+        // Load more functionality (if needed)
+        const loadMoreBtn = document.getElementById('loadMore');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                // Implement AJAX loading here if needed
+                console.log('Load more clicked - implement AJAX loading');
             });
         }
-    });
+
+        // Add smooth animations to gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+    }
+
+    // Initialize the gallery
+    initGallery();
 });

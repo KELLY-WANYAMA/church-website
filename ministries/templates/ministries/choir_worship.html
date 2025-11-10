@@ -1,772 +1,246 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACK ST. JUDE'S HURUMA</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends 'ack/base.html' %} 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+{% load static %}
 
+{% block title %}Church events - ACK ST. JUDE'S HURUMA{% endblock %}
 
-    <header>
-        <nav class="navbar">
-    <div class="logo">
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <a href="/">🌟 ACK ST. JUDES HURUMA</a>
-    </div>
-    <ul class="nav-links">
-        <li><a href="/">HOME</a></li>
-        <li class="dropdown">
-            <a href="#">ABOUT ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/events">EVENTS</a></li>
-                <li><a href="/gallery">GALLERY</a></li>
-                <li><a href="/giving">GIVING</a></li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#">MINISTRIES ▾</a>
-            <ul class="dropdown-menu">
-                <li><a href="/ministries">OUR MINISTRIES</a></li>
-                <li><a href="/ministries/youth">YOUTH</a></li>
-                <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
-                <li><a href="/ministries/kama">KAMA</a></li>
-                <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
-                <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
-            </ul>
-        </li>
-        <li><a href="/sermons">SERMONS</a></li>
-        <li><a href="/contacts">CONTACT</a></li>
-    </ul>
-
-</nav>
-    </header>
-</head>
-<body>
-
-{% block content %}
-
-
- <!-- Hero Section -->
-    <section class="worship-hero">
-        <div class="hero-content">
-            <h1>ACK Music Ministry</h1>
-            <p class="tagline">"Make a joyful noise to the LORD, all the earth! Serve the LORD with gladness! Come into his presence with singing!" - Psalm 100:1-2</p>
-            <div class="hero-buttons">
-                <a href="#teams" class="cta-button primary-btn"><i class="fas fa-music"></i> Our Teams</a>
-                <a href="#registration" class="cta-button secondary-btn"><i class="fas fa-users"></i> Join Us</a>
-            </div>
-        </div>
-    </section>
-
-    
-    
-        <!-- Teams Section -->
-    <section id="teams" class="teams-section">
-        <div class="container">
-            <h2>Our Music Ministry Teams</h2>
-            <div class="teams-container">
-                {% for team in music_teams %}
-                <div class="team-card">
-                    <div class="team-icon">
-                        <i class="{{ team.icon_class }}"></i>
-                    </div>
-                    <h3>{{ team.name }}</h3>
-                    <p>{{ team.description }}</p>
-                    <div class="team-links">
-                        {% if team.youtube_url %}
-                        <a href="{{ team.youtube_url }}" class="youtube-link" target="_blank">
-                            <i class="fab fa-youtube"></i> Watch on YouTube
-                        </a>
-                        {% endif %}
-                        {% if team.tiktok_url %}
-                        <a href="{{ team.tiktok_url }}" class="tiktok-link" target="_blank">
-                            <i class="fab fa-tiktok"></i> Follow on TikTok
-                        </a>
-                        {% endif %}
-                    </div>
-                    <div class="team-leader">
-                        <small>Team Leader: {{ team.leader_name }}</small>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="no-teams">
-                    <p>Music ministry teams information coming soon...</p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Requirements Section -->
-    <section class="requirements">
-        <div class="container">
-            <h2>Ministry Requirements</h2>
-            <div class="req-grid">
-                <div class="req-card">
-                    <div class="req-icon"><i class="fas fa-drum"></i></div>
-                    <h4>Choir Requirements</h4>
-                    <ul>
-                        <li>Commitment to weekly rehearsals</li>
-                        <li>Basic singing ability</li>
-                        <li>Ability to read music (helpful but not required)</li>
-                        <li>Regular church attendance</li>
-                        <li>Team spirit and dedication</li>
-                    </ul>
-                </div>
-
-                <div class="req-card">
-                    <div class="req-icon"><i class="fas fa-drum"></i></div>
-                    <h4>Praise Team Requirements</h4>
-                    <ul>
-                        <li>Proficiency with instrument or voice</li>
-                        <li>Ability to play in a team setting</li>
-                        <li>Understanding of contemporary worship</li>
-                        <li>Commitment to spiritual growth</li>
-                        <li>Weekly rehearsal attendance</li>
-                    </ul>
-                </div>
-
-                <div class="req-card">
-                    <div class="req-icon"><i class="fas fa-heart"></i></div>
-                    <h4>Spiritual Requirements</h4>
-                    <ul>
-                        <li>Personal relationship with Jesus Christ</li>
-                        <li>Heart for worship and service</li>
-                        <li>Willingness to grow spiritually</li>
-                        <li>Commitment to Anglican values</li>
-                        <li>Team player attitude</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Schedule Section -->
-    <section class="schedule">
-        <div class="container">
-            <h2>Rehearsal Schedule</h2>
-            <div class="schedule-grid">
-                <div class="schedule-card">
-                    <h3>Choir Schedule</h3>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Thursday</span>
-                        <span class="schedule-activity">7:00 PM - 9:00 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Sunday</span>
-                        <span class="schedule-activity">8:00 AM - Warm-up</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Special Events</span>
-                        <span class="schedule-activity">Additional rehearsals</span>
-                    </div>
-                </div>
-
-                <div class="schedule-card">
-                    <h3>Praise Team Schedule</h3>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Tuesday</span>
-                        <span class="schedule-activity">6:30 PM - 8:30 PM</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Sunday</span>
-                        <span class="schedule-activity">7:30 AM - Soundcheck</span>
-                    </div>
-                    <div class="schedule-item">
-                        <span class="schedule-time">Monthly</span>
-                        <span class="schedule-activity">Team Building</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Registration Section -->
-    <section id="registration" class="registration">
-        <div class="container">
-            <h2>Join Our Music Ministry</h2>
-            <div class="reg-content">
-                <div class="reg-info">
-                    <h3>Why Join Our Ministry?</h3>
-                    <ul>
-                        <li>Use your musical gifts to glorify God</li>
-                        <li>Be part of a supportive Christian community</li>
-                        <li>Grow in your faith through worship</li>
-                        <li>Receive musical and spiritual mentorship</li>
-                        <li>Serve your church community</li>
-                        <li>Participate in special events and concerts</li>
-                    </ul>
-                    
-                    <h3>Registration Process</h3>
-                    <ul>
-                        <li>Fill out the registration form</li>
-                        <li>Audition with ministry leaders</li>
-                        <li>Attend orientation session</li>
-                        <li>Begin attending rehearsals</li>
-                    </ul>
-                </div>
-                
-                <div class="reg-form">
-                    <h3>Registration Form</h3>
-                    <form class="interest-form" id="musicMinistryForm">
-                        {% csrf_token %}
-                        <input type="text" name="full_name" placeholder="Full Name" required>
-                        <input type="tel" name="phone" placeholder="Phone Number" required>
-                        <input type="email" name="email" placeholder="Email Address">
-                        
-                        <select name="team" required>
-                            <option value="">Select Team</option>
-                            <option value="choir">Choir Team</option>
-                            <option value="praise">Praise & Worship Team</option>
-                            <option value="both">Both Teams</option>
-                        </select>
-                        
-                        <select name="experience" required>
-                            <option value="">Musical Experience</option>
-                            <option value="none">No formal experience</option>
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
-                            <option value="professional">Professional</option>
-                        </select>
-                        
-                        <select name="instrument" required>
-                            <option value="">Primary Instrument/Voice</option>
-                            <option value="soprano">Soprano (Choir)</option>
-                            <option value="alto">Alto (Choir)</option>
-                            <option value="tenor">Tenor (Choir)</option>
-                            <option value="bass">Bass (Choir)</option>
-                            <option value="guitar">Guitar</option>
-                            <option value="piano">Piano/Keyboard</option>
-                            <option value="drums">Drums</option>
-                            <option value="bass_guitar">Bass Guitar</option>
-                            <option value="other">Other Instrument</option>
-                        </select>
-                        
-                        <textarea name="message" placeholder="Why would you like to join? What is your faith journey?" rows="4" required></textarea>
-                        
-                        <button type="submit" id="submitBtn">
-                            <i class="fab fa-whatsapp"></i> Send Registration
-                        </button>
-                        
-                        <div id="form-message" class="alert"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Bible Verse Section -->
-    <section class="bible-verse">
-        <div class="container">
-            <blockquote>
-                "Let the word of Christ dwell in you richly, teaching and admonishing one another in all wisdom, singing psalms and hymns and spiritual songs, with thankfulness in your hearts to God."
-                <cite>- Colossians 3:16</cite>
-            </blockquote>
-        </div>
-    </section>
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/choir_worship.css' %}">
+<style>
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/church-hero.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-top: 60px;
+}
+</style>
 {% endblock %}
 
 
+{% block content %}
+<!-- Hero Section -->
+<section class="worship-hero">
+    <div class="hero-content">
+        <h1>ACK Music Ministry</h1>
+        <p class="tagline">"Make a joyful noise to the LORD, all the earth! Serve the LORD with gladness! Come into his presence with singing!" - Psalm 100:1-2</p>
+        <div class="hero-buttons">
+            <a href="#teams" class="cta-button primary-btn"><i class="fas fa-music"></i> Our Teams</a>
+            <a href="#registration" class="cta-button secondary-btn"><i class="fas fa-users"></i> Join Us</a>
+        </div>
+    </div>
+</section>
 
-<!-- Footer Section -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-section">
-            <h3>ACK ST JUDES HURUMA</h3>
-            <p>A place to belong, believe, and become in Christ.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100069972304998" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@ackstjudesparish-huruma" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@ack.st.judes.huru" target="_blank"><i class="fab fa-tiktok"></i></a>
+<!-- Teams Section -->
+<section id="teams" class="teams-section">
+    <div class="container">
+        <h2>Our Music Ministry Teams</h2>
+        <div class="teams-container">
+            {% for team in music_teams %}
+            <div class="team-card">
+                <div class="team-icon">
+                    <i class="{{ team.icon_class }}"></i>
+                </div>
+                <h3>{{ team.name }}</h3>
+                <p>{{ team.description }}</p>
+                <div class="team-links">
+                    {% if team.youtube_url %}
+                    <a href="{{ team.youtube_url }}" class="youtube-link" target="_blank">
+                        <i class="fab fa-youtube"></i> Watch on YouTube
+                    </a>
+                    {% endif %}
+                    {% if team.tiktok_url %}
+                    <a href="{{ team.tiktok_url }}" class="tiktok-link" target="_blank">
+                        <i class="fab fa-tiktok"></i> Follow on TikTok
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="team-leader">
+                    <small>Team Leader: {{ team.leader_name }}</small>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-teams">
+                <p>Music ministry teams information coming soon...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Requirements Section -->
+<section class="requirements">
+    <div class="container">
+        <h2>Ministry Requirements</h2>
+        <div class="req-grid">
+            <div class="req-card">
+                <div class="req-icon"><i class="fas fa-drum"></i></div>
+                <h4>Choir Requirements</h4>
+                <ul>
+                    <li>Commitment to weekly rehearsals</li>
+                    <li>Basic singing ability</li>
+                    <li>Ability to read music (helpful but not required)</li>
+                    <li>Regular church attendance</li>
+                    <li>Team spirit and dedication</li>
+                </ul>
+            </div>
+
+            <div class="req-card">
+                <div class="req-icon"><i class="fas fa-drum"></i></div>
+                <h4>Praise Team Requirements</h4>
+                <ul>
+                    <li>Proficiency with instrument or voice</li>
+                    <li>Ability to play in a team setting</li>
+                    <li>Understanding of contemporary worship</li>
+                    <li>Commitment to spiritual growth</li>
+                    <li>Weekly rehearsal attendance</li>
+                </ul>
+            </div>
+
+            <div class="req-card">
+                <div class="req-icon"><i class="fas fa-heart"></i></div>
+                <h4>Spiritual Requirements</h4>
+                <ul>
+                    <li>Personal relationship with Jesus Christ</li>
+                    <li>Heart for worship and service</li>
+                    <li>Willingness to grow spiritually</li>
+                    <li>Commitment to Anglican values</li>
+                    <li>Team player attitude</li>
+                </ul>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'sermons' %}">Sermon</a></li>
-                <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contacts' %}">Contact</a></li>
-            </ul>
-        </div>
+<!-- Schedule Section -->
+<section class="schedule">
+    <div class="container">
+        <h2>Rehearsal Schedule</h2>
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <h3>Choir Schedule</h3>
+                <div class="schedule-item">
+                    <span class="schedule-time">Thursday</span>
+                    <span class="schedule-activity">7:00 PM - 9:00 PM</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">Sunday</span>
+                    <span class="schedule-activity">8:00 AM - Warm-up</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">Special Events</span>
+                    <span class="schedule-activity">Additional rehearsals</span>
+                </div>
+            </div>
 
-        <div class="footer-section">
-            <h3>Contact Info</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
-            <p><i class="fas fa-phone"></i> +254 718 437784</p>
-            <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
-        </div>
-
-        <div class="footer-section">
-            <h3>Service Times</h3>
-            <p>Sunday: 7:30 AM To 1:00 PM</p>
-            <p>Wednesday: 6:30 AM To 6:30 PM (Maombi Wednesday)</p>
+            <div class="schedule-card">
+                <h3>Praise Team Schedule</h3>
+                <div class="schedule-item">
+                    <span class="schedule-time">Tuesday</span>
+                    <span class="schedule-activity">6:30 PM - 8:30 PM</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">Sunday</span>
+                    <span class="schedule-activity">7:30 AM - Soundcheck</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="schedule-time">Monthly</span>
+                    <span class="schedule-activity">Team Building</span>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="footer-bottom">
-        <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
-        <p>Designed and developed by <a href="https://nicekelly.netlify.app/" target="_blank"> Kelly</a> </i> To God Be The Glory</p>
-    </div>
-</footer>
-<!--end of footer-->
-
-
-
-
-
-
-<script>
-        // Form Handler for Music Ministry Registration
-    function initializeMusicMinistryForm() {
-        const form = document.getElementById('musicMinistryForm');
-        const messageDiv = document.getElementById('form-message');
-        const submitBtn = document.getElementById('submitBtn');
-
-        if (form) {
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
+<!-- Registration Section -->
+<section id="registration" class="registration">
+    <div class="container">
+        <h2>Join Our Music Ministry</h2>
+        <div class="reg-content">
+            <div class="reg-info">
+                <h3>Why Join Our Ministry?</h3>
+                <ul>
+                    <li>Use your musical gifts to glorify God</li>
+                    <li>Be part of a supportive Christian community</li>
+                    <li>Grow in your faith through worship</li>
+                    <li>Receive musical and spiritual mentorship</li>
+                    <li>Serve your church community</li>
+                    <li>Participate in special events and concerts</li>
+                </ul>
                 
-                // Disable submit button
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                
-                // Get form data
-                const formData = new FormData(form);
-                const data = {
-                    full_name: formData.get('full_name'),
-                    phone: formData.get('phone'),
-                    email: formData.get('email'),
-                    team: formData.get('team'),
-                    experience: formData.get('experience'),
-                    instrument: formData.get('instrument'),
-                    message: formData.get('message')
-                };
-
-                try {
-                    const response = await fetch('/ministries/submit_music_ministry_registration/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
-                        },
-                        body: JSON.stringify(data)
-                    });
-
-                    const result = await response.json();
-
-                    if (result.success) {
-                        showMessage(messageDiv, result.message, 'success');
-                        form.reset();
-                    } else {
-                        showMessage(messageDiv, result.message, 'error');
-                    }
-                } catch (error) {
-                    showMessage(messageDiv, 'Network error. Please try again.', 'error');
-                } finally {
-                    // Re-enable submit button
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Send Registration';
-                }
-            });
-        }
-    }
-
-    function showMessage(element, message, type) {
-        element.textContent = message;
-        element.className = `alert alert-${type}`;
-        element.style.display = 'block';
-        
-        setTimeout(() => {
-            element.style.display = 'none';
-        }, 5000);
-    }
-
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        initializeMusicMinistryForm();
-    });
-
-
-
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-    // Mobile navigation functionality
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('show');
+                <h3>Registration Process</h3>
+                <ul>
+                    <li>Fill out the registration form</li>
+                    <li>Audition with ministry leaders</li>
+                    <li>Attend orientation session</li>
+                    <li>Begin attending rehearsals</li>
+                </ul>
+            </div>
             
-            // Close dropdowns when closing mobile menu
-            if (!navLinks.classList.contains('show')) {
-                dropdowns.forEach(dropdown => {
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    if (menu) menu.classList.remove('show');
-                });
-            }
-        });
-    }
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        if (link) {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const menu = this.nextElementSibling;
-                    if (menu && menu.classList.contains('dropdown-menu')) {
-                        menu.classList.toggle('show');
-                        
-                        // Close other dropdowns
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                                if (otherMenu) otherMenu.classList.remove('show');
-                            }
-                        });
-                    }
-                }
-            });
-        }
-    });
-
-    // Close dropdowns when clicking outside on mobile
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            const isHamburger = e.target.closest('.hamburger');
-            const isNavLink = e.target.closest('.nav-links');
-            const isDropdown = e.target.closest('.dropdown');
-            
-            if (!isHamburger && !isNavLink && !isDropdown && navLinks && navLinks.classList.contains('show')) {
-                navLinks.classList.remove('show');
-                if (hamburger) hamburger.classList.remove('active');
-                
-                // Close all dropdowns
-                dropdowns.forEach(dropdown => {
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    if (menu) menu.classList.remove('show');
-                });
-            }
-        }
-    });
-
-    // Close mobile menu on resize to desktop
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('show')) {
-            navLinks.classList.remove('show');
-            if (hamburger) hamburger.classList.remove('active');
-            
-            // Close all dropdowns
-            dropdowns.forEach(dropdown => {
-                const menu = dropdown.querySelector('.dropdown-menu');
-                if (menu) menu.classList.remove('show');
-            });
-        }
-    });
-
-    // Smooth scrolling for anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href !== '#' && href.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            <div class="reg-form">
+                <h3>Registration Form</h3>
+                <form class="interest-form" id="musicMinistryForm">
+                    {% csrf_token %}
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <input type="email" name="email" placeholder="Email Address">
                     
-                    // Close mobile menu if open
-                    if (navLinks && navLinks.classList.contains('show')) {
-                        navLinks.classList.remove('show');
-                        if (hamburger) hamburger.classList.remove('active');
-                    }
-                }
-            }
-        });
-    });
+                    <select name="team" required>
+                        <option value="">Select Team</option>
+                        <option value="choir">Choir Team</option>
+                        <option value="praise">Praise & Worship Team</option>
+                        <option value="both">Both Teams</option>
+                    </select>
+                    
+                    <select name="experience" required>
+                        <option value="">Musical Experience</option>
+                        <option value="none">No formal experience</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                        <option value="professional">Professional</option>
+                    </select>
+                    
+                    <select name="instrument" required>
+                        <option value="">Primary Instrument/Voice</option>
+                        <option value="soprano">Soprano (Choir)</option>
+                        <option value="alto">Alto (Choir)</option>
+                        <option value="tenor">Tenor (Choir)</option>
+                        <option value="bass">Bass (Choir)</option>
+                        <option value="guitar">Guitar</option>
+                        <option value="piano">Piano/Keyboard</option>
+                        <option value="drums">Drums</option>
+                        <option value="bass_guitar">Bass Guitar</option>
+                        <option value="other">Other Instrument</option>
+                    </select>
+                    
+                    <textarea name="message" placeholder="Why would you like to join? What is your faith journey?" rows="4" required></textarea>
+                    
+                    <button type="submit" id="submitBtn">
+                        <i class="fab fa-whatsapp"></i> Send Registration
+                    </button>
+                    
+                    <div id="form-message" class="alert"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
-    // Tab functionality for age groups (if exists)
-    const tabs = document.querySelectorAll('.age-tab');
-    const contents = document.querySelectorAll('.age-content');
+<!-- Bible Verse Section -->
+<section class="bible-verse">
+    <div class="container">
+        <blockquote>
+            "Let the word of Christ dwell in you richly, teaching and admonishing one another in all wisdom, singing psalms and hymns and spiritual songs, with thankfulness in your hearts to God."
+            <cite>- Colossians 3:16</cite>
+        </blockquote>
+    </div>
+</section>
+{% endblock %}
 
-    if (tabs.length > 0) {
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                const ageGroup = this.getAttribute('data-age');
-                
-                // Remove active class from all tabs and contents
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding content
-                this.classList.add('active');
-                document.getElementById(`${ageGroup}-content`).classList.add('active');
-            });
-        });
-    }
-
-    // Music Ministry form handling
-    const musicForm = document.getElementById('musicMinistryForm');
-    if (musicForm) {
-        const messageDiv = document.getElementById('form-message');
-        
-        musicForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                full_name: this.querySelector('input[name="full_name"]').value,
-                phone: this.querySelector('input[name="phone"]').value,
-                email: this.querySelector('input[name="email"]').value,
-                team: this.querySelector('select[name="team"]').value,
-                experience: this.querySelector('select[name="experience"]').value,
-                instrument: this.querySelector('select[name="instrument"]').value,
-                message: this.querySelector('textarea[name="message"]').value
-            };
-
-            // Validate phone number
-            if (!isValidPhoneNumber(formData.phone)) {
-                showMessage('Please enter a valid phone number', 'error');
-                return;
-            }
-
-            // Create WhatsApp message
-            const whatsappMessage = createWhatsAppMessage(formData);
-            
-            // Encode message for URL
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Replace with actual WhatsApp number of chairperson (remove spaces and special characters)
-            const whatsappNumber = "254791675625"; // Example: 254712345678
-            
-            // Create WhatsApp link
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
-            // Open WhatsApp
-            window.open(whatsappUrl, '_blank');
-            
-            // Show success message
-            showMessage('Thank you! Opening WhatsApp to send your information to our chairperson.', 'success');
-            
-            // Reset form after a delay
-            setTimeout(() => {
-                this.reset();
-                if (messageDiv) messageDiv.style.display = 'none';
-            }, 5000);
-        });
-
-        function createWhatsAppMessage(data) {
-            return `
-Hello ACK Music Ministry Chairperson!
-
-I would like to join the Music Ministry:
-
-*Name:* ${data.full_name}
-*Phone:* ${data.phone}
-*Email:* ${data.email || 'Not provided'}
-*Team:* ${getTeamName(data.team)}
-*Experience Level:* ${data.experience}
-*Instrument/Voice:* ${data.instrument}
-
-*Message:*
-${data.message}
-
-Thank you!
-            `.trim();
-        }
-
-        function getTeamName(teamValue) {
-            const teams = {
-                'choir': 'Choir Team',
-                'praise': 'Praise & Worship Team',
-                'both': 'Both Teams'
-            };
-            return teams[teamValue] || teamValue;
-        }
-
-        function showMessage(text, type) {
-            if (messageDiv) {
-                messageDiv.textContent = text;
-                messageDiv.className = `alert alert-${type}`;
-                messageDiv.style.display = 'block';
-            }
-        }
-    }
-
-    // Mother's Union form handling
-    const mothersUnionForm = document.getElementById('mothersUnionForm');
-    if (mothersUnionForm) {
-        const messageDiv = document.getElementById('form-message');
-
-        mothersUnionForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            
-            // Show loading state
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            if (messageDiv) messageDiv.style.display = 'none';
-
-            try {
-                const formData = {
-                    full_name: this.querySelector('input[name="full_name"]').value,
-                    email: this.querySelector('input[name="email"]').value,
-                    phone: this.querySelector('input[name="phone"]').value,
-                    message: this.querySelector('textarea[name="message"]').value
-                };
-
-                const response = await fetch('/ministries/mu/interest/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    showMUMessage(data.message, 'success');
-                    this.reset();
-                } else {
-                    showMUMessage(data.message, 'error');
-                }
-
-            } catch (error) {
-                showMUMessage('Network error. Please try again.', 'error');
-            } finally {
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }
-        });
-
-        function showMUMessage(text, type) {
-            if (messageDiv) {
-                messageDiv.textContent = text;
-                messageDiv.style.display = 'block';
-                messageDiv.className = type === 'success' ? 
-                    'alert alert-success' : 'alert alert-error';
-            }
-        }
-    }
-
-    // Event card expand/collapse functionality
-    function toggleEventDetails(button) {
-        const eventCard = button.closest('.event-card');
-        const isExpanded = eventCard.classList.contains('expanded');
-        
-        // Close all other expanded cards
-        const expandedCards = document.querySelectorAll('.event-card.expanded');
-        expandedCards.forEach(card => {
-            if (card !== eventCard) {
-                card.classList.remove('expanded');
-                const otherButton = card.querySelector('.event-button');
-                if (otherButton) {
-                    const btnText = otherButton.querySelector('.btn-text');
-                    if (btnText) btnText.textContent = 'Details';
-                }
-            }
-        });
-        
-        // Toggle current card
-        if (isExpanded) {
-            eventCard.classList.remove('expanded');
-            const btnText = button.querySelector('.btn-text');
-            if (btnText) btnText.textContent = 'Details';
-        } else {
-            eventCard.classList.add('expanded');
-            const btnText = button.querySelector('.btn-text');
-            if (btnText) btnText.textContent = 'Less Info';
-            
-            // Scroll to ensure the expanded content is visible
-            eventCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-    }
-
-    // Attach event listeners to all event buttons
-    const eventButtons = document.querySelectorAll('.event-button');
-    eventButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            toggleEventDetails(this);
-        });
-    });
-
-    // Close expanded cards when clicking outside
-    document.addEventListener('click', function(e) {
-        const isEventButton = e.target.classList.contains('event-button') || 
-                            e.target.closest('.event-button');
-        const isInsideExpandedCard = e.target.closest('.event-card.expanded');
-        
-        if (!isInsideExpandedCard && !isEventButton) {
-            const expandedCards = document.querySelectorAll('.event-card.expanded');
-            expandedCards.forEach(card => {
-                card.classList.remove('expanded');
-                const button = card.querySelector('.event-button');
-                if (button) {
-                    const btnText = button.querySelector('.btn-text');
-                    if (btnText) btnText.textContent = 'Details';
-                }
-            });
-        }
-    });
-
-    // Close expanded cards on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const expandedCards = document.querySelectorAll('.event-card.expanded');
-            expandedCards.forEach(card => {
-                card.classList.remove('expanded');
-                const button = card.querySelector('.event-button');
-                if (button) {
-                    const btnText = button.querySelector('.btn-text');
-                    if (btnText) btnText.textContent = 'Details';
-                }
-            });
-        }
-    });
-
-    // Phone validation function (used by multiple forms)
-    function isValidPhoneNumber(phone) {
-        // Basic validation for Kenyan numbers
-        const phoneRegex = /^(\+?254|0)?[7][0-9]{8}$/;
-        return phoneRegex.test(phone.replace(/\s/g, ''));
-    }
-});
-</script>
-</body>
-</html>
-
-
-
+{% block extra_js %}
+<script src="{% static 'js/music.js' %}"></script>
+{% endblock %}

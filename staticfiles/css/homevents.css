@@ -322,7 +322,7 @@
 
 .past-event .event-icon i {
     background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-    -webkit-background-clip: text;
+    
     -webkit-text-fill-color: transparent;
 }
 

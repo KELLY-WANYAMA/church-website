@@ -1,54 +1,27 @@
-<!-- ack/templates/ack/gallery.html -->
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Church Gallery - ACK St. Jude's Huruma</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
-    <!-- Your existing header -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-                <a href="/">🌟 ACK ST JUDES HURUMA</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/">HOME</a></li>
-                <li class="dropdown">
-                    <a href="#">ABOUT ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/about">ABOUT US</a></li>
-                        <li><a href="/events">EVENTS</a></li>
-                        <li><a href="/gallery">GALLERY</a></li>
-                        <li><a href="/giving">GIVING</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#">MINISTRIES ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/ministries">OUR MINISTRIES</a></li>
-                        <li><a href="/ministries/youth">YOUTH</a></li>
-                        <li><a href="/ministries/mu">MOTHER'S UNION</a></li>
-                        <li><a href="/ministries/kama">KAMA</a></li>
-                        <li><a href="/ministries/sundayschool">SUNDAY SCHOOL</a></li>
-                        <li><a href="/ministries/choir_worship">CHOIR / WORSHIP TEAM</a></li>
-                    </ul>
-                </li>
-                <li><a href="/sermons">SERMONS</a></li>
-                <li><a href="/contacts">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header>
+{% extends 'ack/base.html' %} 
 
+{% load static %}
+
+{% block title %}Church Gallery - ACK ST. JUDE'S HURUMA{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+<style>
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/church-hero.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-top: 60px;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
     <main>
         <section class="gallery-section">
     <div class="container">
@@ -120,110 +93,8 @@
 </section>
     </main>
 
-    
-<!-- Footer Section -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-section">
-            <h3>ACK ST JUDES HURUMA</h3>
-            <p>A place to belong, believe, and become in Christ.</p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/profile.php?id=100069972304998" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@ackstjudesparish-huruma" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@ack.st.judes.huru" target="_blank"><i class="fab fa-tiktok"></i></a>
-            </div>
-        </div>
+{% endblock %}
 
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About Us</a></li>
-                <li><a href="{% url 'sermons' %}">Sermon</a></li>
-                <li><a href="{% url 'events' %}">Events</a></li>
-                <li><a href="{% url 'contacts' %}">Contact</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-section">
-            <h3>Contact Info</h3>
-            <p><i class="fas fa-map-marker-alt"></i> Church Road, Westlands, Nairobi</p>
-            <p><i class="fas fa-phone"></i> +254 718 437784</p>
-            <p><i class="fas fa-envelope"></i> info@stjudeshuruma.org</p>
-        </div>
-
-        <div class="footer-section">
-            <h3>Service Times</h3>
-            <p>Sunday: 7:30 AM To 1:00 PM</p>
-            <p>Wednesday: 6:30 AM To 6:30 PM (Maombi Wednesday)</p>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; 2025 ACK ST JUDES HURUMA. All Rights Reserved.</p>
-        <p>Designed and developed by <a href="https://nicekelly.netlify.app/" target="_blank"> Kelly</a> </i> To God Be The Glory</p>
-    </div>
-</footer>
-<!--end of footer-->
-
-<script src="{% static 'js/main.js' %}"></script>
-
-<script>
-function filterGallery(category) {
-    // Use Django template URL for the base path to ensure correct URL routing
-    let url = '{% url "gallery" %}';
-    
-    // If it's not 'all', add the category as a query parameter
-    // Using 'category' parameter to match your view
-    if (category !== 'all') {
-        url += `?category=${category}`;
-    }
-    
-    // Navigate to the filtered URL
-    console.log('Navigating to:', url); // Debug log
-    window.location.href = url;
-}
-
-// Add active class to current category button
-document.addEventListener('DOMContentLoaded', function() {
-    const currentCategory = '{{ current_category }}';
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    
-    console.log('Current category:', currentCategory); // Debug log
-    
-    categoryButtons.forEach(btn => {
-        const btnCategory = btn.dataset.category;
-        console.log('Button category:', btnCategory); // Debug log
-        
-        // Remove active class from all buttons first
-        btn.classList.remove('active');
-        
-        // Add active class to matching button
-        if (btnCategory === currentCategory || 
-            (currentCategory === 'all' && btnCategory === 'all')) {
-            btn.classList.add('active');
-        }
-    });
-    
-    // Simple load more functionality
-    const loadMoreBtn = document.getElementById('loadMore');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            // You can implement AJAX loading here
-            alert('Load more functionality can be implemented with AJAX');
-        });
-    }
-    
-    // Debug: Check if buttons have click events
-    categoryButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const category = this.dataset.category;
-            console.log('Button clicked, category:', category);
-            filterGallery(category);
-        });
-    });
-});
-</script></body>
-</html>
+{% block extra_js %}
+<script src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}
