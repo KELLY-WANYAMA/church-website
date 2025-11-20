@@ -1,0 +1,537 @@
+/* START OF MOTHER'S UNION PAGE STYLES */
+/* Mother's Union Specific Styles */
+:root {
+    --mu-primary: #8e44ad;    /* Purple - traditional Anglican color */
+    --mu-secondary: #2c3e50;  /* Navy blue */
+    --mu-accent: #e67e22;     /* Orange accent */
+    --mu-light: #f8f9fa;
+    --mu-dark: #2c3e50;
+}
+
+/* Hero Section */
+.mothers-union-hero {
+    position: relative;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('/static/images/mothers-union-banner.jpg') center/cover no-repeat;
+    height: 60vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.mothers-union-hero .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.mothers-union-hero .tagline {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+/* About Section */
+.about-mothers-union {
+    padding: 80px 0;
+    background: var(--mu-light);
+}
+
+.about-mothers-union h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--mu-primary);
+    font-size: 2.5rem;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.anglican-values {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border-left: 4px solid var(--mu-primary);
+}
+
+.anglican-values h3 {
+    color: var(--mu-primary);
+    margin-bottom: 20px;
+}
+
+.anglican-values ul {
+    list-style: none;
+    padding: 0;
+}
+
+.anglican-values li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.anglican-values i {
+    margin-right: 15px;
+    color: var(--mu-primary);
+    width: 20px;
+}
+
+/* Objectives Grid */
+.mu-objectives {
+    padding: 80px 0;
+    background: white;
+}
+
+.mu-objectives h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--mu-primary);
+}
+
+.objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.objective-card {
+    text-align: center;
+    padding: 30px;
+    background: var(--mu-light);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.objective-card:hover {
+    transform: translateY(-5px);
+}
+
+.objective-icon {
+    font-size: 2.5rem;
+    color: var(--mu-primary);
+    margin-bottom: 20px;
+}
+
+/* Activities Section */
+.mu-activities {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.activity-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.activity-icon {
+    font-size: 2rem;
+    color: var(--mu-primary);
+    margin-bottom: 20px;
+}
+
+/* Leadership Section */
+.mu-leadership {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+}
+
+.mu-leadership::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mu-primary), var(--mu-secondary));
+}
+
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.leader-card {
+    text-align: center;
+    padding: 40px 25px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.08);
+    border: 1px solid rgba(139, 69, 19, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.leader-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mu-primary), var(--mu-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.leader-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(139, 69, 19, 0.15);
+}
+
+.leader-card:hover::before {
+    transform: scaleX(1);
+}
+
+.leader-image-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 25px;
+}
+
+.leader-card img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.2);
+    transition: all 0.3s ease;
+}
+
+.leader-card:hover img {
+    border-color: var(--mu-primary);
+    transform: scale(1.05);
+}
+
+.leader-placeholder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mu-light), #e8d6c9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.15);
+}
+
+.leader-placeholder i {
+    font-size: 3rem;
+    color: var(--mu-primary);
+    opacity: 0.7;
+}
+
+.leader-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--mu-dark);
+    margin-bottom: 8px;
+    font-family: 'Playfair Display', serif;
+}
+
+.position {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--mu-primary);
+    margin-bottom: 15px;
+    padding: 6px 16px;
+    background: rgba(139, 69, 19, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.contact {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.contact i {
+    color: var(--mu-primary);
+    width: 16px;
+}
+
+.no-leaders {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.08);
+}
+
+.no-leaders p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+}
+
+.no-leaders::before {
+    content: "👥";
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mu-leadership {
+        padding: 60px 0;
+    }
+    
+    .leadership-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 30px;
+    }
+    
+    .leader-card {
+        padding: 30px 20px;
+    }
+    
+    .leader-image-container,
+    .leader-placeholder {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .leader-card {
+        padding: 25px 15px;
+    }
+    
+    .leader-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .position {
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for card entrance */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.leader-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.leader-card:nth-child(1) { animation-delay: 0.1s; }
+.leader-card:nth-child(2) { animation-delay: 0.2s; }
+.leader-card:nth-child(3) { animation-delay: 0.3s; }
+.leader-card:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* Membership Section */
+.mu-membership {
+    padding: 80px 0;
+    background: var(--mu-light);
+}
+
+.membership-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.membership-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.membership-info li {
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.membership-info li:before {
+    content: "✓";
+    color: var(--mu-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.interest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.interest-form input,
+.interest-form textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.interest-form button {
+    background: var(--mu-primary);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+/* Add to your CSS file */
+#form-message {
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: none;
+}
+
+#form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Prayer Section */
+.mu-prayer {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--mu-primary), #6c3483);
+    color: white;
+    text-align: center;
+}
+
+.mu-prayer blockquote {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.prayer-reference {
+    font-style: italic;
+    opacity: 0.9;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content,
+    .membership-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .mothers-union-hero .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .objectives-grid,
+    .activities-grid,
+    .leadership-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Anglican Colors Theme */
+.cta-button.primary-btn {
+    background: var(--mu-primary);
+}
+
+.cta-button.secondary-btn {
+    background: transparent;
+    border: 2px solid white;
+}
+
+.cta-button:hover {
+    background: var(--mu-accent);
+    border-color: var(--mu-accent);
+}
+
+
+/* Add to your CSS */
+.alert {
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Form loading state */
+.form-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/*End of MOTHER'S UNION*/

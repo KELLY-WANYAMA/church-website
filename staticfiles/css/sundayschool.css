@@ -1,0 +1,514 @@
+/*START OF SUNDAYSCHOOL*/
+/* Hero Section */
+        .sunday-hero {
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .sunday-hero .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .sunday-hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            font-style: italic;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Button Styles */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        /* About Section */
+        .about-sunday {
+            background: var(--light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .ack-values {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .ack-values h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .ack-values ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ack-values li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .ack-values i {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 25px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Age Groups Section */
+        .age-groups {
+            background: white;
+        }
+
+        .age-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .age-tab {
+            padding: 15px 30px;
+            background: var(--light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+
+        .age-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .age-tab:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .age-content {
+            display: none;
+        }
+
+        .age-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .age-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .activity-card {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .activity-card h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .activity-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .activity-time {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+
+
+
+
+
+
+
+        /* Schedule Section */
+        .schedule {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .schedule-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .schedule-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .schedule-activity {
+            color: #555;
+        }
+
+        
+        /* Teachers Section */
+        .teachers {
+            background: white;
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .teacher-card {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .teacher-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--primary);
+        }
+
+        .teacher-card h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .teacher-card p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .teacher-age {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Registration Section */
+        .registration {
+            background: var(--light);
+        }
+
+        .reg-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .reg-info h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .reg-info ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 40px;
+        }
+
+        .reg-info li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .reg-info li:before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .reg-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .reg-form h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .interest-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .interest-form input,
+        .interest-form select,
+        .interest-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .interest-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .interest-form button {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+        }
+
+        .interest-form button:hover {
+            background: var(--secondary);
+        }
+
+        /* Bible Verse Section */
+        .bible-verse {
+            background: linear-gradient(135deg, var(--primary), #2980b9);
+            color: white;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .bible-verse blockquote {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bible-verse cite {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-content,
+            .reg-content {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content,
+            .reg-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .sunday-hero .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .sunday-hero .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .age-grid,
+            .schedule-grid,
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .age-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .age-tab {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sunday-hero {
+                height: 70vh;
+                min-height: 400px;
+            }
+            
+            .sunday-hero .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .activity-card,
+            .schedule-card,
+            .teacher-card {
+                padding: 20px;
+            }
+            
+            .reg-form {
+                padding: 20px;
+            }
+            
+            .bible-verse blockquote {
+                font-size: 1.4rem;
+            }
+        }
+
+/*END OF SUNDAY SCHOOL*/
