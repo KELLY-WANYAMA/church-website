@@ -2,28 +2,26 @@
 
 {% load static %}
 
-{% block title %}Church events - ACK ST. JUDE'S HURUMA{% endblock %}
+{% block title %}Church SundaySchool - ACK ST. JUDE'S HURUMA{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/sundayschool.css' %}?v=1.2">
+<link rel="stylesheet" href="{% static 'css/sundayschool.css' %}">
 <style>
-<<<<<<< Updated upstream
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/church-hero.jpg" %}');
-=======
-.sunday-school-page .sunday-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "image/hero.jpg" %}?v=1.2');
->>>>>>> Stashed changes
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "image/hero.jpg" %}');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    padding: 120px 20px;
+    margin-top: 60px;
 }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="sunday-school-page">
+
     <!-- Hero Section -->
     <section class="sunday-hero">
         <div class="hero-content">
@@ -57,7 +55,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="{% static 'image/KAMA.png' %}?v=1.2" alt="ACK Sunday school Members" loading="eager" onerror="this.src='{% static 'image/fallback.jpg' %}'">
+                    <img src="{% static 'image/youthkesha.png' %}" alt="ACK Sunday school Members">
                 </div>
             </div>
         </div>
@@ -148,7 +146,7 @@
         </div>
     </section>
 
-    <!-- Schedule Section -->
+        <!-- Schedule Section -->
     <section class="schedule">
         <div class="container">
             <h2>Weekly Schedule</h2>
@@ -182,7 +180,7 @@
         </div>
     </section>
 
-    <!-- Teachers Section -->
+        <!-- Teachers Section -->
     <section class="teachers">
         <div class="container">
             <h2>Our Teachers</h2>
@@ -190,9 +188,9 @@
                 {% for teacher in teachers %}
                 <div class="teacher-card">
                     {% if teacher.image %}
-                        <img src="{{ teacher.image.url }}?v=1.2" alt="{{ teacher.name }}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80'">
+                        <img src="{{ teacher.image.url }}" alt="{{ teacher.name }}">
                     {% else %}
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80?v=1.2" alt="{{ teacher.name }}" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="{{ teacher.name }}">
                     {% endif %}
                     <h4>{{ teacher.name }}</h4>
                     <p>{{ teacher.position }}</p>
@@ -210,7 +208,7 @@
         </div>
     </section>
 
-    <!-- Registration Section -->
+        <!-- Registration Section -->
     <section id="registration" class="registration">
         <div class="container">
             <h2>Join Our Sunday School</h2>
@@ -260,6 +258,7 @@
             </div>
         </div>
     </section>
+
     
     <!-- Bible Verse Section -->
     <section class="bible-verse">
@@ -270,9 +269,10 @@
             </blockquote>
         </div>
     </section>
-</div>
+
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/sundayschool.js' %}?v=1.2"></script>
+<script src="{% static 'js/sundayschool.js' %}"></script>
 {% endblock %}
+

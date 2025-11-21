@@ -2,13 +2,13 @@
 
 {% load static %}
 
-{% block title %}Church KAMA - ACK ST. JUDE'S HURUMA{% endblock %}
+{% block title %}Church YOUTH - ACK ST. JUDE'S HURUMA{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/youth.css' %}">
 <style>
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/church-hero.jpg" %}');
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/hero.jpg" %}');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -195,17 +195,6 @@
             <a href="#" class="resource-btn">Coming Soon</a>
         </div>
         {% endfor %}
-        
-        <!--<div class="resource-card">
-            <h3>Stay Connected</h3>
-            <p>Sign up for parent updates and newsletters</p>
-            <form class="parent-signup" id="parent-subscription-form">
-                {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-            <div id="subscription-message" style="display: none;"></div>-->
-        </div>
     </div>
 </section>
 
@@ -235,7 +224,7 @@
             <div class="social-buttons">
                 <a href="https://tiktok.com/@yourchurchyouth" target="_blank" class="social-btn tiktok-btn">
                     <i class="fab fa-tiktok"></i>
-                    <span>Follow on TikTok</span>
+                    <span>Follow  Us on TikTok</span>
                 </a>
                 <a href="https://youtube.com/@yourchurchyouth" target="_blank" class="social-btn youtube-btn">
                     <i class="fab fa-youtube"></i>

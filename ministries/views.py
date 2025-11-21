@@ -56,7 +56,7 @@ def youth_ministry(request):
         gallery_images = YouthGallery.objects.filter(is_active=True)[:8]
         
         # Get parent resources
-        parent_resources = VisitorResource.objects.filter(is_active=True)
+        visitor_resources = VisitorResource.objects.filter(is_active=True)
         
         context = {
             'title': 'Youth Ministry',
@@ -68,7 +68,7 @@ def youth_ministry(request):
             'upcoming_events': upcoming_events,
             'youth_leaders': youth_leaders,
             'gallery_images': gallery_images,
-            'parent_resources': parent_resources,
+            'visitor_resources': visitor_resources,
         }
     except Ministry.DoesNotExist:
         context = {
@@ -80,7 +80,7 @@ def youth_ministry(request):
             'upcoming_events': [],
             'youth_leaders': [],
             'gallery_images': [],
-            'parent_resources': [],
+            'visitor_resources': [],
         }
     
     return render(request, 'ministries/youth.html', context)
@@ -641,33 +641,48 @@ def handle_interest_form(request, ministry_type):
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': 'An error occurred. Please try again.'})
 
+
+
 def send_whatsapp_notification(membership):
     try:
-        secretary_phone = getattr(settings, 'MOTHERS_UNION_SECRETARY_PHONE', '')
+        secretary_phone = getattr(settings, 'MOTHERS_UNION_SECRETARY_PHONE', '+254791675625')
         
-        if secretary_phone and hasattr(settings, 'TWILIO_ACCOUNT_SID'):
+        # Create WhatsApp message content
+        message = f"""New Mother's Union Membership Interest!
+
+Name: {membership.full_name}
+Email: {membership.email}
+Phone: {membership.phone or 'Not provided'}
+
+Message:
+{membership.message}
+
+Submitted on: {membership.created_at.strftime('%Y-%m-%d %H:%M')}
+
+Please follow up within 48 hours."""
+        
+        print(f"📱 WhatsApp notification ready for: {secretary_phone}")
+        print(f"📱 Message content: {message}")
+        
+        # If you have Twilio configured, you can use it here
+        if hasattr(settings, 'TWILIO_ACCOUNT_SID') and settings.TWILIO_ACCOUNT_SID:
             from twilio.rest import Client
-            
             client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
             
-            message = client.messages.create(
-                body=f"""
-                    New Mother's Union Membership Interest!
-                    Name: {membership.full_name}
-                    Email: {membership.email}
-                    Phone: {membership.phone or 'Not provided'}
-                    Message: {membership.message}
-                """,
+            whatsapp_message = client.messages.create(
+                body=message,
                 from_=settings.TWILIO_WHATSAPP_NUMBER,
                 to=f'whatsapp:{secretary_phone}'
             )
-            print(f"WhatsApp message sent: {message.sid}")
+            print(f"✅ WhatsApp message sent via Twilio: {whatsapp_message.sid}")
         else:
-            # Fallback to email or console log
-            print(f"WhatsApp notification: New interest from {membership.full_name}")
+            # Log for manual sending
+            print(f"📱 Manual WhatsApp message for {secretary_phone}:")
+            print(f"📱 Content: {message}")
             
     except Exception as e:
-        print(f"Error sending WhatsApp: {e}")
+        print(f"❌ Error sending WhatsApp: {e}")
+
 
 def send_email_notification(membership):
     try:

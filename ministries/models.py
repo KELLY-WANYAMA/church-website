@@ -290,9 +290,10 @@ class Event(models.Model):
 # Weekly Programs Model
 class WeeklyProgram(models.Model):
     PROGRAM_TYPES = [
-        ('sunday_school', 'Sunday School'),
-        ('youth_night', 'Youth Night'),
-        ('small_groups', 'Small Groups'),
+        ('youth_bonding', 'Team Bonding'),
+        ('youth_night', 'Youth Night Kesha'),
+        ('small_groups', 'Small Team Building'),
+        ('Bible_Study', 'Bible Study'),
         ('other', 'Other'),
     ]
     
@@ -308,6 +309,8 @@ class WeeklyProgram(models.Model):
     
     class Meta:
         ordering = ['order', 'name']
+        verbose_name_plural = "Youth Weekly Programs"
+
     
     def __str__(self):
         return self.name

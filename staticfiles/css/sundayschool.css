@@ -1,20 +1,4 @@
-/* START OF SUNDAYSCHOOL - FIXED VERSION */
-.sunday-school-page {
-    /* Reset any inherited styles */
-    all: initial;
-    box-sizing: border-box;
-    font-family: inherit;
-}
-
-.sunday-school-page * {
-    box-sizing: border-box;
-}
-
-.sunday-school-page *:before,
-.sunday-school-page *:after {
-    box-sizing: border-box;
-}
-
+/* START OF SUNDAYSCHOOL - CLEAN & PROFESSIONAL */
 :root {
     --primary: #3e5a84;
     --primary-dark: #2a3765;
@@ -27,19 +11,10 @@
     --border: #e9ecef;
 }
 
-/* Container reset */
-.sunday-school-page .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* Hero Section - FIXED */
-.sunday-school-page .sunday-hero {
+/* Hero Section */
+.sunday-hero {
     position: relative;
-    background: rgba(0, 0, 0, 0.7) url('{% static "image/hero.jpg" %}?v=1.2') center/cover no-repeat !important;
-    background-attachment: fixed;
+    background: rgba(0, 0, 0, 0.7) url('{% static "image/hero.jpg" %}') center/cover no-repeat;
     height: 60vh;
     min-height: 500px;
     display: flex;
@@ -48,18 +23,16 @@
     text-align: center;
     color: white;
     padding: 0 1rem;
-    margin: 0 !important;
-    width: 100% !important;
 }
 
-.sunday-school-page .sunday-hero .hero-content h1 {
+.sunday-hero .hero-content h1 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 1.5rem;
     font-weight: 700;
     line-height: 1.2;
 }
 
-.sunday-school-page .sunday-hero .tagline {
+.sunday-hero .tagline {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     margin-bottom: 2.5rem;
     font-style: italic;
@@ -70,7 +43,7 @@
     line-height: 1.6;
 }
 
-.sunday-school-page .hero-buttons {
+.hero-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
@@ -78,7 +51,7 @@
 }
 
 /* Button Styles */
-.sunday-school-page .cta-button {
+.cta-button {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -91,55 +64,54 @@
     border: 2px solid transparent;
 }
 
-.sunday-school-page .primary-btn {
+.primary-btn {
     background: var(--primary);
     color: white;
 }
 
-.sunday-school-page .secondary-btn {
+.secondary-btn {
     background: transparent;
     color: white;
     border: 2px solid white;
 }
 
-.sunday-school-page .cta-button:hover {
+.cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.sunday-school-page .primary-btn:hover {
+.primary-btn:hover {
     background: var(--primary-dark);
 }
 
-.sunday-school-page .secondary-btn:hover {
+.secondary-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* About Section - FIXED */
-.sunday-school-page .about-sunday {
-    background: var(--light) !important;
-    padding: 4rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+/* About Section */
+.about-sunday {
+    background: var(--light);
+    padding: 4rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+
 }
 
-.sunday-school-page .about-content {
+.about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
 }
 
-.sunday-school-page .about-text p {
+.about-text p {
     margin-bottom: 1.5rem;
     font-size: 1.125rem;
     line-height: 1.7;
     color: var(--gray);
 }
 
-.sunday-school-page .ack-values {
+.ack-values {
     background: white;
     padding: 2rem;
     border-radius: 10px;
@@ -148,50 +120,45 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.sunday-school-page .ack-values h3 {
+.ack-values h3 {
     color: var(--primary);
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
     font-weight: 600;
 }
 
-.sunday-school-page .ack-values ul {
+.ack-values ul {
     list-style: none;
     padding: 0;
 }
 
-.sunday-school-page .ack-values li {
+.ack-values li {
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
     font-size: 1.1rem;
 }
 
-.sunday-school-page .ack-values i {
+.ack-values i {
     margin-right: 1rem;
     color: var(--primary);
     font-size: 1.2rem;
     width: 24px;
 }
 
-.sunday-school-page .about-image img {
+.about-image img {
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    transform: translateZ(0); /* Force GPU rendering */
 }
 
-/* Age Groups Section - FIXED */
-.sunday-school-page .age-groups {
-    background: white !important;
-    padding: 4rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+/* Age Groups Section */
+.age-groups {
+    background: white;
+    padding: 4rem 0;
 }
 
-.sunday-school-page .age-tabs {
+.age-tabs {
     display: flex;
     justify-content: center;
     margin-bottom: 3rem;
@@ -199,7 +166,7 @@
     gap: 0.5rem;
 }
 
-.sunday-school-page .age-tab {
+.age-tab {
     padding: 1rem 1.5rem;
     background: var(--light);
     border: 2px solid transparent;
@@ -211,22 +178,22 @@
     color: var(--dark);
 }
 
-.sunday-school-page .age-tab.active {
+.age-tab.active {
     background: var(--primary);
     color: white;
     border-color: var(--primary);
 }
 
-.sunday-school-page .age-tab:hover:not(.active) {
+.age-tab:hover:not(.active) {
     background: rgba(44, 85, 48, 0.1);
     border-color: var(--primary);
 }
 
-.sunday-school-page .age-content {
+.age-content {
     display: none;
 }
 
-.sunday-school-page .age-content.active {
+.age-content.active {
     display: block;
     animation: fadeIn 0.4s ease;
 }
@@ -236,13 +203,13 @@
     to { opacity: 1; }
 }
 
-.sunday-school-page .age-grid {
+.age-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
-.sunday-school-page .activity-card {
+.activity-card {
     background: white;
     padding: 2rem;
     border-radius: 10px;
@@ -252,30 +219,30 @@
     border: 1px solid var(--border);
 }
 
-.sunday-school-page .activity-card:hover {
+.activity-card:hover {
     transform: translateY(-5px);
 }
 
-.sunday-school-page .activity-icon {
+.activity-icon {
     font-size: 2.5rem;
     color: var(--primary);
     margin-bottom: 1.5rem;
 }
 
-.sunday-school-page .activity-card h4 {
+.activity-card h4 {
     color: var(--dark);
     margin-bottom: 1rem;
     font-size: 1.3rem;
     font-weight: 600;
 }
 
-.sunday-school-page .activity-card p {
+.activity-card p {
     color: var(--gray);
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
 
-.sunday-school-page .activity-time {
+.activity-time {
     display: inline-block;
     background: var(--accent);
     color: white;
@@ -285,23 +252,19 @@
     font-weight: 600;
 }
 
-/* Schedule Section - FIXED */
-.sunday-school-page .schedule {
-    background: var(--light) !important;
-    padding: 4rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+/* Schedule Section */
+.schedule {
+    background: var(--light);
+    padding: 4rem 0;
 }
 
-.sunday-school-page .schedule-grid {
+.schedule-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
 }
 
-.sunday-school-page .schedule-card {
+.schedule-card {
     background: white;
     padding: 2rem;
     border-radius: 10px;
@@ -309,7 +272,7 @@
     border: 1px solid var(--border);
 }
 
-.sunday-school-page .schedule-card h3 {
+.schedule-card h3 {
     color: var(--primary);
     margin-bottom: 1.5rem;
     text-align: center;
@@ -317,14 +280,14 @@
     font-weight: 600;
 }
 
-.sunday-school-page .schedule-description {
+.schedule-description {
     color: var(--gray);
     text-align: center;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
 
-.sunday-school-page .schedule-item {
+.schedule-item {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -333,24 +296,24 @@
     gap: 1rem;
 }
 
-.sunday-school-page .schedule-item:last-child {
+.schedule-item:last-child {
     border-bottom: none;
 }
 
-.sunday-school-page .schedule-time {
+.schedule-time {
     font-weight: 600;
     color: var(--primary);
     min-width: 70px;
     font-size: 0.95rem;
 }
 
-.sunday-school-page .schedule-activity {
+.schedule-activity {
     color: var(--dark);
     font-weight: 500;
     flex: 1;
 }
 
-.sunday-school-page .item-description {
+.item-description {
     color: var(--gray);
     font-size: 0.85rem;
     margin-top: 0.25rem;
@@ -358,22 +321,18 @@
 }
 
 /* Teachers Section - FIXED */
-.sunday-school-page .teachers {
-    background: white !important;
-    padding: 4rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+.teachers {
+    background: white;
+    padding: 4rem 0;
 }
 
-.sunday-school-page .teachers-grid {
+.teachers-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
-.sunday-school-page .teacher-card {
+.teacher-card {
     background: white;
     padding: 2rem;
     border-radius: 10px;
@@ -383,11 +342,11 @@
     border: 1px solid var(--border);
 }
 
-.sunday-school-page .teacher-card:hover {
+.teacher-card:hover {
     transform: translateY(-5px);
 }
 
-.sunday-school-page .teacher-card img {
+.teacher-card img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -399,20 +358,20 @@
     margin-right: auto;
 }
 
-.sunday-school-page .teacher-card h4 {
+.teacher-card h4 {
     color: var(--dark);
     margin-bottom: 0.5rem;
     font-size: 1.25rem;
     font-weight: 600;
 }
 
-.sunday-school-page .teacher-card p {
+.teacher-card p {
     color: var(--gray);
     margin-bottom: 1rem;
     line-height: 1.6;
 }
 
-.sunday-school-page .teacher-age {
+.teacher-age {
     display: inline-block;
     background: var(--accent);
     color: white;
@@ -422,7 +381,7 @@
     font-weight: 600;
 }
 
-.sunday-school-page .teacher-bio {
+.teacher-bio {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
@@ -432,37 +391,33 @@
     font-size: 0.95rem;
 }
 
-/* Registration Section - FIXED */
-.sunday-school-page .registration {
-    background: var(--light) !important;
-    padding: 4rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+/* Registration Section */
+.registration {
+    background: var(--light);
+    padding: 4rem 0;
 }
 
-.sunday-school-page .reg-content {
+.reg-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: start;
 }
 
-.sunday-school-page .reg-info h3 {
+.reg-info h3 {
     color: var(--dark);
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
     font-weight: 600;
 }
 
-.sunday-school-page .reg-info ul {
+.reg-info ul {
     list-style: none;
     padding: 0;
     margin-bottom: 2rem;
 }
 
-.sunday-school-page .reg-info li {
+.reg-info li {
     margin-bottom: 1rem;
     padding-left: 2rem;
     position: relative;
@@ -471,7 +426,7 @@
     color: var(--gray);
 }
 
-.sunday-school-page .reg-info li:before {
+.reg-info li:before {
     content: "✓";
     color: var(--success);
     font-weight: bold;
@@ -479,7 +434,7 @@
     left: 0;
 }
 
-.sunday-school-page .reg-form {
+.reg-form {
     background: white;
     padding: 2rem;
     border-radius: 10px;
@@ -487,7 +442,7 @@
     border: 1px solid var(--border);
 }
 
-.sunday-school-page .reg-form h3 {
+.reg-form h3 {
     color: var(--primary);
     margin-bottom: 1.5rem;
     text-align: center;
@@ -495,15 +450,15 @@
     font-weight: 600;
 }
 
-.sunday-school-page .interest-form {
+.interest-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.sunday-school-page .interest-form input,
-.sunday-school-page .interest-form select,
-.sunday-school-page .interest-form textarea {
+.interest-form input,
+.interest-form select,
+.interest-form textarea {
     padding: 0.875rem 1rem;
     border: 1px solid var(--border);
     border-radius: 6px;
@@ -513,21 +468,21 @@
     background: white;
 }
 
-.sunday-school-page .interest-form input:focus,
-.sunday-school-page .interest-form select:focus,
-.sunday-school-page .interest-form textarea:focus {
+.interest-form input:focus,
+.interest-form select:focus,
+.interest-form textarea:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 2px rgba(44, 85, 48, 0.1);
 }
 
-.sunday-school-page .interest-form textarea {
+.interest-form textarea {
     min-height: 100px;
     resize: vertical;
     line-height: 1.5;
 }
 
-.sunday-school-page .interest-form button {
+.interest-form button {
     background: var(--primary);
     color: white;
     padding: 1rem 2rem;
@@ -540,12 +495,12 @@
     margin-top: 0.5rem;
 }
 
-.sunday-school-page .interest-form button:hover {
+.interest-form button:hover {
     background: var(--primary-dark);
 }
 
 /* Message Styles */
-.sunday-school-page #registration-message {
+#registration-message {
     margin-top: 1rem;
     padding: 1rem;
     border-radius: 6px;
@@ -553,31 +508,27 @@
     text-align: center;
 }
 
-.sunday-school-page .message-success {
+.message-success {
     background: rgba(40, 167, 69, 0.1);
     color: var(--success);
     border: 1px solid rgba(40, 167, 69, 0.3);
 }
 
-.sunday-school-page .message-error {
+.message-error {
     background: rgba(220, 53, 69, 0.1);
     color: var(--error);
     border: 1px solid rgba(220, 53, 69, 0.3);
 }
 
-/* Bible Verse Section - FIXED */
-.sunday-school-page .bible-verse {
-    background: var(--primary) !important;
+/* Bible Verse Section */
+.bible-verse {
+    background: var(--primary);
     color: white;
     text-align: center;
-    padding: 3rem 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    float: none !important;
-    display: block;
+    padding: 3rem 0;
 }
 
-.sunday-school-page .bible-verse blockquote {
+.bible-verse blockquote {
     font-size: clamp(1.3rem, 3vw, 1.8rem);
     line-height: 1.5;
     font-style: italic;
@@ -586,7 +537,7 @@
     font-weight: 400;
 }
 
-.sunday-school-page .bible-verse cite {
+.bible-verse cite {
     display: block;
     margin-top: 1rem;
     font-size: 1.1rem;
@@ -595,50 +546,50 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .sunday-school-page .about-content,
-    .sunday-school-page .reg-content {
+    .about-content,
+    .reg-content {
         gap: 2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .sunday-school-page .sunday-hero {
+    .sunday-hero {
         height: 50vh;
         min-height: 400px;
     }
     
-    .sunday-school-page .about-content,
-    .sunday-school-page .reg-content {
+    .about-content,
+    .reg-content {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
     
-    .sunday-school-page .hero-buttons {
+    .hero-buttons {
         flex-direction: column;
         align-items: center;
     }
     
-    .sunday-school-page .cta-button {
+    .cta-button {
         width: 100%;
         max-width: 250px;
         justify-content: center;
     }
     
-    .sunday-school-page .age-grid,
-    .sunday-school-page .schedule-grid,
-    .sunday-school-page .teachers-grid {
+    .age-grid,
+    .schedule-grid,
+    .teachers-grid {
         grid-template-columns: 1fr;
     }
     
-    .sunday-school-page .age-tabs {
+    .age-tabs {
         flex-direction: column;
     }
     
-    .sunday-school-page .age-tab {
+    .age-tab {
         text-align: center;
     }
     
-    .sunday-school-page .schedule-item {
+    .schedule-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.25rem;
@@ -646,40 +597,40 @@
 }
 
 @media (max-width: 640px) {
-    .sunday-school-page .sunday-hero .hero-content h1 {
+    .sunday-hero .hero-content h1 {
         font-size: 2rem;
     }
     
-    .sunday-school-page .about-sunday,
-    .sunday-school-page .age-groups,
-    .sunday-school-page .schedule,
-    .sunday-school-page .teachers,
-    .sunday-school-page .registration {
-        padding: 3rem 0 !important;
+    .about-sunday,
+    .age-groups,
+    .schedule,
+    .teachers,
+    .registration {
+        padding: 3rem 0;
     }
     
-    .sunday-school-page .activity-card,
-    .sunday-school-page .schedule-card,
-    .sunday-school-page .teacher-card,
-    .sunday-school-page .reg-form {
+    .activity-card,
+    .schedule-card,
+    .teacher-card,
+    .reg-form {
         padding: 1.5rem;
     }
     
-    .sunday-school-page .ack-values {
+    .ack-values {
         padding: 1.5rem;
     }
 }
 
 @media (max-width: 480px) {
-    .sunday-school-page .sunday-hero {
+    .sunday-hero {
         height: 60vh;
     }
     
-    .sunday-school-page .cta-button {
+    .cta-button {
         padding: 0.75rem 1.5rem;
     }
     
-    .sunday-school-page .teacher-card img {
+    .teacher-card img {
         width: 100px;
         height: 100px;
     }
@@ -687,26 +638,13 @@
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .sunday-school-page .cta-button,
-    .sunday-school-page .activity-card,
-    .sunday-school-page .teacher-card,
-    .sunday-school-page .schedule-card,
-    .sunday-school-page .interest-form button {
+    .cta-button,
+    .activity-card,
+    .teacher-card,
+    .schedule-card,
+    .interest-form button {
         transition: none;
         transform: none;
     }
-}
-
-/* Clear floats and ensure proper section display */
-.sunday-school-page section::before,
-.sunday-school-page section::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.sunday-school-page section {
-    display: block;
-    float: none;
 }
 /* END OF SUNDAY SCHOOL */

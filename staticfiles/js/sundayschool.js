@@ -10,6 +10,9 @@ function initializeAllFunctions() {
     initializeMobileNavigation();
     initializeSmoothScrolling();
     initializeEventCards();
+    initializeScrollAnimations();
+    initializeFormEnhancements();
+    initializeImageLoading();
 }
 
 // FORM HANDLERS =============================================================
@@ -17,12 +20,10 @@ function initializeFormHandlers() {
     // Sunday School Registration Form
     const sundaySchoolForm = document.getElementById('sundaySchoolRegistrationForm');
     if (sundaySchoolForm) {
-        // Use Django template tag for URL - FIXED
         setupFormHandler(sundaySchoolForm, '/ministries/submit_sunday_school_registration/', 'registration-message');
     }
 
     // Add other form handlers here as needed
-    // Example: Youth registration, general contact forms, etc.
 }
 
 function setupFormHandler(form, submitUrl, messageDivId) {
@@ -48,8 +49,8 @@ function setupFormHandler(form, submitUrl, messageDivId) {
                 formObject[key] = value;
             }
 
-            console.log('Submitting to:', submitUrl); // Debug log
-            console.log('Form data:', formObject); // Debug log
+            console.log('Submitting to:', submitUrl);
+            console.log('Form data:', formObject);
 
             const response = await fetch(submitUrl, {
                 method: 'POST',
@@ -60,14 +61,14 @@ function setupFormHandler(form, submitUrl, messageDivId) {
                 body: JSON.stringify(formObject)
             });
 
-            console.log('Response status:', response.status); // Debug log
+            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log('Response data:', data); // Debug log
+            console.log('Response data:', data);
 
             if (data.success || data.status === 'success') {
                 showMessage(data.message || 'Thank you! We will contact you soon.', 'success', messageDiv);
@@ -96,18 +97,15 @@ function getCSRFToken() {
     // Try to get CSRF token from template tag or form input
     const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
     if (csrfInput) {
-        console.log('CSRF token found in input');
         return csrfInput.value;
     }
     
     // Fallback to cookie method
     const csrfCookie = getCookie('csrftoken');
     if (csrfCookie) {
-        console.log('CSRF token found in cookie');
         return csrfCookie;
     }
     
-    console.log('No CSRF token found');
     return '';
 }
 
@@ -132,12 +130,14 @@ function showMessage(text, type, messageDiv) {
     messageDiv.textContent = text;
     messageDiv.style.display = 'block';
     
-    // Apply styles based on message type
+    // Apply modern styles based on message type
     if (type === 'success') {
+        messageDiv.className = 'message-success';
         messageDiv.style.backgroundColor = '#d4edda';
         messageDiv.style.color = '#155724';
         messageDiv.style.border = '1px solid #c3e6cb';
     } else {
+        messageDiv.className = 'message-error';
         messageDiv.style.backgroundColor = '#f8d7da';
         messageDiv.style.color = '#721c24';
         messageDiv.style.border = '1px solid #f5c6cb';
@@ -153,22 +153,39 @@ function showMessage(text, type, messageDiv) {
 
 // TAB FUNCTIONALITY =========================================================
 function initializeTabFunctionality() {
-    const tabs = document.querySelectorAll('.age-tab');
-    const contents = document.querySelectorAll('.age-content');
+    const ageTabs = document.querySelectorAll('.age-tab');
+    const ageContents = document.querySelectorAll('.age-content');
 
-    tabs.forEach(tab => {
+    ageTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const ageGroup = this.getAttribute('data-age');
             
             // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
+            ageTabs.forEach(t => t.classList.remove('active'));
+            ageContents.forEach(c => c.classList.remove('active'));
             
             // Add active class to clicked tab and corresponding content
             this.classList.add('active');
             const targetContent = document.getElementById(`${ageGroup}-content`);
             if (targetContent) targetContent.classList.add('active');
         });
+    });
+
+    // Keyboard navigation for age tabs
+    document.addEventListener('keydown', function(e) {
+        if (e.target.classList.contains('age-tab')) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextTab = e.target.nextElementSibling || ageTabs[0];
+                nextTab.click();
+                nextTab.focus();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevTab = e.target.previousElementSibling || ageTabs[ageTabs.length - 1];
+                prevTab.click();
+                prevTab.focus();
+            }
+        }
     });
 }
 
@@ -239,7 +256,94 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// MOBILE NAVIGATION =========================================================
+function initializeMobileNavigation() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
 
+    // Mobile menu toggle
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('show');
+            
+            // Close dropdowns when closing mobile menu
+            if (!navLinks.classList.contains('show')) {
+                closeAllDropdowns(dropdowns);
+            }
+        });
+    }
+
+    // Dropdown functionality for mobile
+    setupMobileDropdowns(dropdowns);
+
+    // Close mobile menu when clicking outside
+    setupClickOutsideHandler(hamburger, navLinks, dropdowns);
+
+    // Close mobile menu on resize to desktop
+    setupResizeHandler(navLinks, hamburger, dropdowns);
+}
+
+function setupMobileDropdowns(dropdowns) {
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        if (link) {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const menu = this.nextElementSibling;
+                    if (menu && menu.classList.contains('dropdown-menu')) {
+                        menu.classList.toggle('show');
+                        
+                        // Close other dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                                if (otherMenu) otherMenu.classList.remove('show');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+}
+
+function setupClickOutsideHandler(hamburger, navLinks, dropdowns) {
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+            const isHamburger = e.target.closest('.hamburger');
+            const isNavLink = e.target.closest('.nav-links');
+            const isDropdown = e.target.closest('.dropdown');
+            
+            if (!isHamburger && !isNavLink && !isDropdown && navLinks && navLinks.classList.contains('show')) {
+                closeMobileMenu(navLinks, hamburger, dropdowns);
+            }
+        }
+    });
+}
+
+function setupResizeHandler(navLinks, hamburger, dropdowns) {
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('show')) {
+            closeMobileMenu(navLinks, hamburger, dropdowns);
+        }
+    });
+}
+
+function closeMobileMenu(navLinks, hamburger, dropdowns) {
+    navLinks.classList.remove('show');
+    if (hamburger) hamburger.classList.remove('active');
+    closeAllDropdowns(dropdowns);
+}
+
+function closeAllDropdowns(dropdowns) {
+    dropdowns.forEach(dropdown => {
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (menu) menu.classList.remove('show');
+    });
+}
 
 // SMOOTH SCROLLING ==========================================================
 function initializeSmoothScrolling() {
@@ -270,8 +374,6 @@ function initializeSmoothScrolling() {
         });
     });
 }
-<<<<<<< Updated upstream
-=======
 
 // SCROLL ANIMATIONS =========================================================
 function initializeScrollAnimations() {
@@ -358,182 +460,16 @@ function initializeFormEnhancements() {
 }
 
 // IMAGE LOADING =============================================================
-// Sunday School JavaScript - Fixed with image loading solutions
-
-// Image preloading and cache busting
-function preloadSundaySchoolImages() {
-    console.log('Preloading Sunday School images...');
-    
-    const imageUrls = [
-        '{% static "image/hero.jpg" %}',
-        '{% static "image/KAMA.png" %}'
-    ];
-    
-    imageUrls.forEach(url => {
-        const img = new Image();
-        // Add cache busting parameter
-        img.src = url + '?v=1.2&t=' + new Date().getTime();
-        img.onload = function() {
-            console.log('Successfully loaded:', url);
-        };
-        img.onerror = function() {
-            console.warn('Failed to load:', url);
-            // Try without cache busting as fallback
-            this.src = url;
-        };
-    });
-}
-
-// Reload images if they fail to load
-function setupImageErrorHandling() {
-    document.querySelectorAll('.sunday-school-page img').forEach(img => {
-        const originalSrc = img.src;
+function initializeImageLoading() {
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
         
-        img.onerror = function() {
-            console.warn('Image failed to load:', this.src);
-            // Retry with cache busting
-            if (!this.src.includes('?')) {
-                this.src = originalSrc + '?t=' + new Date().getTime();
-            } else if (!this.src.includes('t=')) {
-                this.src = originalSrc + '&t=' + new Date().getTime();
-            }
-        };
-        
-        // Force reload if image is broken
-        if (img.complete && img.naturalHeight === 0) {
-            console.log('Reloading broken image:', img.src);
-            img.src = img.src.split('?')[0] + '?t=' + new Date().getTime();
-        }
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
     });
 }
-
-// Age group tabs functionality
-function setupAgeTabs() {
-    const tabs = document.querySelectorAll('.sunday-school-page .age-tab');
-    const contents = document.querySelectorAll('.sunday-school-page .age-content');
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-            const targetAge = this.getAttribute('data-age');
-            
-            // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding content
-            this.classList.add('active');
-            document.getElementById(`${targetAge}-content`).classList.add('active');
-        });
-    });
-}
-
-// Form submission handling
-function setupRegistrationForm() {
-    const form = document.getElementById('sundaySchoolRegistrationForm');
-    const messageDiv = document.getElementById('registration-message');
-    
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const submitButton = this.querySelector('button[type="submit"]');
-            
-            // Disable submit button
-            submitButton.disabled = true;
-            submitButton.textContent = 'Registering...';
-            
-            // Simulate form submission (replace with actual AJAX call)
-            setTimeout(() => {
-                // Show success message
-                showMessage('Registration submitted successfully! We will contact you soon.', 'success');
-                
-                // Reset form
-                form.reset();
-                
-                // Re-enable submit button
-                submitButton.disabled = false;
-                submitButton.textContent = 'Register Now';
-            }, 2000);
-        });
-    }
-    
-    function showMessage(text, type) {
-        if (messageDiv) {
-            messageDiv.textContent = text;
-            messageDiv.className = type === 'success' ? 'message-success' : 'message-error';
-            messageDiv.style.display = 'block';
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
-        }
-    }
-}
-
-// Smooth scrolling for anchor links
-function setupSmoothScrolling() {
-    document.querySelectorAll('.sunday-school-page a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Initializing Sunday School page...');
-    
-    // Preload images first
-    preloadSundaySchoolImages();
-    
-    // Setup image error handling
-    setupImageErrorHandling();
-    
-    // Initialize components
-    setupAgeTabs();
-    setupRegistrationForm();
-    setupSmoothScrolling();
-    
-    // Force reload of hero background if needed
-    const hero = document.querySelector('.sunday-school-page .sunday-hero');
-    if (hero) {
-        const currentBg = hero.style.backgroundImage;
-        if (currentBg) {
-            hero.style.backgroundImage = currentBg.replace(/\?v=([^&]*)/, '?v=1.2');
-        }
-    }
-    
-    console.log('Sunday School page initialized successfully');
-});
-
-// Additional image loading fallback
-window.addEventListener('load', function() {
-    console.log('Window loaded, final image check...');
-    
-    // Check for any images that might still be broken
-    document.querySelectorAll('.sunday-school-page img').forEach(img => {
-        if (img.complete && img.naturalHeight === 0) {
-            console.log('Final attempt to load broken image:', img.src);
-            const newSrc = img.src.split('?')[0] + '?final=' + new Date().getTime();
-            img.src = newSrc;
-        }
-    });
-});
-
-
-
 
 // UTILITY FUNCTIONS =========================================================
 function debounce(func, wait) {
@@ -551,4 +487,3 @@ function debounce(func, wait) {
 // Export functions for global access if needed
 window.toggleEventDetails = toggleEventDetails;
 window.debounce = debounce;
->>>>>>> Stashed changes

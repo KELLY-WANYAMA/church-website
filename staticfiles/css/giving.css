@@ -1,0 +1,97 @@
+/* GIVING Form */
+/* Giving Page Styles */
+.giving-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+}
+
+.giving-section h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+}
+
+.giving-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.giving-method {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.giving-method:hover {
+    transform: translateY(-5px);
+}
+
+.method-icon {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.method-icon i {
+    width: 60px;
+    height: 60px;
+    background: #f0f7ff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.method-details {
+    margin-top: 20px;
+}
+
+.method-details p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.method-details strong {
+    color: #2c3e50;
+}
+
+.note {
+    font-style: italic;
+    color: #666;
+}
+
+.bible-verse {
+    max-width: 800px;
+    margin: 50px auto 0;
+    padding: 20px;
+    background: #2c3e50;
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.bible-verse p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+.verse {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .giving-options {
+        grid-template-columns: 1fr;
+    }
+}
+/* Font Awesome Icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+/* End of Giving Page Styles */
+
+/* END OF GIVING PAGE */
