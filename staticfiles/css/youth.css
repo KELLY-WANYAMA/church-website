@@ -1,19 +1,26 @@
-/* START OF YOUTH PAGE */
+/* ===== YOUTH MINISTRY STYLES ===== */
 :root {
-    --primary: #e74c3c;
-    --secondary: #2c3e50;
-    --accent: #3498db;
-    --light: #ecf0f1;
-    --dark: #2c3e50;
-    --text-dark: #333;
-    --text-light: #666;
+    --primary-dark: #2c3e50;
+    --primary-light: #34495e;
+    --accent-red: #e74c3c;
+    --accent-orange: #f39c12;
+    --accent-blue: #3498db;
+    --accent-green: #27ae60;
+    --text-light: #ecf0f1;
+    --text-dark: #2c3e50;
+    --text-gray: #5a6c7d;
+    --bg-light: #f8f9fa;
+    --bg-lighter: #ffffff;
+    --shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
 }
 
-/* Hero Section */
+/* Hero Section - FIXED BACKGROUND */
 .youth-hero {
     position: relative;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('/static/images/youth-banner.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('{% static "image/hero.jpg" %}');
     height: 70vh;
     min-height: 500px;
     display: flex;
@@ -22,6 +29,7 @@
     text-align: center;
     color: white;
     padding: 0 20px;
+    margin-top: 70px;
 }
 
 .hero-overlay {
@@ -30,7 +38,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .hero-content {
@@ -40,15 +48,17 @@
 }
 
 .youth-hero h1 {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .tagline {
     font-size: 1.4rem;
     margin-bottom: 40px;
     line-height: 1.6;
+    opacity: 0.95;
 }
 
 .hero-buttons {
@@ -56,24 +66,29 @@
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
 .cta-button {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 25px;
-    border-radius: 5px;
+    padding: 15px 30px;
+    border-radius: 50px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    color: var(--accent-white);
+    transition: var(--transition);
+    background-color: var(--accent-red);
     border: none;
     cursor: pointer;
+    font-size: 1rem;
 }
 
 .primary-btn {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--accent-red), #c0392b);
     color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
 }
 
 .secondary-btn {
@@ -83,767 +98,20 @@
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
+.primary-btn:hover {
+    background: linear-gradient(135deg, #c0392b, var(--accent-red));
+}
 
-/* About Section */
-.about-youth {
-    padding: 80px 0;
+.secondary-btn:hover {
     background: white;
+    color: var(--primary-dark);
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-    margin-top: 40px;
-}
-
-.about-text ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.about-text li {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    font-size: 1.1rem;
-}
-
-.about-text i {
-    margin-right: 15px;
-    color: var(--primary);
-    font-size: 1.2rem;
-    width: 25px;
-}
-
-.about-image img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-
-/* Programs Section */
-.programs {
-    padding: 80px 0;
-    background: var(--light);
-}
-
-.programs h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary);
-}
-
-.program-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.program-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-}
-
-.program-card:hover {
-    transform: translateY(-5px);
-}
-
-.program-icon {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-}
-
-.program-card h3 {
-    color: var(--secondary);
-    margin-bottom: 15px;
-}
-
-/* Events Section */
-.youth-events {
-    padding: 80px 0;
-    background: white;
-    position: relative;
-}
-
-/* Additional styles for dynamic content */
-.no-programs, .no-events, .no-leaders, .no-gallery {
-    text-align: center;
-    padding: 2rem;
-    background: #f9f9f9;
-    border-radius: 8px;
-    grid-column: 1 / -1;
-}
-
-.success-message {
-    color: green;
-    margin-top: 10px;
-    padding: 10px;
-    background: #e8f5e8;
-    border-radius: 4px;
-}
-
-.error-message {
-    color: red;
-    margin-top: 10px;
-    padding: 10px;
-    background: #ffe8e8;
-    border-radius: 4px;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-}
-
-.gallery-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 10px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover .gallery-caption {
-    transform: translateY(0);
-}
-
-.event-registration {
-    margin-top: 15px;
-}
-
-.registration-btn {
-    display: inline-block;
-    background: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.registration-btn:hover {
-    background: #45a049;
-}
-
-.youth-events h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary);
-    font-size: 2.5rem;
-}
-
-/* Event Container - 3 Column Grid */
-.event-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Individual Event Card */
-.event-card {
-    background: white;
-    border-radius: 15px;
-    overflow: visible; /* Changed from hidden to visible for overlapping */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: all 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    position: relative;
-    z-index: 1;
-}
-
-.event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    z-index: 2;
-}
-
-.event-card.expanded {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-    z-index: 100; /* Very high z-index to overlap everything */
-    position: relative;
-}
-
-/* Event Date */
-.event-date {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-}
-
-.month {
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.day {
-    font-size: 2.2rem;
-    font-weight: bold;
-    line-height: 1;
-    margin-top: 5px;
-}
-
-/* Event Details */
-.event-details {
-    padding: 25px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2;
-}
-
-.event-details h3 {
-    color: #2c3e50;
-    margin: 0 0 15px 0;
-    font-size: 1.3rem;
-    line-height: 1.4;
-    min-height: 60px;
-}
-
-.event-details p {
-    margin: 8px 0;
-    display: flex;
-    align-items: center;
-    color: #555;
-    font-size: 0.95rem;
-}
-
-.event-details i {
-    margin-right: 10px;
-    color: #e74c3c;
-    width: 18px;
-    text-align: center;
-}
-
-/* Event Button */
-.event-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    margin-top: 20px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    align-self: flex-start;
-    margin-top: auto;
-    position: relative;
-    z-index: 3;
-}
-
-.event-button:hover {
-    background: #34495e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.event-button .fa-chevron-down {
-    transition: transform 0.3s ease;
-    font-size: 0.8rem;
-}
-
-.event-card.expanded .event-button .fa-chevron-down {
-    transform: rotate(180deg);
-}
-
-.event-card.expanded .event-button {
-    background: #e74c3c;
-}
-
-/* Expanded Details Section - OVERLAY STYLE */
-.event-expanded-details {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: auto;
-    max-height: 0;
-    overflow: hidden;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    transform: scale(0.95);
-    z-index: 101;
-    pointer-events: none;
-}
-
-.event-card.expanded .event-expanded-details {
-    max-height: 800px;
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-    top: -20px; /* Slightly above the card */
-    left: -20px;
-    right: -20px;
-    z-index: 1000;
-}
-
-.event-description {
-    padding: 35px 30px 30px;
-    border-top: 3px solid #e74c3c;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease 0.2s;
-}
-
-.event-card.expanded .event-description {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.event-description h4 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-}
-
-.event-description p {
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 20px;
-    font-size: 1rem;
-}
-
-.event-extra-info {
-    background: rgba(231, 76, 60, 0.08);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 25px;
-    border-left: 4px solid #e74c3c;
-}
-
-.event-extra-info p {
-    margin: 10px 0;
-    color: #2c3e50;
-    font-size: 0.95rem;
-}
-
-.event-extra-info strong {
-    color: #e74c3c;
-}
-
-/* Close button for expanded view */
-.event-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 102;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.event-card.expanded .event-close-btn {
-    opacity: 1;
-}
-
-.event-close-btn:hover {
-    background: #c0392b;
-    transform: rotate(90deg);
-}
-
-/* Overlay background when card is expanded */
-.event-card.expanded::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    z-index: 99;
-    opacity: 0;
-    animation: fadeIn 0.3s ease forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-/* Full Calendar Link */
-.full-calendar-link {
-    display: block;
-    text-align: center;
-    color: #e74c3c;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-top: 40px;
-    transition: color 0.3s ease;
-    position: relative;
-    z-index: 10;
-}
-
-.full-calendar-link:hover {
-    color: #c0392b;
-    text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .event-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-    
-    .event-card.expanded .event-expanded-details {
-        left: -15px;
-        right: -15px;
-    }
-}
-
-@media (max-width: 768px) {
-    .event-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 15px;
-    }
-    
-    .event-card {
-        margin: 0;
-    }
-    
-    .event-details {
-        padding: 20px;
-    }
-    
-    .event-card.expanded .event-expanded-details {
-        left: -10px;
-        right: -10px;
-        top: -15px;
-    }
-    
-    .event-description {
-        padding: 25px 20px 20px;
-    }
-    
-    .event-details h3 {
-        min-height: auto;
-        font-size: 1.2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .youth-events h2 {
-        font-size: 2rem;
-        margin-bottom: 30px;
-    }
-    
-    .event-date {
-        padding: 15px;
-        min-height: 70px;
-    }
-    
-    .month {
-        font-size: 1rem;
-    }
-    
-    .day {
-        font-size: 1.8rem;
-    }
-    
-    .event-details {
-        padding: 15px;
-    }
-    
-    .event-button {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .event-description {
-        padding: 20px 15px 15px;
-    }
-    
-    .event-extra-info {
-        padding: 15px;
-    }
-    
-    .event-card.expanded .event-expanded-details {
-        left: -5px;
-        right: -5px;
-        top: -10px;
-    }
-}
-
-/* Ensure equal height for all cards */
-/*.event-container {
-    align-items: stretch;
-}*/
-
-.event-card {
-    height: auto;
-    min-height: 350px;
-}
-
-/* Hover effects */
-.event-card:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #e74c3c, #3498db);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.event-card:hover:before {
-    opacity: 1;
-}
-
-/* Prevent body scrolling when modal is open */
-body.no-scroll {
-    overflow: hidden;
-}
-
-/* Leaders Section */
-.youth-leaders {
-    padding: 80px 0;
-    background: var(--light);
-}
-
-.youth-leaders h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary);
-}
-
-.leaders-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.leader-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.leader-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid var(--primary);
-}
-
-.leader-card h3 {
-    color: var(--secondary);
-    margin-bottom: 10px;
-}
-
-.leader-card p {
-    color: var(--text-light);
-    margin-bottom: 15px;
-}
-
-.bio {
-    font-style: italic;
-    color: var(--text-dark);
-}
-
-
-/* Gallery Section */
-.youth-gallery {
-    padding: 80px 0;
-    background: white;
-}
-
-.youth-gallery h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.gallery-grid img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.gallery-grid img:hover {
-    transform: scale(1.05);
-}
-
-
-/* Parent Resources */
-.parent-resources {
-    padding: 80px 0;
-    background: var(--light);
-}
-
-.parent-resources h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    color: var(--secondary);
-}
-
-.resources {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.resource-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.resource-card h3 {
-    color: var(--secondary);
-    margin-bottom: 15px;
-}
-
-.resource-btn {
-    display: inline-block;
-    padding: 10px 25px;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background 0.3s;
-}
-
-.resource-btn:hover {
-    background: var(--secondary);
-}
-
-.parent-signup {
-    margin-top: 20px;
-}
-
-.parent-signup input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.parent-signup button {
-    padding: 12px 25px;
-    background: var(--secondary);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-/* CTA Section */
-.youth-cta {
-    padding: 80px 0;
-    background: var(--secondary);
-    color: white;
-    text-align: center;
-}
-
-.youth-cta h2 {
-    margin-bottom: 20px;
-}
-
-.youth-cta p {
-    margin-bottom: 40px;
-    font-size: 1.2rem;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Youth Social Media Links */
+/* ===== SOCIAL MEDIA BUTTONS - ADDED STYLES ===== */
 .youth-social-links {
     margin-top: 40px;
     text-align: center;
@@ -854,7 +122,7 @@ body.no-scroll {
     font-size: 1.1rem;
     margin-bottom: 20px;
     font-weight: 500;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .social-buttons {
@@ -872,19 +140,19 @@ body.no-scroll {
     border-radius: 25px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     min-width: 180px;
     justify-content: center;
 }
 
 .social-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* TikTok Button */
+/* TikTok Button - Black and Teal */
 .tiktok-btn {
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 242, 234, 0.3));
     color: white;
@@ -897,7 +165,7 @@ body.no-scroll {
     box-shadow: 0 0 15px rgba(0, 242, 234, 0.4);
 }
 
-/* YouTube Button */
+/* YouTube Button - Black and Red */
 .youtube-btn {
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(255, 0, 0, 0.3));
     color: white;
@@ -957,50 +225,780 @@ body.no-scroll {
     animation: pulse-youtube 3s infinite 1.5s;
 }
 
-/* Responsive Design */
+/* Scroll Down Animation */
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: white;
+    font-size: 1.5rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* About Section */
+.about-youth {
+    padding: 80px 0;
+    background: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-youth h2 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 50px;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-gray);
+    margin-bottom: 25px;
+}
+
+.about-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-text li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.about-text i {
+    margin-right: 15px;
+    color: var(--accent-red);
+    font-size: 1.2rem;
+    width: 25px;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* Programs Section */
+.programs {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.programs h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.program-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.program-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.program-icon {
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    margin-bottom: 20px;
+}
+
+.program-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.program-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* ===== YOUTH EVENTS SECTION - INDEPENDENT TOGGLE ===== */
+.youth-events {
+    padding: 80px 0;
+    background: white;
+    position: relative;
+}
+
+.youth-events h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.event-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+}
+
+.event-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: visible; /* Changed from hidden to visible */
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Expanded state - card elevates and expands */
+.event-card.expanded {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    z-index: 100; /* Higher z-index to appear above other cards */
+    position: relative;
+}
+
+.event-date {
+    background: linear-gradient(135deg, var(--accent-red), #c0392b);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.month {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.day {
+    font-size: 2.2rem;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+.event-details {
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.event-details h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.event-details p {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+.event-details i {
+    margin-right: 10px;
+    color: var(--accent-red);
+    width: 16px;
+}
+
+.event-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+    z-index: 3;
+}
+
+.event-button:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.event-button .fa-chevron-down {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.event-card.expanded .event-button .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.event-card.expanded .event-button {
+    background: var(--accent-red);
+}
+
+/* Expanded Details - Independent overlay style */
+.event-expanded-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: scale(0.95);
+    z-index: 101; /* Above the card but below overlay */
+    pointer-events: none;
+}
+
+.event-card.expanded .event-expanded-details {
+    max-height: 800px; /* Adjust based on content */
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    top: -20px; /* Slightly above the card */
+    left: -20px;
+    right: -20px;
+    z-index: 1000; /* Very high to ensure it's on top */
+}
+
+.event-description {
+    padding: 35px 30px 30px;
+    border-top: 3px solid var(--accent-red);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.2s;
+}
+
+.event-card.expanded .event-description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.event-description h4 {
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--accent-blue);
+    padding-bottom: 10px;
+}
+
+.event-description p {
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.event-extra-info {
+    background: rgba(231, 76, 60, 0.08);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    border-left: 4px solid var(--accent-red);
+}
+
+.event-extra-info p {
+    margin: 10px 0;
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+}
+
+.event-extra-info strong {
+    color: var(--accent-red);
+}
+
+.event-registration {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.registration-btn {
+    display: inline-block;
+    background: var(--accent-green);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.registration-btn:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+/* Close button for expanded view */
+.event-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 102;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.event-card.expanded .event-close-btn {
+    opacity: 1;
+}
+
+.event-close-btn:hover {
+    background: #c0392b;
+    transform: rotate(90deg);
+}
+
+/* Overlay background when card is expanded */
+.event-card.expanded::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 99;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Full Calendar Link */
+.full-calendar-link {
+    display: block;
+    text-align: center;
+    color: var(--accent-red);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 40px;
+    transition: var(--transition);
+    position: relative;
+    z-index: 10; /* Above overlay */
+}
+
+.full-calendar-link:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
+
+/* No Events State */
+.no-events {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    color: var(--text-gray);
+    border: 2px dashed var(--accent-red);
+}
+
+.no-events::before {
+    content: "📅";
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    opacity: 0.6;
+}
+
+/* ===== RESPONSIVE DESIGN FOR EVENTS ===== */
+@media (max-width: 1024px) {
+    .event-container {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+    
+    .event-card.expanded .event-expanded-details {
+        left: -15px;
+        right: -15px;
+    }
+}
+
 @media (max-width: 768px) {
-    .social-buttons {
-        flex-direction: column;
-        align-items: center;
+    .event-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 15px;
     }
     
-    .social-btn {
-        min-width: 200px;
-        padding: 15px 25px;
+    .event-card {
+        margin: 0;
     }
     
-    .social-title {
-        font-size: 1rem;
+    .event-details {
+        padding: 20px;
+    }
+    
+    .event-card.expanded .event-expanded-details {
+        left: -10px;
+        right: -10px;
+        top: -15px;
+    }
+    
+    .event-description {
+        padding: 25px 20px 20px;
+    }
+    
+    .event-details h3 {
+        font-size: 1.2rem;
     }
 }
 
 @media (max-width: 480px) {
-    .social-btn {
-        min-width: 160px;
-        padding: 12px 20px;
+    .youth-events h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
     }
     
-    .social-btn span {
-        font-size: 0.8rem;
+    .event-date {
+        padding: 15px;
     }
     
-    .social-btn i {
-        font-size: 1.1rem;
+    .month {
+        font-size: 1rem;
+    }
+    
+    .day {
+        font-size: 1.8rem;
+    }
+    
+    .event-details {
+        padding: 15px;
+    }
+    
+    .event-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .event-description {
+        padding: 20px 15px 15px;
+    }
+    
+    .event-extra-info {
+        padding: 15px;
+    }
+    
+    .event-card.expanded .event-expanded-details {
+        left: -5px;
+        right: -5px;
+        top: -10px;
     }
 }
 
-/* Hover Effects Enhancement */
-.social-btn:hover i {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
+/* Ensure equal height for all cards */
+.event-container {
+    align-items: stretch;
 }
 
-/* Mobile Touch Feedback */
-@media (hover: none) {
-    .social-btn:active {
-        transform: scale(0.95);
-        transition: transform 0.1s ease;
-    }
+.event-card {
+    height: auto;
+    min-height: 350px;
+}
+
+/* Hover effects */
+.event-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-blue));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.event-card:hover:before {
+    opacity: 1;
+}
+
+/* Prevent body scrolling when modal is open */
+body.no-scroll {
+    overflow: hidden;
+}
+
+
+
+
+
+
+/* Leaders Section */
+.youth-leaders {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.youth-leaders h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.leaders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.leader-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.leader-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.leader-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--accent-red);
+}
+
+.leader-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.leader-card p {
+    color: var(--text-gray);
+    margin-bottom: 15px;
+}
+
+.bio {
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Gallery Section */
+.youth-gallery {
+    padding: 80px 0;
+    background: white;
+}
+
+.youth-gallery h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Resources Section */
+.parent-resources {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.parent-resources h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.resources {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resource-card {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.resource-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.resource-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.resource-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--accent-red);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.resource-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* CTA Section */
+.youth-cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: white;
+    text-align: center;
+}
+
+.youth-cta h2 {
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+.youth-cta p {
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 /* Values Section */
@@ -1012,7 +1010,9 @@ body.no-scroll {
 .values-section h2 {
     text-align: center;
     margin-bottom: 50px;
-    color: var(--secondary);
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
 }
 
 .values-grid {
@@ -1024,52 +1024,64 @@ body.no-scroll {
 }
 
 .value-card {
-    background: var(--light);
+    background: var(--bg-light);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: var(--transition);
 }
 
 .value-card:hover {
     transform: translateY(-5px);
+    box-shadow: var(--shadow);
 }
 
 .value-icon {
     font-size: 2.5rem;
-    color: var(--primary);
+    color: var(--accent-red);
     margin-bottom: 20px;
 }
 
+.value-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.value-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+}
 
 /* Testimonials */
 .testimonials {
     padding: 80px 0;
-    background: var(--light);
+    background: var(--bg-light);
 }
 
 .testimonials h2 {
     text-align: center;
     margin-bottom: 50px;
-    color: var(--secondary);
+    color: var(--primary-dark);
+    font-size: 2.2rem;
+    font-weight: 700;
 }
 
 .testimonial-slider {
-    max-width: 1200px; /* Increased to accommodate two columns */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
     margin: 0 auto;
-    display: flex;
-    gap: 30px; /* Space between columns */
     padding: 0 20px;
 }
 
 .testimonial {
     background: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
     text-align: center;
-    flex: 1; /* Each testimonial takes equal width */
-    /* Remove the margin since gap handles spacing */
 }
 
 .testimonial-img {
@@ -1078,12 +1090,12 @@ body.no-scroll {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
-    border: 3px solid var(--primary);
+    border: 3px solid var(--accent-red);
 }
 
 blockquote {
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     margin-bottom: 20px;
     color: var(--text-dark);
@@ -1091,20 +1103,32 @@ blockquote {
 
 .testimonial-author {
     font-weight: 600;
-    color: var(--secondary);
+    color: var(--primary-dark);
 }
 
-/* Responsive: Stack on mobile */
+/* Empty States */
+.no-programs,
+.no-events,
+.no-leaders,
+.no-gallery {
+    text-align: center;
+    padding: 3rem;
+    background: var(--bg-light);
+    border-radius: var(--border-radius);
+    color: var(--text-gray);
+    grid-column: 1 / -1;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-    .testimonial-slider {
-        flex-direction: column; /* Stack vertically on mobile */
+    .youth-hero {
+        height: 60vh;
+        min-height: 400px;
+        margin-top: 60px;
     }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+    
     .youth-hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
     
     .tagline {
@@ -1121,25 +1145,18 @@ blockquote {
         gap: 30px;
     }
     
-    .program-cards,
-    .leaders-grid,
-    .values-grid {
+    .event-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .testimonial-slider {
         grid-template-columns: 1fr;
     }
     
-    .event-card {
+    .social-buttons {
         flex-direction: column;
-    }
-    
-    .event-date {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        padding: 15px;
-    }
-    
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        align-items: center;
     }
     
     .cta-buttons {
@@ -1148,29 +1165,35 @@ blockquote {
     }
 }
 
-/* Scroll Down Animation */
-.scroll-down {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: bounce 2s infinite;
+@media (max-width: 480px) {
+    .youth-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .program-cards,
+    .leaders-grid,
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .social-btn {
+        min-width: 160px;
+        padding: 12px 20px;
+    }
+    
+    .social-btn span {
+        font-size: 0.8rem;
+    }
+    
+    .social-btn i {
+        font-size: 1.1rem;
+    }
 }
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* Font Awesome Icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-/* End of youth_ministry */
-
-/*END OF YOUTH MINISTRIES*/

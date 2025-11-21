@@ -1,35 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('show');
-    });
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        link.addEventListener('click', function(e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                const menu = this.nextElementSibling;
-                menu.classList.toggle('show');
-            }
-        });
-    });
-});
-
-
-
 function filterEvents(eventType) {
     let url = new URL(window.location.href);
     
-    // Always start with the base events URL
-    const basePath = '/events/';
-    url.pathname = basePath;
+    // Get the current path correctly
+    const currentPath = window.location.pathname;
     
     if (eventType === 'all') {
         url.searchParams.delete('type');
@@ -56,8 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Update active class
-        if (btnFilter === currentFilter) {
+        // Update active class - fix comparison logic
+        if ((currentFilter === 'all' && btnFilter === 'all') || 
+            (currentFilter === btnFilter)) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');

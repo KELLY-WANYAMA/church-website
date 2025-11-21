@@ -10,6 +10,9 @@ function initializeAllFunctions() {
     initializeMobileNavigation();
     initializeSmoothScrolling();
     initializeEventCards();
+    initializeScrollAnimations();
+    initializeFormEnhancements();
+    initializeImageLoading();
 }
 
 // FORM HANDLERS =============================================================
@@ -17,12 +20,10 @@ function initializeFormHandlers() {
     // Sunday School Registration Form
     const sundaySchoolForm = document.getElementById('sundaySchoolRegistrationForm');
     if (sundaySchoolForm) {
-        // Use Django template tag for URL - FIXED
         setupFormHandler(sundaySchoolForm, '/ministries/submit_sunday_school_registration/', 'registration-message');
     }
 
     // Add other form handlers here as needed
-    // Example: Youth registration, general contact forms, etc.
 }
 
 function setupFormHandler(form, submitUrl, messageDivId) {
@@ -48,8 +49,8 @@ function setupFormHandler(form, submitUrl, messageDivId) {
                 formObject[key] = value;
             }
 
-            console.log('Submitting to:', submitUrl); // Debug log
-            console.log('Form data:', formObject); // Debug log
+            console.log('Submitting to:', submitUrl);
+            console.log('Form data:', formObject);
 
             const response = await fetch(submitUrl, {
                 method: 'POST',
@@ -60,14 +61,14 @@ function setupFormHandler(form, submitUrl, messageDivId) {
                 body: JSON.stringify(formObject)
             });
 
-            console.log('Response status:', response.status); // Debug log
+            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log('Response data:', data); // Debug log
+            console.log('Response data:', data);
 
             if (data.success || data.status === 'success') {
                 showMessage(data.message || 'Thank you! We will contact you soon.', 'success', messageDiv);
@@ -96,18 +97,15 @@ function getCSRFToken() {
     // Try to get CSRF token from template tag or form input
     const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
     if (csrfInput) {
-        console.log('CSRF token found in input');
         return csrfInput.value;
     }
     
     // Fallback to cookie method
     const csrfCookie = getCookie('csrftoken');
     if (csrfCookie) {
-        console.log('CSRF token found in cookie');
         return csrfCookie;
     }
     
-    console.log('No CSRF token found');
     return '';
 }
 
@@ -132,12 +130,14 @@ function showMessage(text, type, messageDiv) {
     messageDiv.textContent = text;
     messageDiv.style.display = 'block';
     
-    // Apply styles based on message type
+    // Apply modern styles based on message type
     if (type === 'success') {
+        messageDiv.className = 'message-success';
         messageDiv.style.backgroundColor = '#d4edda';
         messageDiv.style.color = '#155724';
         messageDiv.style.border = '1px solid #c3e6cb';
     } else {
+        messageDiv.className = 'message-error';
         messageDiv.style.backgroundColor = '#f8d7da';
         messageDiv.style.color = '#721c24';
         messageDiv.style.border = '1px solid #f5c6cb';
@@ -153,22 +153,39 @@ function showMessage(text, type, messageDiv) {
 
 // TAB FUNCTIONALITY =========================================================
 function initializeTabFunctionality() {
-    const tabs = document.querySelectorAll('.age-tab');
-    const contents = document.querySelectorAll('.age-content');
+    const ageTabs = document.querySelectorAll('.age-tab');
+    const ageContents = document.querySelectorAll('.age-content');
 
-    tabs.forEach(tab => {
+    ageTabs.forEach(tab => {
         tab.addEventListener('click', function() {
             const ageGroup = this.getAttribute('data-age');
             
             // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
+            ageTabs.forEach(t => t.classList.remove('active'));
+            ageContents.forEach(c => c.classList.remove('active'));
             
             // Add active class to clicked tab and corresponding content
             this.classList.add('active');
             const targetContent = document.getElementById(`${ageGroup}-content`);
             if (targetContent) targetContent.classList.add('active');
         });
+    });
+
+    // Keyboard navigation for age tabs
+    document.addEventListener('keydown', function(e) {
+        if (e.target.classList.contains('age-tab')) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextTab = e.target.nextElementSibling || ageTabs[0];
+                nextTab.click();
+                nextTab.focus();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevTab = e.target.previousElementSibling || ageTabs[ageTabs.length - 1];
+                prevTab.click();
+                prevTab.focus();
+            }
+        }
     });
 }
 
@@ -357,3 +374,116 @@ function initializeSmoothScrolling() {
         });
     });
 }
+
+// SCROLL ANIMATIONS =========================================================
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for scroll animations
+    document.querySelectorAll('.activity-card, .teacher-card, .schedule-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// FORM ENHANCEMENTS =========================================================
+function initializeFormEnhancements() {
+    const formInputs = document.querySelectorAll('.interest-form input, .interest-form select, .interest-form textarea');
+    
+    formInputs.forEach(input => {
+        // Add focus/blur effects
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+
+        // Add character counter for textareas
+        if (input.tagName === 'TEXTAREA') {
+            const counter = document.createElement('div');
+            counter.className = 'char-counter';
+            counter.style.fontSize = '0.8rem';
+            counter.style.color = 'var(--gray)';
+            counter.style.textAlign = 'right';
+            counter.style.marginTop = '0.5rem';
+            input.parentNode.appendChild(counter);
+
+            input.addEventListener('input', function() {
+                const maxLength = this.getAttribute('maxlength') || 500;
+                const currentLength = this.value.length;
+                counter.textContent = `${currentLength}/${maxLength}`;
+                
+                if (currentLength > maxLength * 0.8) {
+                    counter.style.color = 'var(--accent)';
+                } else {
+                    counter.style.color = 'var(--gray)';
+                }
+            });
+        }
+    });
+
+    // Age validation and group suggestion
+    const ageInput = document.querySelector('input[name="child_age"]');
+    const ageGroupSelect = document.querySelector('select[name="age_group"]');
+
+    if (ageInput && ageGroupSelect) {
+        ageInput.addEventListener('input', function() {
+            const age = parseInt(this.value);
+            if (age >= 3 && age <= 12) {
+                let suggestedGroup = '';
+                if (age >= 3 && age <= 5) suggestedGroup = 'nursery';
+                else if (age >= 6 && age <= 9) suggestedGroup = 'primary';
+                else if (age >= 10 && age <= 12) suggestedGroup = 'juniors';
+                
+                ageGroupSelect.value = suggestedGroup;
+            }
+        });
+    }
+}
+
+// IMAGE LOADING =============================================================
+function initializeImageLoading() {
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.3s ease';
+    });
+}
+
+// UTILITY FUNCTIONS =========================================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Export functions for global access if needed
+window.toggleEventDetails = toggleEventDetails;
+window.debounce = debounce;

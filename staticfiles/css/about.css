@@ -102,7 +102,7 @@
     font-weight: bold;
 }
 
-/* ===== LEADERSHIP SECTION STYLES ===== */
+/* ===== LEADERSHIP SECTION STYLES - UPDATED ===== */
 .leadership-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -123,47 +123,38 @@
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
+/* UPDATED: Leader image container for better fit */
 .leader-image {
-    height: 250px;
+    height: 280px;
     overflow: hidden;
-    position: relative; /* Add this */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f8f9fa; /* Fallback background */
 }
 
-.leader-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    z-index: 1;
-}
-
+/* UPDATED: Better image handling */
 .leader-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Changed from 'cover' to 'contain' to show full image */
     transition: transform 0.3s ease;
-    position: relative; /* Add this */
-    z-index: 2; /* Add this - makes image appear above gradient */
-
+    background: white; /* Background for transparent images */
 }
 
-/* Only show gradient if no image */
-.leader-image:has(img[src*="leader-placeholder"])::before {
-    display: block;
+/* UPDATED: Placeholder styling */
+.leader-image:has(img[src*="leader-placeholder"]) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.leader-image:has(img:not([src*="leader-placeholder"]))::before {
-    display: none; /* Hide gradient when real image exists */
+.leader-image:has(img[src*="leader-placeholder"]) img {
+    object-fit: cover; /* Use cover for placeholder to fill space */
+    opacity: 0.8; /* Slight transparency for placeholder */
 }
 
 .leader-card:hover .leader-image img {
-    transform: scale(1.05);
+    transform: scale(1.03); /* Slightly reduced scale for better fit */
 }
 
 .leader-info {
@@ -260,7 +251,7 @@
     }
     
     .leader-image {
-        height: 200px;
+        height: 250px; /* Adjusted for mobile */
     }
     
     .leader-info {
@@ -282,6 +273,10 @@
         border-radius: 8px;
     }
     
+    .leader-image {
+        height: 220px; /* Adjusted for small mobile */
+    }
+    
     .leader-info {
         padding: 1rem;
     }
@@ -293,4 +288,11 @@
     .bio {
         font-size: 0.85rem;
     }
-}/* End of About Page Styles */
+}
+
+/* Large screens */
+@media (min-width: 1200px) {
+    .leader-image {
+        height: 300px; /* Slightly taller on large screens */
+    }
+}

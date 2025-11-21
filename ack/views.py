@@ -54,22 +54,29 @@ def contacts(request):
     return render(request, 'ack/contacts.html')
 
 
-# views.py - CORRECTED events view for DateTimeField
 def events(request):
     # Get filter parameter from request
     event_type = request.GET.get('type', 'all')
+    
+    # Debug: Print the filter being received
+    print(f"DEBUG: Event type filter requested: '{event_type}'")
     
     # Get ALL events ordered by date
     all_events = Event.objects.all().order_by('-date')
     
     # Filter events by type if specified
     if event_type != 'all':
-        all_events = all_events.filter(event_type__iexact=event_type)
+        # Use exact match for event_type (case-sensitive)
+        all_events = all_events.filter(event_type=event_type)
+        print(f"DEBUG: After filtering by '{event_type}', found {all_events.count()} events")
     
     # Separate upcoming and past events - handle DateTimeField properly
     now = timezone.now()
     upcoming_events = [event for event in all_events if event.date >= now]
     past_events = [event for event in all_events if event.date < now]
+    
+    # Debug: Print final counts
+    print(f"DEBUG: Final counts - All: {len(all_events)}, Upcoming: {len(upcoming_events)}, Past: {len(past_events)}")
     
     context = {
         'all_events': all_events,
@@ -78,7 +85,6 @@ def events(request):
         'current_filter': event_type,
     }
     return render(request, 'ack/events.html', context)
-
 
 def gallery(request):
     # Get all gallery items ordered by date
