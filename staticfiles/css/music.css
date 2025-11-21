@@ -1,0 +1,804 @@
+/*START OF CHOIR AND PRAISE & WORSHIP TEAM*/
+
+/* Using existing CSS variables from base.css */
+:root {
+    /* These variables are already defined in base.css, so we use them directly */
+    --border-radius: 12px; /* Override to match base.css */
+    --transition: all 0.3s ease; /* Override to match base.css */
+}
+
+/* Hero Section */
+.worship-hero {
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    height: 70vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    padding: 0 20px;
+    overflow: hidden;
+    margin-top: 0; /* Remove any default margins */
+}
+
+.worship-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+}
+
+.worship-hero .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.worship-hero .hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.worship-hero .tagline {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-style: italic;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Button Styles - Aligned with base.css */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent-orange));
+    color: var(--text-light);
+    box-shadow: var(--shadow);
+}
+
+.secondary-btn {
+    background: transparent;
+    color: var(--text-light);
+    border: 2px solid rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, var(--accent-orange), var(--primary-dark));
+}
+
+.secondary-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--text-light);
+}
+
+/* Teams Section */
+.teams-section {
+    background: var(--bg-light);
+    padding: 80px 0;
+}
+
+.teams-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.teams-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.team-card {
+    background: var(--bg-lighter);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-dark), var(--accent-orange));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover::before {
+    transform: scaleX(1);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.team-icon {
+    font-size: 3rem;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.team-card:hover .team-icon {
+    transform: scale(1.1);
+    color: var(--accent-orange);
+}
+
+.team-card h3 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.team-card p {
+    color: var(--text-gray);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1.05rem;
+}
+
+.team-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.youtube-link,
+.tiktok-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.youtube-link {
+    background: #ff0000;
+}
+
+.tiktok-link {
+    background: #000000;
+}
+
+.youtube-link:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.tiktok-link:hover {
+    background: #333333;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.team-leader {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.team-leader small {
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+/* Requirements Section */
+.requirements {
+    background: var(--bg-lighter);
+    padding: 80px 0;
+}
+
+.requirements h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.req-card {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.req-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.req-icon {
+    font-size: 2.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.req-card:hover .req-icon {
+    transform: scale(1.1);
+    color: var(--accent-orange);
+}
+
+.req-card h4 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.req-card ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.req-card li {
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.6;
+    color: var(--text-gray);
+}
+
+.req-card li::before {
+    content: "✓";
+    color: var(--accent-green);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem;
+}
+
+/* Schedule Section */
+.schedule {
+    background: linear-gradient(135deg, var(--bg-light) 0%, #e8eaed 100%);
+    padding: 80px 0;
+}
+
+.schedule h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.schedule-card {
+    background: var(--bg-lighter);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.schedule-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.schedule-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.schedule-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-dark), var(--accent-orange));
+    border-radius: 2px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    transition: var(--transition);
+}
+
+.schedule-item:hover {
+    background: rgba(0,0,0,0.02);
+    margin: 0 -10px;
+    padding: 18px 10px;
+    border-radius: 6px;
+}
+
+.schedule-item:last-child {
+    border-bottom: none;
+}
+
+.schedule-time {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+}
+
+.schedule-activity {
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+/* Registration Section */
+.registration {
+    background: var(--bg-lighter);
+    padding: 80px 0;
+}
+
+.registration h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.reg-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.reg-info {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.reg-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.reg-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-orange);
+    border-radius: 2px;
+}
+
+.reg-info ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.reg-info li {
+    margin-bottom: 15px;
+    padding-left: 28px;
+    position: relative;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+}
+
+.reg-info li::before {
+    content: "✓";
+    color: var(--accent-green);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem;
+}
+
+.reg-form {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.reg-form h3 {
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.interest-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.interest-form input,
+.interest-form select,
+.interest-form textarea {
+    padding: 15px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--bg-lighter);
+}
+
+.interest-form input:focus,
+.interest-form select:focus,
+.interest-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+.interest-form textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.interest-form button {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent-orange));
+    color: var(--text-light);
+    padding: 18px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    box-shadow: var(--shadow);
+}
+
+.interest-form button:hover {
+    background: linear-gradient(135deg, var(--accent-orange), var(--primary-dark));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Bible Verse Section */
+.bible-verse {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: var(--text-light);
+    text-align: center;
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bible-verse::before {
+    content: '"';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20rem;
+    opacity: 0.1;
+    font-family: serif;
+    pointer-events: none;
+    color: var(--text-light);
+}
+
+.bible-verse blockquote {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    font-weight: 300;
+    padding: 0 20px;
+}
+
+.bible-verse cite {
+    display: block;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Form Messages */
+.alert {
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+    font-weight: 500;
+    display: none;
+    text-align: center;
+    border: 1px solid transparent;
+}
+
+.alert-success {
+    background-color: rgba(39, 174, 96, 0.1);
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+.alert-error {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
+/* No Teams State */
+.no-teams {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-gray);
+    font-size: 1.2rem;
+}
+
+/* Container consistency */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Responsive Design - Enhanced to match base.css breakpoints */
+@media (max-width: 1200px) {
+    .teams-container,
+    .reg-content {
+        gap: 30px;
+    }
+    
+    .teams-container {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .teams-container,
+    .reg-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .worship-hero .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .worship-hero .tagline {
+        font-size: 1.1rem;
+    }
+    
+    .req-grid,
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .teams-section h2,
+    .requirements h2,
+    .schedule h2,
+    .registration h2 {
+        font-size: 2rem;
+    }
+    
+    .reg-info {
+        position: static;
+    }
+    
+    .worship-hero {
+        height: 60vh;
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 575px) {
+    .worship-hero {
+        height: 70vh;
+        min-height: 500px;
+        padding: 0 15px;
+    }
+    
+    .worship-hero .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .cta-button {
+        padding: 14px 24px;
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .team-card,
+    .req-card,
+    .schedule-card {
+        padding: 30px 20px;
+    }
+    
+    .reg-form,
+    .reg-info {
+        padding: 30px 20px;
+    }
+    
+    .bible-verse blockquote {
+        font-size: 1.4rem;
+    }
+    
+    .teams-container {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+    
+    .teams-section,
+    .requirements,
+    .schedule,
+    .registration {
+        padding: 60px 0;
+    }
+}
+
+/* Loading States */
+.interest-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.interest-form button:disabled:hover {
+    transform: none !important;
+    box-shadow: var(--shadow) !important;
+}
+
+/* Focus States for Accessibility */
+.cta-button:focus,
+.interest-form input:focus,
+.interest-form select:focus,
+.interest-form textarea:focus,
+.interest-form button:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure proper container usage */
+.teams-section .container,
+.requirements .container,
+.schedule .container,
+.registration .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/*END OF CHOIR AND PRAISE & WORSHIP*/

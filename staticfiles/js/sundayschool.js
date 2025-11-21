@@ -239,94 +239,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// MOBILE NAVIGATION =========================================================
-function initializeMobileNavigation() {
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Mobile menu toggle
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('show');
-            
-            // Close dropdowns when closing mobile menu
-            if (!navLinks.classList.contains('show')) {
-                closeAllDropdowns(dropdowns);
-            }
-        });
-    }
-
-    // Dropdown functionality for mobile
-    setupMobileDropdowns(dropdowns);
-
-    // Close mobile menu when clicking outside
-    setupClickOutsideHandler(hamburger, navLinks, dropdowns);
-
-    // Close mobile menu on resize to desktop
-    setupResizeHandler(navLinks, hamburger, dropdowns);
-}
-
-function setupMobileDropdowns(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        if (link) {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const menu = this.nextElementSibling;
-                    if (menu && menu.classList.contains('dropdown-menu')) {
-                        menu.classList.toggle('show');
-                        
-                        // Close other dropdowns
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                                if (otherMenu) otherMenu.classList.remove('show');
-                            }
-                        });
-                    }
-                }
-            });
-        }
-    });
-}
-
-function setupClickOutsideHandler(hamburger, navLinks, dropdowns) {
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            const isHamburger = e.target.closest('.hamburger');
-            const isNavLink = e.target.closest('.nav-links');
-            const isDropdown = e.target.closest('.dropdown');
-            
-            if (!isHamburger && !isNavLink && !isDropdown && navLinks && navLinks.classList.contains('show')) {
-                closeMobileMenu(navLinks, hamburger, dropdowns);
-            }
-        }
-    });
-}
-
-function setupResizeHandler(navLinks, hamburger, dropdowns) {
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('show')) {
-            closeMobileMenu(navLinks, hamburger, dropdowns);
-        }
-    });
-}
-
-function closeMobileMenu(navLinks, hamburger, dropdowns) {
-    navLinks.classList.remove('show');
-    if (hamburger) hamburger.classList.remove('active');
-    closeAllDropdowns(dropdowns);
-}
-
-function closeAllDropdowns(dropdowns) {
-    dropdowns.forEach(dropdown => {
-        const menu = dropdown.querySelector('.dropdown-menu');
-        if (menu) menu.classList.remove('show');
-    });
-}
 
 // SMOOTH SCROLLING ==========================================================
 function initializeSmoothScrolling() {
@@ -357,3 +270,285 @@ function initializeSmoothScrolling() {
         });
     });
 }
+<<<<<<< Updated upstream
+=======
+
+// SCROLL ANIMATIONS =========================================================
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for scroll animations
+    document.querySelectorAll('.activity-card, .teacher-card, .schedule-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+}
+
+// FORM ENHANCEMENTS =========================================================
+function initializeFormEnhancements() {
+    const formInputs = document.querySelectorAll('.interest-form input, .interest-form select, .interest-form textarea');
+    
+    formInputs.forEach(input => {
+        // Add focus/blur effects
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+
+        // Add character counter for textareas
+        if (input.tagName === 'TEXTAREA') {
+            const counter = document.createElement('div');
+            counter.className = 'char-counter';
+            counter.style.fontSize = '0.8rem';
+            counter.style.color = 'var(--gray)';
+            counter.style.textAlign = 'right';
+            counter.style.marginTop = '0.5rem';
+            input.parentNode.appendChild(counter);
+
+            input.addEventListener('input', function() {
+                const maxLength = this.getAttribute('maxlength') || 500;
+                const currentLength = this.value.length;
+                counter.textContent = `${currentLength}/${maxLength}`;
+                
+                if (currentLength > maxLength * 0.8) {
+                    counter.style.color = 'var(--accent)';
+                } else {
+                    counter.style.color = 'var(--gray)';
+                }
+            });
+        }
+    });
+
+    // Age validation and group suggestion
+    const ageInput = document.querySelector('input[name="child_age"]');
+    const ageGroupSelect = document.querySelector('select[name="age_group"]');
+
+    if (ageInput && ageGroupSelect) {
+        ageInput.addEventListener('input', function() {
+            const age = parseInt(this.value);
+            if (age >= 3 && age <= 12) {
+                let suggestedGroup = '';
+                if (age >= 3 && age <= 5) suggestedGroup = 'nursery';
+                else if (age >= 6 && age <= 9) suggestedGroup = 'primary';
+                else if (age >= 10 && age <= 12) suggestedGroup = 'juniors';
+                
+                ageGroupSelect.value = suggestedGroup;
+            }
+        });
+    }
+}
+
+// IMAGE LOADING =============================================================
+// Sunday School JavaScript - Fixed with image loading solutions
+
+// Image preloading and cache busting
+function preloadSundaySchoolImages() {
+    console.log('Preloading Sunday School images...');
+    
+    const imageUrls = [
+        '{% static "image/hero.jpg" %}',
+        '{% static "image/KAMA.png" %}'
+    ];
+    
+    imageUrls.forEach(url => {
+        const img = new Image();
+        // Add cache busting parameter
+        img.src = url + '?v=1.2&t=' + new Date().getTime();
+        img.onload = function() {
+            console.log('Successfully loaded:', url);
+        };
+        img.onerror = function() {
+            console.warn('Failed to load:', url);
+            // Try without cache busting as fallback
+            this.src = url;
+        };
+    });
+}
+
+// Reload images if they fail to load
+function setupImageErrorHandling() {
+    document.querySelectorAll('.sunday-school-page img').forEach(img => {
+        const originalSrc = img.src;
+        
+        img.onerror = function() {
+            console.warn('Image failed to load:', this.src);
+            // Retry with cache busting
+            if (!this.src.includes('?')) {
+                this.src = originalSrc + '?t=' + new Date().getTime();
+            } else if (!this.src.includes('t=')) {
+                this.src = originalSrc + '&t=' + new Date().getTime();
+            }
+        };
+        
+        // Force reload if image is broken
+        if (img.complete && img.naturalHeight === 0) {
+            console.log('Reloading broken image:', img.src);
+            img.src = img.src.split('?')[0] + '?t=' + new Date().getTime();
+        }
+    });
+}
+
+// Age group tabs functionality
+function setupAgeTabs() {
+    const tabs = document.querySelectorAll('.sunday-school-page .age-tab');
+    const contents = document.querySelectorAll('.sunday-school-page .age-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetAge = this.getAttribute('data-age');
+            
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding content
+            this.classList.add('active');
+            document.getElementById(`${targetAge}-content`).classList.add('active');
+        });
+    });
+}
+
+// Form submission handling
+function setupRegistrationForm() {
+    const form = document.getElementById('sundaySchoolRegistrationForm');
+    const messageDiv = document.getElementById('registration-message');
+    
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Registering...';
+            
+            // Simulate form submission (replace with actual AJAX call)
+            setTimeout(() => {
+                // Show success message
+                showMessage('Registration submitted successfully! We will contact you soon.', 'success');
+                
+                // Reset form
+                form.reset();
+                
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Register Now';
+            }, 2000);
+        });
+    }
+    
+    function showMessage(text, type) {
+        if (messageDiv) {
+            messageDiv.textContent = text;
+            messageDiv.className = type === 'success' ? 'message-success' : 'message-error';
+            messageDiv.style.display = 'block';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
+}
+
+// Smooth scrolling for anchor links
+function setupSmoothScrolling() {
+    document.querySelectorAll('.sunday-school-page a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing Sunday School page...');
+    
+    // Preload images first
+    preloadSundaySchoolImages();
+    
+    // Setup image error handling
+    setupImageErrorHandling();
+    
+    // Initialize components
+    setupAgeTabs();
+    setupRegistrationForm();
+    setupSmoothScrolling();
+    
+    // Force reload of hero background if needed
+    const hero = document.querySelector('.sunday-school-page .sunday-hero');
+    if (hero) {
+        const currentBg = hero.style.backgroundImage;
+        if (currentBg) {
+            hero.style.backgroundImage = currentBg.replace(/\?v=([^&]*)/, '?v=1.2');
+        }
+    }
+    
+    console.log('Sunday School page initialized successfully');
+});
+
+// Additional image loading fallback
+window.addEventListener('load', function() {
+    console.log('Window loaded, final image check...');
+    
+    // Check for any images that might still be broken
+    document.querySelectorAll('.sunday-school-page img').forEach(img => {
+        if (img.complete && img.naturalHeight === 0) {
+            console.log('Final attempt to load broken image:', img.src);
+            const newSrc = img.src.split('?')[0] + '?final=' + new Date().getTime();
+            img.src = newSrc;
+        }
+    });
+});
+
+
+
+
+// UTILITY FUNCTIONS =========================================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Export functions for global access if needed
+window.toggleEventDetails = toggleEventDetails;
+window.debounce = debounce;
+>>>>>>> Stashed changes

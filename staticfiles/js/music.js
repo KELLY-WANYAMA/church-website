@@ -75,89 +75,7 @@
 
 
     document.addEventListener('DOMContentLoaded', function() {
-    // Mobile navigation functionality
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    // Toggle mobile menu
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('show');
-            
-            // Close dropdowns when closing mobile menu
-            if (!navLinks.classList.contains('show')) {
-                dropdowns.forEach(dropdown => {
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    if (menu) menu.classList.remove('show');
-                });
-            }
-        });
-    }
-
-    // Toggle dropdowns on mobile
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        if (link) {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const menu = this.nextElementSibling;
-                    if (menu && menu.classList.contains('dropdown-menu')) {
-                        menu.classList.toggle('show');
-                        
-                        // Close other dropdowns
-                        dropdowns.forEach(otherDropdown => {
-                            if (otherDropdown !== dropdown) {
-                                const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                                if (otherMenu) otherMenu.classList.remove('show');
-                            }
-                        });
-                    }
-                }
-            });
-        }
-    });
-
-
-
-
     
-    // Close dropdowns when clicking outside on mobile
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-            const isHamburger = e.target.closest('.hamburger');
-            const isNavLink = e.target.closest('.nav-links');
-            const isDropdown = e.target.closest('.dropdown');
-            
-            if (!isHamburger && !isNavLink && !isDropdown && navLinks && navLinks.classList.contains('show')) {
-                navLinks.classList.remove('show');
-                if (hamburger) hamburger.classList.remove('active');
-                
-                // Close all dropdowns
-                dropdowns.forEach(dropdown => {
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    if (menu) menu.classList.remove('show');
-                });
-            }
-        }
-    });
-
-    // Close mobile menu on resize to desktop
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('show')) {
-            navLinks.classList.remove('show');
-            if (hamburger) hamburger.classList.remove('active');
-            
-            // Close all dropdowns
-            dropdowns.forEach(dropdown => {
-                const menu = dropdown.querySelector('.dropdown-menu');
-                if (menu) menu.classList.remove('show');
-            });
-        }
-    });
-
     // Smooth scrolling for anchor links
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
     
@@ -292,66 +210,7 @@ Thank you!
         }
     }
 
-    // Mother's Union form handling
-    const mothersUnionForm = document.getElementById('mothersUnionForm');
-    if (mothersUnionForm) {
-        const messageDiv = document.getElementById('form-message');
-
-        mothersUnionForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitButton = this.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            
-            // Show loading state
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            if (messageDiv) messageDiv.style.display = 'none';
-
-            try {
-                const formData = {
-                    full_name: this.querySelector('input[name="full_name"]').value,
-                    email: this.querySelector('input[name="email"]').value,
-                    phone: this.querySelector('input[name="phone"]').value,
-                    message: this.querySelector('textarea[name="message"]').value
-                };
-
-                const response = await fetch('/ministries/mu/interest/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    showMUMessage(data.message, 'success');
-                    this.reset();
-                } else {
-                    showMUMessage(data.message, 'error');
-                }
-
-            } catch (error) {
-                showMUMessage('Network error. Please try again.', 'error');
-            } finally {
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
-            }
-        });
-
-        function showMUMessage(text, type) {
-            if (messageDiv) {
-                messageDiv.textContent = text;
-                messageDiv.style.display = 'block';
-                messageDiv.className = type === 'success' ? 
-                    'alert alert-success' : 'alert alert-error';
-            }
-        }
-    }
-
+    
     // Event card expand/collapse functionality
     function toggleEventDetails(button) {
         const eventCard = button.closest('.event-card');
