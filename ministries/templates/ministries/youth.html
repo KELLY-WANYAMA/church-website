@@ -7,7 +7,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/youth.css' %}">
 <style>
-.hero {
+.hero, .youth-hero {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/hero.jpg" %}');
     background-size: cover;
     background-position: center;
@@ -16,6 +16,11 @@
     text-align: center;
     padding: 120px 20px;
     margin-top: 60px;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 {% endblock %}
@@ -72,6 +77,7 @@
         {% endfor %}
     </div>
 </section>
+
 
 
 <section id="events" class="youth-events">

@@ -79,13 +79,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nairobi.wsgi.application'
 
 
-# WhatsApp Configuration
-MOTHERS_UNION_SECRETARY_PHONE = '+254791675625'  # Replace with actual number
+# Mother's Union Settings
+MOTHERS_UNION_SECRETARY_PHONE = '+254791675625'  # With country code
+MOTHERS_UNION_EMAIL = 'wanyamakelvin47@gmail.com'
 
-# Twilio Configuration (if using)
-TWILIO_ACCOUNT_SID = 'your_account_sid'
-TWILIO_AUTH_TOKEN = 'your_auth_token'
-TWILIO_WHATSAPP_NUMBER = 'whatsapp:+14155238886'
+# Twilio Settings (if using WhatsApp API)
+TWILIO_ACCOUNT_SID = 'your_account_sid_here'
+TWILIO_AUTH_TOKEN = 'your_auth_token_here'
+TWILIO_WHATSAPP_NUMBER = 'whatsapp:+14155238886'  # Twilio's WhatsApp number
+
 
 
 # Database

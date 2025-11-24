@@ -228,6 +228,16 @@
     padding: 0 20px;
 }
 
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    min-height: 250px;
+    max-height: 400px;
+}
+
 .events h2 {
     color: #2c3e50;
     margin-bottom: 50px;
@@ -377,6 +387,16 @@
     .event-cards {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+
+    .event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    min-height: 100px;
+    max-height: 250px;
     }
     
     .cta-button {

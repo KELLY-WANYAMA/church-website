@@ -15,6 +15,7 @@ class Event(models.Model):
     ]
     
     title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='events/', blank=True, null=True, help_text="Event image")
     description = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     time = models.TimeField(null=True, blank=True)
@@ -294,3 +295,32 @@ class SermonEvent(models.Model):
             return self.image.url
         return self.image_url or ''
     
+
+
+class CustomerReview(models.Model):
+    STATUS_CHOICES = [
+        ('unread', 'Unread'),
+        ('read', 'Read'),
+        ('replied', 'Replied'),
+    ]
+    
+    name = models.CharField(max_length=100, verbose_name="Customer Name")
+    email = models.EmailField(verbose_name="Email Address")
+    subject = models.CharField(max_length=200, verbose_name="Message Subject")
+    message = models.TextField(verbose_name="Review Message")
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="Received At")
+    status = models.CharField(
+        max_length=10, 
+        choices=STATUS_CHOICES, 
+        default='unread',
+        verbose_name="Review Status"
+    )
+    admin_notes = models.TextField(blank=True, null=True, verbose_name="Admin Notes")
+    
+    class Meta:
+        verbose_name = "Customer Review"
+        verbose_name_plural = "Customer Reviews"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Review from {self.name} - {self.subject}"

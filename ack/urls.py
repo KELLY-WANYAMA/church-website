@@ -18,6 +18,10 @@ urlpatterns = [
     path('mu/', views.mu, name='mu'),
     path('kama/', views.kama, name='kama'),
     path('leaders/', views.leaders, name='leaders'),
+    path('calendar/', views.full_calendar, name='full_calendar'),
+    
+    # ADD THIS LINE - Contact form submission
+    path('submit-review/', views.submit_review, name='submit_review'),
     
     # NEW API URLs
     path('api/', api_home, name='api-home'),

@@ -364,7 +364,6 @@
 
 
 
-
 /* ===== YOUTH EVENTS SECTION - INDEPENDENT TOGGLE ===== */
 .youth-events {
     padding: 80px 0;
@@ -679,7 +678,7 @@
 }
 
 .no-events::before {
-    content: "📅";
+    content: "🗓️";
     font-size: 3rem;
     display: block;
     margin-bottom: 15px;

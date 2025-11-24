@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models import Count, Q
 import json
 from .models import *
+from .serializers import *
 
 # REST Framework imports
 from rest_framework import generics, viewsets, status
@@ -15,12 +16,7 @@ from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
-from .serializers import (
-    MinistryListSerializer, MinistryDetailSerializer, ProgramSerializer,
-    InterestFormSubmissionSerializer, InterestFormCreateSerializer,
-    MinistryMemberSerializer, MinistryEventSerializer,
-    MinistryStatsSerializer, MinistryTypeStatsSerializer
-)
+
 
 # ============================================================================
 # TRADITIONAL DJANGO VIEWS - PAGE RENDERING
@@ -245,9 +241,6 @@ def men_ministry(request):
 def events(request):
     # Get filter from URL parameters
     event_filter = request.GET.get('filter', 'all')
-    
-    # Get all events ordered by date (newest first)
-    all_events = Event.objects.all().order_by('-date')
     
     # Apply filter if not 'all'
     if event_filter and event_filter != 'all':
@@ -584,9 +577,226 @@ def submit_interest_form(request):
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+
+
+
+#MOTHER'S UNION MEMBERSHIP INTEREST FORM SUBMISSION HANDLER
+
+@csrf_exempt
+@require_POST
+def submit_membership_interest(request):
+    """
+    Handle Mother's Union membership interest form submissions
+    """
+    print("📝 DEBUG: submit_membership_interest called")  # Debug log
+    
+    try:
+        # Parse JSON data
+        if request.content_type == 'application/json':
+            data = json.loads(request.body)
+        else:
+            # Handle form data
+            data = request.POST
+        
+        print(f"📝 DEBUG: Received data: {data}")  # Debug log
+        
+        # Extract form data
+        full_name = data.get('full_name')
+        email = data.get('email')
+        phone = data.get('phone')
+        message = data.get('message')
+        
+        print(f"📝 DEBUG: Form data - Name: {full_name}, Email: {email}, Phone: {phone}")  # Debug log
+        
+        # Validate required fields
+        if not all([full_name, email, message]):
+            print("❌ DEBUG: Missing required fields")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Please fill in all required fields: Name, Email, and Message are required.'
+            }, status=400)
+        
+        # Validate email format
+        from django.core.validators import validate_email
+        from django.core.exceptions import ValidationError
+        try:
+            validate_email(email)
+        except ValidationError:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Please enter a valid email address.'
+            }, status=400)
+        
+        # Save to database
+        try:
+            membership = MothersUnionMembership.objects.create(
+                full_name=full_name.strip(),
+                email=email.strip(),
+                phone=phone.strip() if phone else '',
+                message=message.strip()
+            )
+            print(f"✅ DEBUG: Membership saved with ID: {membership.id}")  # Debug log
+            
+        except Exception as db_error:
+            print(f"❌ DEBUG: Database error: {db_error}")
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Database error. Please try again.'
+            }, status=500)
+        
+        # Send WhatsApp notification
+        try:
+            send_whatsapp_notification(membership)
+            print("✅ DEBUG: WhatsApp notification sent")
+        except Exception as whatsapp_error:
+            print(f"⚠️ DEBUG: WhatsApp notification failed: {whatsapp_error}")
+            # Don't fail the request if WhatsApp fails
+        
+        # Send email notification
+        try:
+            send_email_notification(membership)
+            print("✅ DEBUG: Email notification sent")
+        except Exception as email_error:
+            print(f"⚠️ DEBUG: Email notification failed: {email_error}")
+            # Don't fail the request if email fails
+        
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Thank you for your interest in Mother\'s Union! We will contact you soon.'
+        })
+        
+    except json.JSONDecodeError as e:
+        print(f"❌ DEBUG: JSON decode error: {e}")
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Invalid form data. Please try again.'
+        }, status=400)
+        
+    except Exception as e:
+        print(f"❌ DEBUG: Unexpected error: {str(e)}")
+        import traceback
+        print(f"❌ DEBUG: Traceback: {traceback.format_exc()}")
+        return JsonResponse({
+            'status': 'error',
+            'message': 'An unexpected error occurred. Please try again.'
+        }, status=500)
+    
+
+
+
+#MOTHER'S UNION WHATSAPP NOTIFICATION FUNCTION
+
+def send_whatsapp_notification(membership):
+    """
+    Send WhatsApp notification for new Mother's Union membership interest
+    """
+    try:
+        # Get secretary phone from settings or use default
+        secretary_phone = getattr(settings, 'MOTHERS_UNION_SECRETARY_PHONE', '+254791675625')
+        
+        # Create WhatsApp message content
+        message = f"""🙏 New Mother's Union Membership Interest!
+
+👤 *Name:* {membership.full_name}
+📧 *Email:* {membership.email}
+📞 *Phone:* {membership.phone or 'Not provided'}
+
+💬 *Message:*
+{membership.message}
+
+📅 *Submitted on:* {membership.created_at.strftime('%Y-%m-%d at %H:%M')}
+
+Please follow up within 48 hours. 🙏"""
+        
+        print(f"📱 DEBUG: WhatsApp notification ready for: {secretary_phone}")
+        print(f"📱 DEBUG: Message content: {message}")
+        
+        # If you have Twilio configured, use it
+        if hasattr(settings, 'TWILIO_ACCOUNT_SID') and settings.TWILIO_ACCOUNT_SID:
+            try:
+                from twilio.rest import Client
+                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                
+                whatsapp_message = client.messages.create(
+                    body=message,
+                    from_=settings.TWILIO_WHATSAPP_NUMBER,
+                    to=f'whatsapp:{secretary_phone}'
+                )
+                print(f"✅ WhatsApp message sent via Twilio: {whatsapp_message.sid}")
+                return True
+            except Exception as twilio_error:
+                print(f"❌ Twilio error: {twilio_error}")
+        
+        # Fallback: Create WhatsApp link for manual sending
+        encoded_message = message.replace(' ', '%20').replace('\n', '%0A')
+        whatsapp_url = f"https://wa.me/{secretary_phone}?text={encoded_message}"
+        print(f"📱 Manual WhatsApp URL: {whatsapp_url}")
+        
+        # Return the URL for the frontend to use
+        return whatsapp_url
+            
+    except Exception as e:
+        print(f"❌ Error in send_whatsapp_notification: {e}")
+        return None
+
+
+
+#MOTHER'S UNION EMAIL NOTIFICATION FUNCTION
+
+
+def send_email_notification(membership):
+    """
+    Send email notification for new Mother's Union membership interest
+    """
+    try:
+        subject = f"New Mother's Union Membership Interest - {membership.full_name}"
+        
+        message = f"""
+        New Mother's Union membership interest received:
+        
+        Name: {membership.full_name}
+        Email: {membership.email}
+        Phone: {membership.phone or 'Not provided'}
+        
+        Message:
+        {membership.message}
+        
+        Submitted on: {membership.created_at.strftime('%Y-%m-%d at %H:%M')}
+        
+        Please follow up within 48 hours.
+        """
+        
+        # Get recipient email from settings or use default
+        recipient_email = getattr(settings, 'MOTHERS_UNION_EMAIL', 'wanyamakelvin47@gmail.com')
+        
+        send_mail(
+            subject=subject,
+            message=message.strip(),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[recipient_email],
+            fail_silently=True,  # Don't raise exception if email fails
+        )
+        print("✅ Email notification sent successfully")
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error sending email: {e}")
+        return False
+
+
+#END OF MOTHER'S UNION NOTIFICATION FUNCTION
+
+
+
+
 @csrf_exempt
 @require_POST
 def mothers_union_interest(request):
+    """
+    API endpoint for Mother's Union interest form submissions
+    """
     return handle_interest_form(request, 'mothers_union')
 
 @csrf_exempt

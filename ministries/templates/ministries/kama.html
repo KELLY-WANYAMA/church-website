@@ -7,7 +7,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/kama.css' %}">
 <style>
-.hero {
+.hero, .kama-hero {
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{% static "image/hero.jpg" %}');
     background-size: cover;
     background-position: center;
@@ -16,6 +16,11 @@
     text-align: center;
     padding: 120px 20px;
     margin-top: 60px;
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 {% endblock %}
@@ -210,7 +215,7 @@
                     </ul>
                 </div>
                 
-                <!-- KAMA Membership Section -->
+                <!-- KAMA Membership Section 
                 <div class="membership-form">
                     <h3>Express Interest</h3>
                     <form class="interest-form" id="kamaInterestForm">
@@ -219,12 +224,12 @@
                         <input type="email" name="email" placeholder="Email Address" required>
                         <input type="tel" name="phone" placeholder="Phone Number">
                         <textarea name="message" placeholder="Why would you like to join KAMA?" rows="4" required></textarea>
-                        <button type="submit">Submit Interest</button>
+                        <button type="submit">Submit Interest</button>-->
                         
-                        <!-- Success/Error Messages -->
+                        <!-- Success/Error Messages 
                         <div id="form-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px;"></div>
                     </form>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>

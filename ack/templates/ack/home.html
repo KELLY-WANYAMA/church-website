@@ -70,6 +70,9 @@
             {% for event in upcoming_events %}
             <div class="event-card">
                 <h3>{{ event.title }}</h3>
+                {% if event.image %}
+                <img src="{{ event.image.url }}" alt="{{ event.title }}" class="event-image">
+                {% endif %}
                 <p class="date">{{ event.formatted_date }}</p>
                 <p>{{ event.description|truncatewords:15 }}</p>
                 <div class="event-meta">

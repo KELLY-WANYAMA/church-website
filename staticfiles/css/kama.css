@@ -1,665 +1,758 @@
 /*START OF KAMA*/
     
-        /* KAMA Specific Styles */
-        :root {
-            --kama-primary: #2c3e50;    /* Navy blue - strength and stability */
-            --kama-secondary: #e67e22;  /* Orange - energy and action */
-            --kama-accent: #27ae60;     /* Green - growth and renewal */
-            --kama-dark: #1a2530;       /* Dark blue */
-            --kama-light: #ecf0f1;      /* Light background */
-        }
+/* KAMA Specific Styles */
+:root {
+    --kama-primary: #2c3e50;    /* Navy blue - strength and stability */
+    --kama-secondary: #e67e22;  /* Orange - energy and action */
+    --kama-accent: #27ae60;     /* Green - growth and renewal */
+    --kama-dark: #1a2530;       /* Dark blue */
+    --kama-light: #ecf0f1;      /* Light background */
+    --kama-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --kama-card-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
+    --kama-border: #e0e0e0;
+}
 
-        /* Global Styles */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+/* Global Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 50px;
-            color: var(--kama-primary);
-            font-size: 2.5rem;
-            position: relative;
-        }
+h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--kama-primary);
+    font-size: 2.8rem;
+    font-weight: 700;
+    position: relative;
+}
 
-        h2:after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
+h2:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
 
-        /* Hero Section */
-        .kama-hero {
-            position: relative;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+/* Hero Section */
+.kama-hero {
+    position: relative;
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(230, 126, 34, 0.8)), 
                 url('{% static "image/KAMA.png" %}') center/cover no-repeat;
-            height: 60vh;
-            min-height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
+    height: 70vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
 
-        .kama-hero .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+.kama-hero .hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
 
-        .kama-hero .tagline {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            font-style: italic;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+.kama-hero .tagline {
+    font-size: 1.4rem;
+    margin-bottom: 50px;
+    font-style: italic;
+    opacity: 0.95;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-        /* Button Styles */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+/* Button Styles */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    text-transform: none;
+    letter-spacing: 0.5px;
+}
 
-        .primary-btn {
-            background: var(--kama-primary);
-            color: white;
-        }
+.cta-button.primary-btn {
+    background: var(--kama-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+}
 
-        .secondary-btn {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+.cta-button.primary-btn:hover {
+    background: #1a2530;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.4);
+}
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            background: var(--kama-secondary);
-            border-color: var(--kama-secondary);
-        }
+.cta-button.secondary-btn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
 
+.cta-button.secondary-btn:hover {
+    background: white;
+    color: var(--kama-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
 
-        /* KAMA Activities Styles */
+/* About Section */
+.about-kama {
+    padding: 100px 0;
+    background: var(--kama-light);
+    position: relative;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.anglican-values {
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    margin-top: 40px;
+    border-left: 5px solid var(--kama-primary);
+    box-shadow: var(--kama-card-shadow);
+}
+
+.anglican-values h3 {
+    color: var(--kama-primary);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.anglican-values ul {
+    list-style: none;
+    padding: 0;
+}
+
+.anglican-values li {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.anglican-values i {
+    margin-right: 18px;
+    color: var(--kama-primary);
+    width: 22px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: var(--kama-card-shadow);
+}
+
+/* Mission & Vision */
+.mission-vision {
+    padding: 100px 0;
+    background: white;
+}
+
+.mv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    margin-top: 50px;
+}
+
+.mv-card {
+    background: var(--kama-light);
+    padding: 45px 30px;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--kama-card-shadow);
+    border: 1px solid var(--kama-border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mv-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--kama-card-shadow-hover);
+}
+
+.mv-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.mv-card:hover::before {
+    transform: scaleX(1);
+}
+
+.mv-icon {
+    font-size: 3rem;
+    color: var(--kama-primary);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.mv-card:hover .mv-icon {
+    transform: scale(1.1);
+}
+
+.mv-card h3 {
+    color: var(--kama-primary);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.mv-card p {
+    line-height: 1.7;
+    color: #555;
+    font-size: 1.05rem;
+}
+
+.motto-description {
+    font-size: 0.95rem;
+    color: #777;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Pillars Section */
+.kama-pillars {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    margin-top: 50px;
+}
+
+.pillar-card {
+    background: white;
+    padding: 45px 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--kama-card-shadow);
+    border: 1px solid var(--kama-border);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.pillar-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--kama-card-shadow-hover);
+}
+
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.pillar-card:hover::before {
+    transform: scaleX(1);
+}
+
+.pillar-icon {
+    font-size: 3rem;
+    color: var(--kama-secondary);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.pillar-card:hover .pillar-icon {
+    transform: scale(1.1);
+}
+
+.pillar-card h3 {
+    color: var(--kama-primary);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.pillar-card p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Activities Section */
 .kama-activities {
-    padding: 80px 0;
-    background: #f8f9fa;
+    padding: 100px 0;
+    background: white;
 }
 
 .activities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-top: 50px;
 }
 
 .activity-card {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
+    background: var(--kama-light);
+    padding: 40px 30px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: var(--kama-card-shadow);
+    border: 1px solid var(--kama-border);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .activity-card:hover {
     transform: translateY(-5px);
+    box-shadow: var(--kama-card-shadow-hover);
+}
+
+.activity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.activity-card:hover::before {
+    transform: scaleX(1);
 }
 
 .activity-icon {
-    font-size: 2.5rem;
-    color: #8B4513;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
+    color: var(--kama-primary);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.activity-card:hover .activity-icon {
+    transform: scale(1.1);
 }
 
 .activity-card h3 {
-    color: #333;
+    color: var(--kama-primary);
     margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .schedule {
-    color: #8B4513;
-    font-weight: bold;
+    color: var(--kama-secondary);
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.activity-card p {
+    color: #555;
+    line-height: 1.7;
     margin-bottom: 10px;
 }
 
 .additional-info {
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: 10px;
+    color: #777;
+    font-size: 0.95rem;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--kama-border);
 }
 
 .no-activities {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 40px;
+    padding: 80px 40px;
     background: white;
-    border-radius: 10px;
-    color: #666;
+    border-radius: 16px;
+    box-shadow: var(--kama-card-shadow);
+    border: 2px dashed var(--kama-border);
 }
 
-/* KAMA Leadership Styles */
+.no-activities p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+}
+
+.no-activities::before {
+    content: "📅";
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+/* Leadership Section */
 .kama-leadership {
-    padding: 80px 0;
-    background: white;
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+}
+
+.kama-leadership::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
 }
 
 .leadership-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
     margin-top: 50px;
 }
 
 .leader-card {
     text-align: center;
-    padding: 30px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    padding: 45px 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--kama-card-shadow);
+    border: 1px solid rgba(44, 62, 80, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.leader-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--kama-card-shadow-hover);
+}
+
+.leader-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.leader-card:hover::before {
+    transform: scaleX(1);
 }
 
 .leader-card img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid #8B4513;
+    margin-bottom: 30px;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.2);
+    transition: all 0.3s ease;
+}
+
+.leader-card:hover img {
+    border-color: var(--kama-primary);
+    transform: scale(1.05);
 }
 
 .leader-placeholder {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background: #e9ecef;
+    background: linear-gradient(135deg, var(--kama-light), #d3d9df);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
+    margin: 0 auto 30px;
+    border: 4px solid white;
+    box-shadow: 0 8px 24px rgba(44, 62, 80, 0.15);
 }
 
 .leader-placeholder i {
-    font-size: 2.5rem;
-    color: #6c757d;
+    font-size: 3.5rem;
+    color: var(--kama-primary);
+    opacity: 0.7;
+}
+
+.leader-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--kama-dark);
+    margin-bottom: 12px;
 }
 
 .position {
-    color: #8B4513;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--kama-primary);
+    margin-bottom: 20px;
+    padding: 8px 20px;
+    background: rgba(44, 62, 80, 0.1);
+    border-radius: 25px;
+    display: inline-block;
 }
 
 .bio {
+    font-size: 1rem;
+    line-height: 1.7;
     color: #666;
+    margin-bottom: 25px;
     font-style: italic;
-    margin-bottom: 15px;
 }
 
 .contact {
+    font-size: 0.95rem;
     color: #777;
-    font-size: 0.9rem;
-    margin: 5px 0;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact i {
+    color: var(--kama-primary);
+    width: 18px;
 }
 
 .no-leaders {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 40px;
-    background: #f8f9fa;
-    border-radius: 10px;
+    padding: 80px 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--kama-card-shadow);
+    border: 2px dashed var(--kama-border);
+}
+
+.no-leaders p {
+    font-size: 1.2rem;
     color: #666;
-}*/
+    margin: 0;
+}
 
+.no-leaders::before {
+    content: "👥";
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
 
-        /* About Section */
-        .about-kama {
-            padding: 80px 0;
-            background: var(--kama-light);
-        }
+/* Membership Section - Simplified without form */
+.kama-membership {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--kama-primary), var(--kama-dark));
+    color: white;
+    text-align: center;
+}
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
+.kama-membership h2 {
+    color: white;
+    margin-bottom: 60px;
+}
 
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
+.kama-membership h2:after {
+    background: linear-gradient(90deg, white, var(--kama-secondary));
+}
 
-        .anglican-values {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-top: 30px;
-            border-left: 4px solid var(--kama-primary);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+.membership-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
 
-        .anglican-values h3 {
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
+.membership-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
-        .anglican-values ul {
-            list-style: none;
-            padding: 0;
-        }
+.membership-info h3 {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
 
-        .anglican-values li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            font-size: 1.1rem;
-        }
+.membership-info ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+    text-align: left;
+}
 
-        .anglican-values i {
-            margin-right: 15px;
-            color: var(--kama-primary);
-            font-size: 1.2rem;
-            width: 25px;
-        }
+.membership-info li {
+    margin-bottom: 16px;
+    padding-left: 32px;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
 
-        .about-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
+.membership-info li:before {
+    content: "✓";
+    color: var(--kama-secondary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1.3rem;
+}
 
-        
-        /* Mission & Vision */
-        .mission-vision {
-            padding: 80px 0;
-            background: white;
-        }
+/* Verse Section */
+.kama-verse {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--kama-secondary), #d35400);
+    color: white;
+    text-align: center;
+    position: relative;
+}
 
-        .mv-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
+.kama-verse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
 
-        .mv-card {
-            background: var(--kama-light);
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+.kama-verse blockquote {
+    font-size: 2rem;
+    line-height: 1.6;
+    font-style: italic;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    padding: 0 20px;
+}
 
-        .mv-card:hover {
-            transform: translateY(-5px);
-        }
+.kama-verse blockquote::before,
+.kama-verse blockquote::after {
+    content: '"';
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    line-height: 1;
+}
 
-        .mv-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--kama-primary), var(--kama-secondary));
-        }
+.kama-verse blockquote::before {
+    top: -20px;
+    left: -10px;
+}
 
-        .mv-icon {
-            font-size: 3rem;
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-        }
+.kama-verse blockquote::after {
+    bottom: -40px;
+    right: -10px;
+}
 
-        .mv-card h3 {
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
+.kama-verse cite {
+    display: block;
+    margin-top: 30px;
+    font-size: 1.3rem;
+    opacity: 0.9;
+    position: relative;
+}
 
-        .mv-card p {
-            line-height: 1.6;
-            color: #555;
-        }
+/* Animation for card entrance */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        /* Pillars Section */
-        .kama-pillars {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
-        }
+.mv-card,
+.pillar-card,
+.activity-card,
+.leader-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
 
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
 
-        .pillar-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
+/* Focus styles for accessibility */
+.cta-button:focus {
+    outline: 2px solid var(--kama-accent);
+    outline-offset: 2px;
+}
 
-        .pillar-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .pillar-icon {
-            font-size: 2.5rem;
-            color: var(--kama-secondary);
-            margin-bottom: 20px;
-        }
-
-        .pillar-card h3 {
-            color: var(--kama-primary);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .pillar-card p {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* Activities Section */
-        .kama-activities {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .activity-card {
-            background: var(--kama-light);
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .activity-icon {
-            font-size: 2rem;
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-        }
-
-        .activity-card h3 {
-            color: var(--kama-primary);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .activity-card p {
-            color: #555;
-            margin-bottom: 8px;
-        }
-
-        /* Leadership Section */
-        .kama-leadership {
-            padding: 80px 0;
-            background: var(--kama-light);
-        }
-
-        .leadership-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .leader-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .leader-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid var(--kama-primary);
-        }
-
-        .leader-card h3 {
-            color: var(--kama-primary);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-
-        .leader-card p {
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .bio {
-            font-style: italic;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-
-        /* Membership Section */
-        .kama-membership {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .membership-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .membership-info h3 {
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-        }
-
-        .membership-info ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 40px;
-        }
-
-        .membership-info li {
-            margin-bottom: 15px;
-            padding-left: 25px;
-            position: relative;
-            font-size: 1.1rem;
-        }
-
-        .membership-info li:before {
-            content: "✓";
-            color: var(--kama-accent);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        .membership-form {
-            background: var(--kama-light);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .membership-form h3 {
-            color: var(--kama-primary);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .interest-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .interest-form input,
-        .interest-form textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .interest-form textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .interest-form button {
-            background: var(--kama-primary);
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: background 0.3s ease;
-        }
-
-        .interest-form button:hover {
-            background: var(--kama-secondary);
-        }
-
-        /* Verse Section */
-        .kama-verse {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--kama-primary), #d3d9df);
-            color: white;
-            text-align: center;
-        }
-
-        .kama-verse blockquote {
-            font-size: 1.8rem;
-            line-height: 1.6;
-            font-style: italic;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .kama-verse cite {
-            display: block;
-            margin-top: 20px;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .about-content,
-            .membership-content {
-                gap: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .about-content,
-            .membership-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .kama-hero .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .kama-hero .tagline {
-                font-size: 1.1rem;
-            }
-            
-            .mv-grid,
-            .pillars-grid,
-            .activities-grid,
-            .leadership-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .kama-hero {
-                height: 70vh;
-                min-height: 400px;
-            }
-            
-            .kama-hero .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .cta-button {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-            
-            .mv-card,
-            .pillar-card,
-            .activity-card,
-            .leader-card {
-                padding: 20px;
-            }
-            
-            .membership-form {
-                padding: 20px;
-            }
-            
-            .kama-verse blockquote {
-                font-size: 1.4rem;
-            }
-        }
-
-
-        .alert {
+/* Alert Styles */
+.alert {
     padding: 12px 15px;
     border-radius: 5px;
     margin-top: 15px;
@@ -681,6 +774,341 @@
 .form-loading {
     opacity: 0.7;
     pointer-events: none;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1140px;
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .about-kama,
+    .mission-vision,
+    .kama-pillars,
+    .kama-activities,
+    .kama-leadership,
+    .kama-membership,
+    .kama-verse {
+        padding: 80px 0;
+    }
+    
+    .container {
+        max-width: 960px;
+        padding: 0 25px;
+    }
+    
+    .about-content {
+        gap: 40px;
+    }
+    
+    .kama-hero .hero-content h1 {
+        font-size: 3.2rem;
+    }
+    
+    .kama-hero .tagline {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-kama,
+    .mission-vision,
+    .kama-pillars,
+    .kama-activities,
+    .kama-leadership,
+    .kama-membership,
+    .kama-verse {
+        padding: 60px 0;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .kama-hero {
+        height: 60vh;
+        min-height: 500px;
+    }
+    
+    .kama-hero .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .kama-hero .tagline {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        padding: 14px 28px;
+    }
+    
+    .mv-grid,
+    .pillars-grid,
+    .activities-grid,
+    .leadership-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .mv-card,
+    .pillar-card,
+    .activity-card,
+    .leader-card {
+        padding: 35px 25px;
+    }
+    
+    .leader-image-container,
+    .leader-placeholder {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .anglican-values {
+        padding: 30px 25px;
+    }
+    
+    .membership-info {
+        padding: 35px 25px;
+    }
+    
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-kama,
+    .mission-vision,
+    .kama-pillars,
+    .kama-activities,
+    .kama-leadership,
+    .kama-membership,
+    .kama-verse {
+        padding: 50px 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .kama-hero .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .kama-hero .tagline {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .anglican-values li {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .anglican-values i {
+        margin-right: 0;
+    }
+    
+    .mv-icon,
+    .pillar-icon,
+    .activity-icon {
+        font-size: 2.5rem;
+    }
+    
+    .leader-card {
+        padding: 30px 20px;
+    }
+    
+    .leader-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .position {
+        font-size: 1rem;
+        padding: 6px 16px;
+    }
+    
+    .membership-info {
+        padding: 30px 20px;
+    }
+    
+    .membership-info li {
+        font-size: 1rem;
+        padding-left: 28px;
+    }
+    
+    .kama-verse blockquote {
+        font-size: 1.6rem;
+        padding: 0 15px;
+    }
+    
+    .kama-verse blockquote::before,
+    .kama-verse blockquote::after {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .kama-hero {
+        height: 50vh;
+        min-height: 400px;
+        padding: 0 15px;
+    }
+    
+    .kama-hero .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .kama-hero .tagline {
+        font-size: 0.95rem;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .mv-card,
+    .pillar-card,
+    .activity-card {
+        padding: 25px 20px;
+    }
+    
+    .leader-card {
+        padding: 25px 15px;
+    }
+    
+    .leader-image-container,
+    .leader-placeholder {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .leader-placeholder i {
+        font-size: 2.5rem;
+    }
+    
+    .no-activities,
+    .no-leaders {
+        padding: 50px 25px;
+    }
+    
+    .no-activities p,
+    .no-leaders p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .kama-hero .hero-content h1 {
+        font-size: 1.6rem;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .mv-card,
+    .pillar-card,
+    .activity-card,
+    .leader-card {
+        padding: 20px 15px;
+    }
+    
+    .membership-info {
+        padding: 25px 15px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .hero-buttons {
+        display: none;
+    }
+    
+    .about-kama,
+    .mission-vision,
+    .kama-pillars,
+    .kama-activities,
+    .kama-leadership,
+    .kama-membership,
+    .kama-verse {
+        padding: 30px 0;
+    }
+    
+    .kama-hero {
+        background: none !important;
+        color: black;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .cta-button {
+        display: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --kama-border: #000000;
+        --kama-card-shadow: 0 0 0 2px #000000;
+    }
+    
+    .mv-card,
+    .pillar-card,
+    .activity-card,
+    .leader-card {
+        border: 2px solid #000000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .mv-card:hover,
+    .pillar-card:hover,
+    .activity-card:hover,
+    .leader-card:hover {
+        transform: none;
+    }
 }
 
 /* END OF KAMA */

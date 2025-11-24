@@ -74,10 +74,7 @@ class MinistryDetailSerializer(serializers.ModelSerializer):
             'is_active', 'created_at', 'programs', 'members', 'gallery',
             'upcoming_events', 'contact_info'
         ]
-    
-    def get_upcoming_events(self, obj):
-        upcoming = obj.events.filter(date__gte=timezone.now().date())[:5]
-        return MinistryEventSerializer(upcoming, many=True).data
+        
     
     def get_contact_info(self, obj):
         return {
@@ -86,30 +83,6 @@ class MinistryDetailSerializer(serializers.ModelSerializer):
             'phone': obj.leader_phone
         }
 
-
-class MinistryEventSerializer(serializers.ModelSerializer):
-    formatted_date = serializers.SerializerMethodField()
-    formatted_time = serializers.SerializerMethodField()
-    is_upcoming = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Event
-        fields = [
-            'id', 'title', 'description', 'date', 'formatted_date',
-            'start_time', 'end_time', 'formatted_time', 'location',
-            'is_public', 'max_attendees', 'is_upcoming'
-        ]
-    
-    def get_formatted_date(self, obj):
-        return obj.date.strftime("%A, %B %d, %Y")
-    
-    def get_formatted_time(self, obj):
-        if obj.end_time:
-            return f"{obj.start_time.strftime('%I:%M %p')} - {obj.end_time.strftime('%I:%M %p')}"
-        return obj.start_time.strftime('%I:%M %p')
-    
-    def get_is_upcoming(self, obj):
-        return obj.date >= timezone.now().date()
 
 
 class InterestFormSubmissionSerializer(serializers.ModelSerializer):

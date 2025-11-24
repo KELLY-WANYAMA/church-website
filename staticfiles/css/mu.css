@@ -493,119 +493,65 @@ section {
     width: 18px;
 }
 
-/* Membership Section */
+/* Membership Section - Simplified without form */
 .mu-membership {
-    background: var(--mu-light);
+    background: linear-gradient(135deg, var(--mu-primary), #6c3483);
+    color: white;
+    text-align: center;
 }
 
 .mu-membership h2 {
-    text-align: center;
+    color: white;
     margin-bottom: 60px;
-    color: var(--mu-primary);
     font-size: 2.8rem;
     font-weight: 700;
 }
 
 .membership-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.membership-info {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .membership-info h3 {
-    color: var(--mu-secondary);
-    margin-bottom: 20px;
-    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
     font-weight: 600;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
 }
 
 .membership-info ul {
     list-style: none;
     padding: 0;
     margin-bottom: 40px;
+    text-align: left;
 }
 
 .membership-info li {
     margin-bottom: 16px;
     padding-left: 32px;
     position: relative;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     line-height: 1.6;
-    color: #555;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .membership-info li:before {
     content: "✓";
-    color: var(--mu-success);
+    color: var(--mu-accent);
     font-weight: bold;
     position: absolute;
     left: 0;
-    font-size: 1.2rem;
-}
-
-.membership-form {
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: var(--mu-shadow);
-    border: 1px solid var(--mu-border);
-}
-
-.membership-form h3 {
-    color: var(--mu-primary);
-    margin-bottom: 30px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.interest-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.interest-form input,
-.interest-form textarea {
-    padding: 16px 20px;
-    border: 2px solid var(--mu-border);
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background: #fafafa;
-}
-
-.interest-form input:focus,
-.interest-form textarea:focus {
-    outline: none;
-    border-color: var(--mu-primary);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
-}
-
-.interest-form button {
-    background: linear-gradient(135deg, var(--mu-primary), #7d3c98);
-    color: white;
-    padding: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
-
-.interest-form button:hover {
-    background: linear-gradient(135deg, #7d3c98, #6c3483);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
-}
-
-.interest-form button:active {
-    transform: translateY(0);
+    font-size: 1.3rem;
 }
 
 /* Events Section */
@@ -692,7 +638,7 @@ section {
 
 /* Prayer Section */
 .mu-prayer {
-    background: linear-gradient(135deg, var(--mu-primary), #6c3483);
+    background: linear-gradient(135deg, var(--mu-secondary), #1a2530);
     color: white;
     text-align: center;
     position: relative;
@@ -754,53 +700,6 @@ section {
     position: relative;
 }
 
-/* Form Messages */
-#form-message {
-    padding: 16px 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    font-weight: 500;
-    border: 2px solid transparent;
-}
-
-#form-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border-color: #c3e6cb;
-}
-
-#form-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
-}
-
-.loading {
-    opacity: 0.7;
-    pointer-events: none;
-    position: relative;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin: -10px 0 0 -10px;
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-    border-right-color: transparent;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 /* Empty States */
 .no-activities,
 .no-leaders,
@@ -835,138 +734,6 @@ section {
 .no-leaders::before { content: "👥"; }
 .no-events::before { content: "🎉"; }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    section {
-        padding: 80px 0;
-    }
-    
-    .about-content,
-    .membership-content {
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    section {
-        padding: 60px 0;
-    }
-    
-    .about-content,
-    .membership-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .mothers-union-hero .hero-content h1 {
-        font-size: 2.8rem;
-    }
-    
-    .mothers-union-hero .tagline {
-        font-size: 1.2rem;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .cta-button {
-        width: 100%;
-        max-width: 300px;
-        justify-content: center;
-    }
-    
-    .objectives-grid,
-    .activities-grid,
-    .leadership-grid,
-    .events-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-    
-    .mu-leadership {
-        padding: 60px 0;
-    }
-    
-    .leader-card {
-        padding: 35px 25px;
-    }
-    
-    .leader-image-container,
-    .leader-placeholder {
-        width: 130px;
-        height: 130px;
-    }
-    
-    .membership-form {
-        padding: 30px 25px;
-    }
-    
-    .anglican-values,
-    .activity-card,
-    .objective-card {
-        padding: 30px 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    section {
-        padding: 50px 0;
-    }
-    
-    .container {
-        padding: 0 15px;
-    }
-    
-    .mothers-union-hero .hero-content h1 {
-        font-size: 2.2rem;
-    }
-    
-    .mothers-union-hero .tagline {
-        font-size: 1.1rem;
-    }
-    
-    .about-mothers-union h2,
-    .mu-objectives h2,
-    .mu-activities h2,
-    .mu-leadership h2,
-    .mu-membership h2,
-    .mu-events h2,
-    .mu-prayer h2 {
-        font-size: 2.2rem;
-        margin-bottom: 40px;
-    }
-    
-    .leader-card {
-        padding: 30px 20px;
-    }
-    
-    .leader-card h3 {
-        font-size: 1.3rem;
-    }
-    
-    .position {
-        font-size: 1rem;
-    }
-    
-    .event-card {
-        flex-direction: column;
-    }
-    
-    .event-date {
-        min-width: auto;
-        padding: 20px;
-        flex-direction: row;
-        gap: 15px;
-        justify-content: center;
-    }
-    
-    .month, .day {
-        font-size: 1.2rem;
-    }
-}
-
 /* Animation for card entrance */
 @keyframes fadeInUp {
     from {
@@ -992,45 +759,348 @@ html {
 }
 
 /* Focus styles for accessibility */
-.cta-button:focus,
-.interest-form input:focus,
-.interest-form textarea:focus,
-.interest-form button:focus {
+.cta-button:focus {
     outline: 2px solid var(--mu-accent);
     outline-offset: 2px;
 }
 
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1140px;
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    section {
+        padding: 80px 0;
+    }
+    
+    .container {
+        max-width: 960px;
+        padding: 0 25px;
+    }
+    
+    .about-content {
+        gap: 40px;
+    }
+    
+    .mothers-union-hero .hero-content h1 {
+        font-size: 3.2rem;
+    }
+    
+    .mothers-union-hero .tagline {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .mothers-union-hero {
+        height: 60vh;
+        min-height: 500px;
+    }
+    
+    .mothers-union-hero .hero-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .mothers-union-hero .tagline {
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        padding: 14px 28px;
+    }
+    
+    .objectives-grid,
+    .activities-grid,
+    .leadership-grid,
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .objective-card,
+    .activity-card,
+    .leader-card {
+        padding: 35px 25px;
+    }
+    
+    .leader-image-container,
+    .leader-placeholder {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .anglican-values {
+        padding: 30px 25px;
+    }
+    
+    .membership-info {
+        padding: 35px 25px;
+    }
+    
+    .event-card {
+        flex-direction: column;
+    }
+    
+    .event-date {
+        min-width: auto;
+        padding: 20px;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .month, .day {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    section {
+        padding: 50px 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .mothers-union-hero .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .mothers-union-hero .tagline {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+    
+    .about-mothers-union h2,
+    .mu-objectives h2,
+    .mu-activities h2,
+    .mu-leadership h2,
+    .mu-membership h2,
+    .mu-events h2,
+    .mu-prayer h2 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    .anglican-values li {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .anglican-values i {
+        margin-right: 0;
+    }
+    
+    .objective-icon,
+    .activity-icon {
+        font-size: 2.5rem;
+    }
+    
+    .leader-card {
+        padding: 30px 20px;
+    }
+    
+    .leader-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .position {
+        font-size: 1rem;
+        padding: 6px 16px;
+    }
+    
+    .membership-info {
+        padding: 30px 20px;
+    }
+    
+    .membership-info li {
+        font-size: 1rem;
+        padding-left: 28px;
+    }
+    
+    .mu-prayer blockquote {
+        font-size: 1.1rem;
+        padding: 0 15px;
+    }
+    
+    .mu-prayer blockquote::before,
+    .mu-prayer blockquote::after {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mothers-union-hero {
+        height: 50vh;
+        min-height: 400px;
+        padding: 0 15px;
+    }
+    
+    .mothers-union-hero .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .mothers-union-hero .tagline {
+        font-size: 0.95rem;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    .about-mothers-union h2,
+    .mu-objectives h2,
+    .mu-activities h2,
+    .mu-leadership h2,
+    .mu-membership h2,
+    .mu-events h2,
+    .mu-prayer h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .objective-card,
+    .activity-card {
+        padding: 25px 20px;
+    }
+    
+    .leader-card {
+        padding: 25px 15px;
+    }
+    
+    .leader-image-container,
+    .leader-placeholder {
+        width: 110px;
+        height: 110px;
+    }
+    
+    .leader-placeholder i {
+        font-size: 2.5rem;
+    }
+    
+    .event-details {
+        padding: 20px;
+    }
+    
+    .no-activities,
+    .no-leaders,
+    .no-events {
+        padding: 50px 25px;
+    }
+    
+    .no-activities p,
+    .no-leaders p,
+    .no-events p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .mothers-union-hero .hero-content h1 {
+        font-size: 1.6rem;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .objective-card,
+    .activity-card,
+    .leader-card {
+        padding: 20px 15px;
+    }
+    
+    .membership-info {
+        padding: 25px 15px;
+    }
+}
+
 /* Print styles */
 @media print {
-    .hero-buttons,
-    .membership-form {
+    .hero-buttons {
         display: none;
     }
     
     section {
-        padding: 40px 0;
+        padding: 30px 0;
+    }
+    
+    .mothers-union-hero {
+        background: none !important;
+        color: black;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .cta-button {
+        display: none;
     }
 }
 
-
-
-
-
-.alert {
-    padding: 12px 15px;
-    border-radius: 5px;
-    margin: 15px 0;
-    font-weight: 500;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --mu-border: #000000;
+        --mu-shadow: 0 0 0 2px #000000;
+    }
+    
+    .objective-card,
+    .activity-card,
+    .leader-card,
+    .event-card {
+        border: 2px solid #000000;
+    }
 }
 
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .objective-card:hover,
+    .activity-card:hover,
+    .leader-card:hover,
+    .event-card:hover {
+        transform: none;
+    }
 }

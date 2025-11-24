@@ -2,6 +2,7 @@
 from django.contrib import admin
 from .models import *
 from django.utils.safestring import mark_safe
+from django.db.models import Count
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -9,6 +10,13 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ['event_type', 'date']
     search_fields = ['title', 'description', 'location']
     ordering = ['date']
+    eadonly_fields = ['image_preview']
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="50" height="50" />')
+        return "No Image"
+    image_preview.short_description = 'Preview'
 
 @admin.register(Leader)
 class LeaderAdmin(admin.ModelAdmin):
@@ -108,3 +116,47 @@ class SermonEventAdmin(admin.ModelAdmin):
         }),
     )
 
+
+
+@admin.register(CustomerReview)
+class CustomerReviewAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'subject', 'status', 'created_at', 'short_message']
+    list_filter = ['status', 'created_at']
+    search_fields = ['name', 'email', 'subject', 'message']
+    readonly_fields = ['name', 'email', 'subject', 'message', 'created_at']
+    list_per_page = 20
+    
+    fieldsets = (
+        ('Customer Information', {
+            'fields': ('name', 'email', 'subject', 'message', 'created_at')
+        }),
+        ('Review Management', {
+            'fields': ('status', 'admin_notes')
+        }),
+    )
+    
+    def short_message(self, obj):
+        return obj.message[:50] + '...' if len(obj.message) > 50 else obj.message
+    short_message.short_description = 'Message Preview'
+    
+    actions = ['mark_as_read', 'mark_as_replied']
+    
+    def mark_as_read(self, request, queryset):
+        queryset.update(status='read')
+    mark_as_read.short_description = "Mark selected reviews as read"
+    
+    def mark_as_replied(self, request, queryset):
+        queryset.update(status='replied')
+    mark_as_replied.short_description = "Mark selected reviews as replied"
+
+
+class CustomAdminSite(admin.AdminSite):
+    def index(self, request, extra_context=None):
+        extra_context = extra_context or {}
+        review_stats = CustomerReview.objects.aggregate(
+            total=Count('id'),
+            unread=Count('id', filter=models.Q(status='unread')),
+            read=Count('id', filter=models.Q(status='read')),
+        )
+        extra_context['review_stats'] = review_stats
+        return super().index(request, extra_context)

@@ -2,11 +2,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import views
-from .views import (
-    MinistryViewSet, InterestFormSubmissionViewSet,
-    ministry_stats, ministry_type_stats, submit_interest_form,
-    ProgramListAPIView, MinistryProgramsAPIView
-)
+from .views import *
 
 # Router for ViewSets
 router = DefaultRouter()
@@ -39,8 +35,8 @@ urlpatterns = [
     path('api/programs/', ProgramListAPIView.as_view(), name='program_list'),
     path('api/programs/<str:ministry_type>/', MinistryProgramsAPIView.as_view(), name='ministry_programs'),
     
-    # API Interest form endpoints
-    path('api/mothers-union-interest/', views.mothers_union_interest, name='mothers_union_interest'),
+    # API Interest form endpoints - FIXED
+    path('api/mothers-union-interest/', mothers_union_interest, name='mothers_union_interest'),
     path('api/kama-interest/', views.kama_interest, name='kama_interest'),
     path('api/youth-interest/', views.youth_interest, name='youth_interest'),
     path('api/choir-interest/', views.choir_interest, name='choir_interest'),

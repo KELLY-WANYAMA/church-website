@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
+from django.contrib import messages
 
 
 # Traditional Django Views - Updated for better integration
@@ -47,6 +48,36 @@ def sermons(request):
     }
     
     return render(request, 'ack/sermons.html', context)
+
+
+
+def submit_review(request):
+    if request.method == 'POST':
+        print("DEBUG: Form submitted via POST")
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        
+        print(f"DEBUG: Form data - Name: {name}, Email: {email}, Subject: {subject}")
+        
+        # Create new review
+        try:
+            review = CustomerReview.objects.create(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message
+            )
+            print(f"DEBUG: Review created with ID: {review.id}")
+            messages.success(request, 'Thank you for your message! We will get back to you soon.')
+        except Exception as e:
+            print(f"DEBUG: Error creating review: {e}")
+            messages.error(request, 'There was an error sending your message. Please try again.')
+        
+        return redirect('contacts')
+    
+    return redirect('contacts')
 
 
 

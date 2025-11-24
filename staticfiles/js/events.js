@@ -1,9 +1,6 @@
 function filterEvents(eventType) {
     let url = new URL(window.location.href);
     
-    // Get the current path correctly
-    const currentPath = window.location.pathname;
-    
     if (eventType === 'all') {
         url.searchParams.delete('type');
     } else {
@@ -13,25 +10,22 @@ function filterEvents(eventType) {
     window.location.href = url.toString();
 }
 
-// Add active class to current filter button
+// Add active class to current filter button and click handlers
 document.addEventListener('DOMContentLoaded', function() {
-    const currentFilter = '{{ current_filter }}'.toLowerCase();
+    const currentFilter = '{{ current_filter }}' || 'all';
     const filterButtons = document.querySelectorAll('.filter-btn');
     
+    // Add click event listeners to all filter buttons
     filterButtons.forEach(btn => {
-        let btnFilter = 'all';
-        const onclickAttr = btn.getAttribute('onclick');
+        const filterType = btn.getAttribute('data-filter');
         
-        if (onclickAttr) {
-            const match = onclickAttr.match(/'([^']+)'/);
-            if (match && match[1]) {
-                btnFilter = match[1].toLowerCase();
-            }
-        }
+        btn.addEventListener('click', function() {
+            filterEvents(filterType);
+        });
         
-        // Update active class - fix comparison logic
-        if ((currentFilter === 'all' && btnFilter === 'all') || 
-            (currentFilter === btnFilter)) {
+        // Update active class
+        if ((currentFilter === 'all' && filterType === 'all') || 
+            (currentFilter === filterType)) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');
@@ -44,6 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function(e) {
             // Allow default behavior (opening link)
             console.log('Video button clicked:', this.href);
+        });
+    });
+    
+    // Add loading state to filter buttons
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            this.disabled = true;
         });
     });
 });

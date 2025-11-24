@@ -87,34 +87,32 @@
             
             <div class="contact-form">
                 <h3>Send Us a Message</h3>
-                <form id="contactForm">
+                <form method="POST" action="{% url 'submit_review' %}" id="contactForm">
+                    {% csrf_token %}
+                    
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-control" required>
+                        <input type="text" id="name" name="name" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" class="form-control" required>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="subject">Subject</label>
-                        <input type="text" id="subject" class="form-control" required>
+                        <input type="text" id="subject" name="subject" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Your Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
                     </div>
                     
                     <button type="submit" class="btn">
-                        <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                        <i class="fab fa-whatsapp"></i> Send Message
                     </button>
-                    
-                    <!--<div class="whatsapp-note" id="whatsappNote">
-                        Your message will be sent via WhatsApp to +254791675625
-                    </div>-->
                 </form>
             </div>
         </div>

@@ -100,37 +100,29 @@ class MothersUnionActivityAdmin(admin.ModelAdmin):
     list_filter = ['is_active']
     search_fields = ['title', 'description']
 
+
 @admin.register(MothersUnionLeader)
 class MothersUnionLeaderAdmin(admin.ModelAdmin):
-    list_display = ['name', 'position', 'order', 'is_active']
-    list_editable = ['order', 'is_active']
-    list_filter = ['is_active']
-    search_fields = ['name', 'position']
+    list_display = ['name', 'position', 'email', 'phone', 'is_active', 'order']
+    list_filter = ['is_active', 'position']
+    list_editable = ['is_active', 'order']
+    search_fields = ['name', 'position', 'email']
+    ordering = ['order', 'name']
 
-@admin.register(MothersUnionEvent)
-class MothersUnionEventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date', 'time', 'location', 'is_active']
-    list_editable = ['is_active']
-    list_filter = ['is_active', 'date']
-    search_fields = ['title', 'description']
+@admin.register(WeeklyProgram)
+class WeeklyProgramAdmin(admin.ModelAdmin):
+    list_display = ['name', 'program_type', 'day', 'time', 'location', 'is_active', 'order']
+    list_filter = ['program_type', 'day', 'is_active']
+    list_editable = ['is_active', 'order']
+    search_fields = ['name', 'location', 'description']
+    ordering = ['order', 'day', 'time']
 
 @admin.register(MothersUnionMembership)
 class MothersUnionMembershipAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'email', 'phone', 'created_at', 'is_contacted']
     list_filter = ['is_contacted', 'created_at']
     search_fields = ['full_name', 'email']
-@admin.register(WeeklyProgram)
-class WeeklyProgramAdmin(admin.ModelAdmin):
-    list_display = ['name', 'program_type', 'day', 'time', 'is_active', 'order']
-    list_filter = ['program_type', 'is_active']
-    list_editable = ['is_active', 'order']
-
-@admin.register(YouthEvent)
-class YouthEventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'event_date', 'location', 'is_upcoming']
-    list_filter = ['is_upcoming', 'event_date']
-    search_fields = ['title', 'description']
-
+    
 @admin.register(YouthLeader)
 class YouthLeaderAdmin(admin.ModelAdmin):
     list_display = ['name', 'position', 'is_active', 'order']
@@ -146,11 +138,29 @@ class VisitorResourceAdmin(admin.ModelAdmin):
     list_display = ['title', 'upload_date', 'is_active']
     list_editable = ['is_active']
 
-class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'event_type', 'date', 'time', 'location']
-    list_filter = ['event_type', 'date']
-    search_fields = ['title', 'description', 'location']
+#    list_display = ['title', 'event_type', 'date', 'time', 'location']
+#    list_filter = ['event_type', 'date']
+#    search_fields = ['title', 'description', 'location']
+#    date_hierarchy = 'date'
+
+
+@admin.register(MothersUnionEvent)
+class MothersUnionEventAdmin(admin.ModelAdmin):
+    list_display = ['title', 'date', 'time', 'location', 'is_active', 'created_at']
+    list_filter = ['date', 'is_active', 'created_at']
+    list_editable = ['is_active']
+    search_fields = ['title', 'location', 'description']
     date_hierarchy = 'date'
+    ordering = ['-date', '-time']
+    
+    # Optional: Add custom method to show if event is upcoming
+    def is_upcoming(self, obj):
+        from django.utils import timezone
+        return obj.date >= timezone.now().date()
+    is_upcoming.boolean = True
+    is_upcoming.short_description = 'Upcoming'
+
+
 
 class MinistryGalleryAdmin(admin.ModelAdmin):
     list_display = ['title', 'ministry', 'upload_date', 'is_featured']
@@ -202,13 +212,6 @@ class MusicMinistryRegistrationAdmin(admin.ModelAdmin):
     readonly_fields = ['submitted_at']
     list_editable = ['is_contacted']
 
-
-# Register all models using the same method
-admin.site.register(Ministry, MinistryAdmin)
-admin.site.register(Program, ProgramAdmin)
-admin.site.register(MinistryMember, MinistryMemberAdmin)
-admin.site.register(InterestFormSubmission, InterestFormSubmissionAdmin)
-admin.site.register(Event, EventAdmin)  # ONLY ONE registration
 
 
 # Optional: Customize the admin header
