@@ -179,7 +179,7 @@ body, ul, li, a {
 /* HERO */
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "images/church-hero.jpg" %}');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/church-hero.jpg');
     background-size: cover;
     background-position: center;
     color: white;
@@ -1275,7 +1275,7 @@ body, ul, li, a {
 .youth-hero {
     position: relative;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('/static/images/youth-banner.jpg') center/cover no-repeat;
+                url('../images/youth-banner.jpg') center/cover no-repeat;
     height: 70vh;
     min-height: 500px;
     display: flex;
@@ -2386,7 +2386,7 @@ blockquote {
 .mothers-union-hero {
     position: relative;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('/static/images/mothers-union-banner.jpg') center/cover no-repeat;
+                url('../images/mothers-union-banner.jpg') center/cover no-repeat;
     height: 60vh;
     min-height: 500px;
     display: flex;
